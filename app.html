@@ -17,23 +17,6 @@
   .live{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--cyan);text-transform:uppercase;margin-bottom:18px}
   .live .d{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 1.6s infinite}
 
-  /* phone mockup (CSS) */
-  .phone{position:relative;width:260px;height:540px;border-radius:40px;margin:0 auto;
-    background:linear-gradient(160deg,#15151f,#0a0a12);border:1px solid rgba(139,123,240,.25);
-    box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 60px rgba(139,123,240,.18),inset 0 1px 2px rgba(255,255,255,.08);padding:14px}
-  .phone .notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:90px;height:22px;border-radius:0 0 14px 14px;background:#0a0a12;z-index:3}
-  .phone .scr{width:100%;height:100%;border-radius:28px;background:linear-gradient(180deg,#0d0d18,#060610);overflow:hidden;position:relative;padding:40px 18px 18px}
-  .scr .ttl{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.14em;color:var(--text-faint);text-transform:uppercase;margin-bottom:14px}
-  .scr .ring2{position:relative;width:120px;height:120px;margin:0 auto 18px}
-  .scr .ring2 .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .scr .ring2 .num b{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:600;color:#fff}
-  .scr .ring2 .num span{font-size:8px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
-  .scr .row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-  .scr .row .l{font-family:'Space Grotesk',sans-serif;font-size:8px;letter-spacing:.06em;color:var(--text-dim);width:54px;text-transform:uppercase}
-  .scr .row .tr{flex:1;height:4px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
-  .scr .row .fl{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--violet),var(--cyan));animation:grow 1.6s cubic-bezier(.2,.8,.2,1) forwards;width:0}
-  @keyframes grow{to{width:var(--w)}}
-
   .stores{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
   .store{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:12px 22px;transition:.3s;background:rgba(20,18,40,.3)}
   .store:hover{border-color:var(--violet);transform:translateY(-2px)}
@@ -52,18 +35,11 @@
   .legal-row a{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.04em;color:var(--text-dim);border:1px solid var(--line);border-radius:100px;padding:10px 22px;transition:.25s}
   .legal-row a:hover{border-color:var(--violet);color:var(--violet-bright)}
 
-  /* app gallery */
-  .gallery-section{position:relative;z-index:2}
-  .gallery-row{display:flex;align-items:center;justify-content:center;gap:32px;max-width:900px;margin:0 auto;flex-wrap:nowrap}
-  .gallery-slot{flex:0 0 auto;width:230px;height:494px;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.5)}
-  .gallery-center{width:260px;height:558px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(139,123,240,.25);border-color:rgba(139,123,240,.4)}
-  .gallery-slot img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .6s ease}
-  .gallery-slot img.fading{opacity:0}
-  @media(max-width:760px){
-    .gallery-row{gap:14px}
-    .gallery-slot{width:30vw;height:64vw}
-    .gallery-center{width:34vw;height:73vw}
-  }
+  /* app shot */
+  .app-shot{width:100%;max-width:340px;margin:0 auto;aspect-ratio:1260/2736;border-radius:28px;overflow:hidden;border:1px solid rgba(139,123,240,.4);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(139,123,240,.25)}
+  .app-shot img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .6s ease}
+  .app-shot img.fading{opacity:0}
+  @media(max-width:880px){.app-shot{max-width:280px}}
 </style>
 </head>
 <body class="lang-ja">
@@ -98,34 +74,11 @@
   </p>
 </section>
 
-<section class="section gallery-section" style="padding-top:40px;padding-bottom:40px">
-  <div class="gallery-row">
-    <div class="gallery-slot"><img src="assets/images/app-1.jpg" alt="App screen" data-slot="0"></div>
-    <div class="gallery-slot gallery-center"><img src="assets/images/app-2.jpg" alt="App screen" data-slot="1"></div>
-    <div class="gallery-slot"><img src="assets/images/app-3.jpg" alt="App screen" data-slot="2"></div>
-  </div>
-</section>
-
 <section class="section" style="padding-top:10px">
   <div class="wrap grid-2" style="align-items:center">
     <div class="reveal">
-      <div class="phone">
-        <div class="notch"></div>
-        <div class="scr">
-          <div class="ttl">Form Score</div>
-          <div class="ring2">
-            <svg width="120" height="120" style="transform:rotate(-90deg)">
-              <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="7"/>
-              <circle cx="60" cy="60" r="52" fill="none" stroke="url(#pg)" stroke-width="7" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="52" style="filter:drop-shadow(0 0 5px var(--cyan))"/>
-              <defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8B7BF0"/><stop offset="1" stop-color="#5BD8FF"/></linearGradient></defs>
-            </svg>
-            <div class="num"><b>86</b><span>Score</span></div>
-          </div>
-          <div class="row"><span class="l">Volume</span><span class="tr"><span class="fl" style="--w:85%"></span></span></div>
-          <div class="row"><span class="l">Streak</span><span class="tr"><span class="fl" style="--w:72%;animation-delay:.15s"></span></span></div>
-          <div class="row"><span class="l">Balance</span><span class="tr"><span class="fl" style="--w:90%;animation-delay:.3s"></span></span></div>
-          <div class="row"><span class="l">Tempo</span><span class="tr"><span class="fl" style="--w:78%;animation-delay:.45s"></span></span></div>
-        </div>
+      <div class="app-shot">
+        <img id="appShot" src="assets/images/app-1.jpg" alt="ShareSweat app screen">
       </div>
     </div>
     <div class="reveal">
@@ -190,24 +143,18 @@
 <script>
 (function(){
   var images=['app-1.jpg','app-2.jpg','app-3.jpg','app-4.jpg','app-5.jpg','app-6.jpg'];
-  var slots=document.querySelectorAll('.gallery-slot img');
-  if(!slots.length) return;
-  function pick(exclude){
-    var c;
-    do{ c=images[Math.floor(Math.random()*images.length)]; }while(exclude.indexOf(c)!==-1);
-    return c;
-  }
+  var img=document.getElementById('appShot');
+  if(!img) return;
   setInterval(function(){
-    var i=Math.floor(Math.random()*slots.length);
-    var img=slots[i];
-    var current=Array.prototype.map.call(slots,function(s){return s.getAttribute('src').split('/').pop();});
-    var next=pick(current);
+    var current=img.getAttribute('src').split('/').pop();
+    var next;
+    do{ next=images[Math.floor(Math.random()*images.length)]; }while(next===current);
     img.classList.add('fading');
     setTimeout(function(){
       img.setAttribute('src','assets/images/'+next);
       img.classList.remove('fading');
     },600);
-  },2600);
+  },2800);
 })();
 </script>
 </body>
