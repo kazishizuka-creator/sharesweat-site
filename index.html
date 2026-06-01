@@ -65,6 +65,24 @@
   .navcard h3{font-weight:500;font-size:1.4rem;margin-bottom:10px}
   .navcard p{color:var(--text-dim);font-size:.95rem;margin-bottom:18px}
   .navcard .go{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--violet-bright)}
+
+  /* 4IMU × 4Fields */
+  .imu-fields-section{position:relative;z-index:2;padding:40px 6vw;background:rgba(11,11,22,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .imu-fields-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
+  .imu-block,.fields-block{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .imu-label,.fields-label{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--violet-bright);font-weight:600}
+  .imu-devices{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+  .imu-device{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .imu-icon{width:56px;height:56px;border-radius:14px;background:rgba(139,123,240,.08);border:1px solid rgba(139,123,240,.2);display:flex;align-items:center;justify-content:center;transition:.3s}
+  .imu-icon:hover{background:rgba(139,123,240,.16);border-color:rgba(139,123,240,.5)}
+  .imu-name{font-size:11px;color:var(--text-faint);font-family:'Space Grotesk',sans-serif}
+  .imu-cross{font-family:'Space Grotesk',sans-serif;font-size:2.4rem;font-weight:700;color:var(--violet-bright);opacity:.6}
+  .fields-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .field-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 16px;border-radius:12px;background:rgba(99,220,255,.05);border:1px solid rgba(99,220,255,.15);transition:.3s;min-width:80px}
+  .field-item:hover{background:rgba(99,220,255,.1);border-color:rgba(99,220,255,.35)}
+  .field-icon{font-size:1.4rem}
+  .field-name{font-size:11px;color:var(--text-dim);font-family:'Space Grotesk',sans-serif}
+  @media(max-width:720px){.imu-fields-inner{gap:28px}.imu-cross{font-size:1.8rem}}
 </style>
 </head>
 <body>
@@ -98,7 +116,7 @@
   <span class="eyebrow rise d1"><span class="dot"></span><span data-lang-ja>4点IMU × 動作解析AI</span><span data-lang-en>4-POINT IMU × MOTION AI</span></span>
   <div class="en-mini rise d2">Sports form analysis &amp; human-motion data platform</div>
   <h1 class="rise d3">
-    <span data-lang-ja>身体知を、<span class="grad">データ</span>化する世界へ。</span>
+    <span data-lang-ja>身体知を、<br><span class="grad">データ化する</span>世界へ。</span>
     <span data-lang-en>Turning <span class="grad">body intelligence</span> into data.</span>
   </h1>
   <p class="sub rise d4">
@@ -121,16 +139,93 @@
   </div>
 </div>
 
+<!-- 4IMU × 4Fields ビジュアルセクション -->
+<div class="imu-fields-section">
+  <div class="imu-fields-inner">
+    <div class="imu-block">
+      <div class="imu-label">4 IMU</div>
+      <div class="imu-devices">
+        <div class="imu-device">
+          <div class="imu-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+              <rect x="8" y="16" width="32" height="20" rx="6" fill="rgba(139,123,240,0.15)" stroke="rgba(139,123,240,0.6)" stroke-width="1.5"/>
+              <circle cx="24" cy="26" r="4" fill="rgba(139,123,240,0.4)"/>
+              <rect x="18" y="8" width="12" height="10" rx="3" fill="rgba(99,220,255,0.15)" stroke="rgba(99,220,255,0.5)" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="imu-name">左手首</div>
+        </div>
+        <div class="imu-device">
+          <div class="imu-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+              <rect x="8" y="16" width="32" height="20" rx="6" fill="rgba(139,123,240,0.15)" stroke="rgba(139,123,240,0.6)" stroke-width="1.5"/>
+              <circle cx="24" cy="26" r="4" fill="rgba(139,123,240,0.4)"/>
+              <rect x="18" y="8" width="12" height="10" rx="3" fill="rgba(99,220,255,0.15)" stroke="rgba(99,220,255,0.5)" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="imu-name">右手首</div>
+        </div>
+        <div class="imu-device">
+          <div class="imu-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+              <rect x="8" y="12" width="32" height="24" rx="6" fill="rgba(99,220,255,0.12)" stroke="rgba(99,220,255,0.5)" stroke-width="1.5"/>
+              <circle cx="24" cy="24" r="4" fill="rgba(99,220,255,0.35)"/>
+              <rect x="20" y="36" width="8" height="8" rx="2" fill="rgba(139,123,240,0.2)" stroke="rgba(139,123,240,0.4)" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="imu-name">左足首</div>
+        </div>
+        <div class="imu-device">
+          <div class="imu-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+              <rect x="8" y="12" width="32" height="24" rx="6" fill="rgba(99,220,255,0.12)" stroke="rgba(99,220,255,0.5)" stroke-width="1.5"/>
+              <circle cx="24" cy="24" r="4" fill="rgba(99,220,255,0.35)"/>
+              <rect x="20" y="36" width="8" height="8" rx="2" fill="rgba(139,123,240,0.2)" stroke="rgba(139,123,240,0.4)" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="imu-name">右足首</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="imu-cross">
+      <span>×</span>
+    </div>
+
+    <div class="fields-block">
+      <div class="fields-label">4 Fields</div>
+      <div class="fields-grid">
+        <div class="field-item">
+          <div class="field-icon">🏋️</div>
+          <div class="field-name">筋トレ</div>
+        </div>
+        <div class="field-item">
+          <div class="field-icon">🏃</div>
+          <div class="field-name">ランニング</div>
+        </div>
+        <div class="field-item">
+          <div class="field-icon">⛳</div>
+          <div class="field-name">ゴルフ</div>
+        </div>
+        <div class="field-item">
+          <div class="field-icon">🧘</div>
+          <div class="field-name">ヨガ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== WHAT WE'RE BUILDING (短い概要) ===== -->
 <section class="section">
   <div class="wrap">
-    <span class="eyebrow reveal"><span class="dot"></span><span data-lang-ja>私たちがつくるもの</span><span data-lang-en>What we build</span></span>
+    <span class="eyebrow reveal"><span class="dot"></span><span data-lang-ja>Our Product</span><span data-lang-en>What we build</span></span>
     <h2 class="h-sec reveal">
-      <span data-lang-ja>つけて運動するだけで、<br><span class="grad">フォームがデータになる。</span></span>
+      <span data-lang-ja>つけて運動するだけで、<br><span class="grad">正しいフォームがわかる。</span></span>
       <span data-lang-en>Just move — and your <span class="grad">form becomes data.</span></span>
     </h2>
     <p class="lead reveal">
-      <span data-lang-ja>筋トレ・ランニング・ゴルフ・ヨガ。趣味のスポーツに本気で向き合う人ほど、「自分のフォームが正しいのか」を客観的に確かめる手段を持っていません。私たちは、身体に着けた4点のセンサーと動作解析AIで、その問いに答えようとしています。</span>
+      <span data-lang-ja>筋トレ・ランニング・ゴルフ・ヨガ。趣味のスポーツに本気で向き合う人ほど、「今のフォームが正しかったのか」確かめる手段を持っていません。<br><br>スマホで動画をいちいち撮影するのは面倒。かといって、スマートウォッチ・リングだとフォームまではわからない。<br><br>私たちは、身体に着けた4点のセンサーと動作解析AIで、その問いに答えようとしています。</span>
       <span data-lang-en>Strength, running, golf, yoga. The more seriously people pursue their sport, the harder it is to objectively check their own form. We answer that question with four body-worn sensors and motion-analysis AI.</span>
     </p>
   </div>
