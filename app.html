@@ -56,16 +56,15 @@
   .orbit-section{position:relative;z-index:2;overflow:hidden}
   .orbit-stage{position:relative;width:100%;max-width:760px;height:560px;margin:0 auto;display:flex;align-items:center;justify-content:center}
   .orbit-track{position:absolute;top:50%;left:50%;width:0;height:0}
-  .orbit-card{position:absolute;top:0;left:0;width:150px;height:320px;margin:-160px 0 0 -75px;
-    animation:orbitMove 28s linear infinite;animation-delay:var(--d)}
-  .orbit-card img{width:100%;height:100%;object-fit:cover;border-radius:18px;border:1px solid var(--line);box-shadow:0 16px 50px rgba(0,0,0,.6)}
+  .orbit-card{position:absolute;top:0;left:0;width:200px;height:430px;margin:-215px 0 0 -100px;animation:orbitMove 28s linear infinite;animation-delay:var(--d)}
+  .orbit-card img{width:100%;height:100%;object-fit:cover;border-radius:18px;border:1px solid var(--line);box-shadow:0 16px 50px rgba(0,0,0,.6);-webkit-backface-visibility:hidden;backface-visibility:hidden;transform:translateZ(0)}
   /* 楕円軌道を回りながら、手前で大きく・奥で小さく。カード自体は回転しない＝反転しない */
   @keyframes orbitMove{
-    0%   {transform:translate(300px,0)        scale(1.15);z-index:6;opacity:1}
-    25%  {transform:translate(0,40px)         scale(1.3); z-index:7;opacity:1}
-    50%  {transform:translate(-300px,0)       scale(1.15);z-index:6;opacity:1}
+    0%   {transform:translate(340px,0)        scale(1.15);z-index:6;opacity:1}
+    25%  {transform:translate(0,40px)         scale(1.25); z-index:7;opacity:1}
+    50%  {transform:translate(-340px,0)       scale(1.15);z-index:6;opacity:1}
     75%  {transform:translate(0,-40px)        scale(.6);  z-index:1;opacity:.55}
-    100% {transform:translate(300px,0)        scale(1.15);z-index:6;opacity:1}
+    100% {transform:translate(340px,0)        scale(1.15);z-index:6;opacity:1}
   }
   .orbit-center{position:relative;z-index:5}
   .orbit-phone{position:relative;width:210px;height:440px;border-radius:38px;background:linear-gradient(160deg,#15151f,#0a0a12);border:1px solid rgba(139,123,240,.3);box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 70px rgba(139,123,240,.3);padding:10px;overflow:hidden}
@@ -73,7 +72,7 @@
   .orbit-phone-img{width:100%;height:100%;object-fit:cover;border-radius:30px}
   @media(max-width:760px){
     .orbit-stage{height:440px;max-width:100%}
-    .orbit-card{width:110px;height:234px;margin:-117px 0 0 -55px}
+    .orbit-card{width:150px;height:322px;margin:-161px 0 0 -75px}
     @keyframes orbitMove{
       0%{transform:translate(200px,0) scale(1.1);z-index:6;opacity:1}
       25%{transform:translate(0,30px) scale(1.25);z-index:7;opacity:1}
