@@ -19,6 +19,14 @@
   .hero h1 .grad{background:linear-gradient(100deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero .sub{font-size:clamp(1rem,1.5vw,1.2rem);color:var(--text-dim);max-width:48ch;margin-bottom:42px}
   .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .hero > .eyebrow,
+  .hero > .en-mini,
+  .hero > h1,
+  .hero > .sub,
+  .hero > .cta-row{
+    position:relative;
+    z-index:2;
+  }
   .rise{opacity:0;animation:rise 1s forwards}
   .d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}.d4{animation-delay:.6s}.d5{animation-delay:.8s}
   @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
