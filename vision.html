@@ -40,6 +40,11 @@
     @keyframes nudge{0%,100%{transform:rotate(-90deg) translateX(0)}50%{transform:rotate(-90deg) translateX(-6px)}}
     .v-right{flex-direction:column}
   }
+
+  /* vision 2-column */
+  .vision-2col{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
+  .v-textcol{display:flex;flex-direction:column;gap:28px}
+  @media(max-width:980px){.vision-2col{grid-template-columns:1fr;gap:32px}}
 </style>
 </head>
 <body class="lang-ja">
@@ -65,23 +70,13 @@
 <section class="page-hero wrap">
   <span class="eyebrow"><span class="dot"></span>Vision</span>
   <h1>
-    <span data-lang-ja>身体動作がAIに理解される時代を、<br><span class="grad">見据えて。</span></span>
+    <span data-lang-ja>身体動作が<br>AIに理解される時代を見据えて。</span>
     <span data-lang-en>Looking ahead to when AI <span class="grad">understands human motion.</span></span>
   </h1>
-  <p class="sub">
-    <span data-lang-ja>私たちが挑んでいるのは、まだ誰のものでもない領域です。</span>
-    <span data-lang-en>We are pursuing a frontier that no one owns yet.</span>
-  </p>
 </section>
 
 <section class="section" style="padding-top:30px">
-  <div class="wrap vision-3col">
-    <div class="reveal v-left">
-      <p class="statement-sm">
-        <span data-lang-ja>AIはすでに、テキスト・画像・動画・音声を扱えるようになりました。<br><br>残された大きな領域は、<span class="grad">人の身体動作</span>である。</span>
-        <span data-lang-en>AI can already handle text, images, video, and audio.<br><br>The remaining frontier is <span class="grad">human motion.</span></span>
-      </p>
-    </div>
+  <div class="wrap vision-2col">
     <div class="reveal v-mid">
       <div class="layers">
         <div class="layer done"><span class="idx">01</span><span class="nm">Text</span></div>
@@ -90,8 +85,11 @@
         <div class="layer now"><span class="idx">04</span><span class="nm">Human Motion</span></div>
       </div>
     </div>
-    <div class="reveal v-right">
-      <div class="v-arrow" aria-hidden="true">←</div>
+    <div class="reveal v-textcol">
+      <p class="statement-sm">
+        <span data-lang-ja>AIはすでに、テキスト・画像・動画・音声を扱えるようになりました。残された大きな領域は、<span class="grad">人の身体動作</span>である。</span>
+        <span data-lang-en>AI can already handle text, images, video, and audio. The remaining frontier is <span class="grad">human motion.</span></span>
+      </p>
       <p class="v-right-text">
         <span data-lang-ja>身体の動きがデータ化され、AIが理解し、上達・健康・リハビリに活かされる時代は、必ず来ます。私たちは、その<span style="color:var(--violet-bright)">身体動作AIの基盤を日本から作りたい</span>と考えています。</span>
         <span data-lang-en>The era when body movement is captured as data, understood by AI, and applied to skill, health, and rehabilitation will surely come. We want to build that <span style="color:var(--violet-bright)">foundation for motion AI — from Japan.</span></span>
@@ -102,11 +100,7 @@
 
 <section class="section" style="text-align:center">
   <div class="wrap">
-    <p class="lead reveal" style="margin:0 auto 28px;font-size:1.1rem;color:var(--text)">
-      <span data-lang-ja>ここで語れるのは、思想の輪郭までです。その先は、ぜひ直接。</span>
-      <span data-lang-en>This page outlines the philosophy. The rest, we'd love to share in person.</span>
-    </p>
-    <a href="contact.html" class="btn btn-primary reveal"><span data-lang-ja>話を聞く</span><span data-lang-en>Talk with us</span> →</a>
+    <a href="contact.html" class="btn btn-primary reveal"><span data-lang-ja>お問い合わせ</span><span data-lang-en>Get in touch</span> →</a>
   </div>
 </section>
 
