@@ -77,6 +77,11 @@ header.site{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-it
 .menu-btn span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
 .lang{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.08em;color:var(--text-dim);background:none;border:1px solid var(--line);border-radius:100px;padding:7px 12px;cursor:pointer;transition:.25s}
 .lang:hover{border-color:var(--violet);color:var(--text)}
+.lang-in-menu{display:none}
+@media(max-width:880px){
+  .nav-right > .lang{display:none}
+  .lang-in-menu{display:block;margin:14px 0 4px;width:max-content}
+}
 @media(max-width:880px){
   .nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;
     background:rgba(8,8,16,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:10px 6vw 22px}

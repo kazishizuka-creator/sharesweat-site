@@ -24,8 +24,8 @@
   function applyLang(lang){
     if(lang==='en'){document.body.classList.add('lang-en');}
     else{document.body.classList.remove('lang-en');}
-    var btn=document.querySelector('.lang');
-    if(btn){btn.textContent = (lang==='en') ? 'JA / EN' : 'EN / 日本語';}
+    var btns=document.querySelectorAll('.lang');
+    btns.forEach(function(btn){btn.textContent=(lang==='en')?'JA / 日本語':'EN / 日本語';});
     try{window.localStorage.setItem('ss_lang',lang);}catch(e){}
   }
   function initLang(){
@@ -33,16 +33,17 @@
     try{saved=window.localStorage.getItem('ss_lang');}catch(e){}
     var lang=saved;
     if(!lang){
-      // first visit: guess from browser language
       var nav=(navigator.language||navigator.userLanguage||'en').toLowerCase();
-      lang = nav.indexOf('ja')===0 ? 'ja' : 'en';
+      lang=nav.indexOf('ja')===0?'ja':'en';
     }
     applyLang(lang);
-    var btn=document.querySelector('.lang');
-    if(btn){btn.addEventListener('click',function(){
-      var cur=document.body.classList.contains('lang-en')?'en':'ja';
-      applyLang(cur==='en'?'ja':'en');
-    });}
+    var btns=document.querySelectorAll('.lang');
+    btns.forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var cur=document.body.classList.contains('lang-en')?'en':'ja';
+        applyLang(cur==='en'?'ja':'en');
+      });
+    });
   }
 
   document.addEventListener('DOMContentLoaded',function(){
