@@ -106,6 +106,13 @@
     backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
     box-shadow:0 0 24px rgba(255,255,255,.12)}
   @media(max-width:880px){.imu-cross{align-self:center}}
+  @media(max-width:720px){
+    .imu-fields-inner{flex-wrap:nowrap;gap:10px;align-items:flex-start}
+    .imu-block,.fields-block{min-width:0;flex:1;gap:10px}
+    .imu-title{font-size:clamp(1.1rem,4.5vw,1.5rem)}
+    .imu-cross{width:36px;height:36px;font-size:1.1rem;padding-top:0;align-self:center;margin-top:40px}
+    .imu-image-box{border-radius:12px}
+  }
 
   /* WHAT WE'RE BUILDING */
   .wwb-section{padding-top:80px;padding-bottom:80px}
