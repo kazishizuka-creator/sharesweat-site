@@ -51,6 +51,31 @@
   .legal-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:14px}
   .legal-row a{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.04em;color:var(--text-dim);border:1px solid var(--line);border-radius:100px;padding:10px 22px;transition:.25s}
   .legal-row a:hover{border-color:var(--violet);color:var(--violet-bright)}
+
+  /* app orbit */
+  .orbit-section{position:relative;z-index:2;overflow:hidden}
+  .orbit-stage{position:relative;width:100%;max-width:720px;height:720px;margin:0 auto;display:flex;align-items:center;justify-content:center}
+  .orbit-ring{position:absolute;width:560px;height:560px;animation:orbitspin 32s linear infinite}
+  @keyframes orbitspin{to{transform:rotate(360deg)}}
+  .orbit-item{position:absolute;top:50%;left:50%;width:110px;height:236px;margin:-118px 0 0 -55px;
+    transform:rotate(calc(var(--i)*60deg)) translateY(-280px);}
+  .orbit-item img{width:100%;height:100%;object-fit:cover;border-radius:16px;border:1px solid var(--line);
+    box-shadow:0 16px 40px rgba(0,0,0,.5);
+    transform:rotate(calc(var(--i)*-60deg));
+    animation:orbitcounter 32s linear infinite;}
+  @keyframes orbitcounter{to{transform:rotate(-360deg)}}
+  .orbit-center{position:relative;z-index:5}
+  .orbit-phone{position:relative;width:200px;height:420px;border-radius:36px;
+    background:linear-gradient(160deg,#15151f,#0a0a12);border:1px solid rgba(139,123,240,.3);
+    box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 70px rgba(139,123,240,.25);padding:10px;overflow:hidden}
+  .orbit-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:80px;height:20px;border-radius:0 0 12px 12px;background:#0a0a12;z-index:3}
+  .orbit-phone-img{width:100%;height:100%;object-fit:cover;border-radius:28px}
+  @media(max-width:760px){
+    .orbit-stage{height:520px;max-width:100%}
+    .orbit-ring{width:380px;height:380px}
+    .orbit-item{width:74px;height:158px;margin:-79px 0 0 -37px;transform:rotate(calc(var(--i)*60deg)) translateY(-190px)}
+    .orbit-phone{width:150px;height:316px}
+  }
 </style>
 </head>
 <body class="lang-ja">
@@ -83,6 +108,25 @@
     <span data-lang-ja>「ShareSweat」は、継続にコミットする筋トレアプリ。プランの自動生成から進捗の可視化、シェアまでを一つに。デバイスに先がけて、すでに世界で公開しています。</span>
     <span data-lang-en>"ShareSweat" is a workout app built for consistency — from auto-generated plans to progress dashboards and sharing. It's already live worldwide, ahead of our device.</span>
   </p>
+</section>
+
+<section class="section orbit-section" style="padding-top:40px;padding-bottom:40px">
+  <div class="orbit-stage">
+    <div class="orbit-ring">
+      <div class="orbit-item" style="--i:0"><img src="assets/images/app-1.jpg" alt="App screen 1"></div>
+      <div class="orbit-item" style="--i:1"><img src="assets/images/app-2.jpg" alt="App screen 2"></div>
+      <div class="orbit-item" style="--i:2"><img src="assets/images/app-3.jpg" alt="App screen 3"></div>
+      <div class="orbit-item" style="--i:3"><img src="assets/images/app-4.jpg" alt="App screen 4"></div>
+      <div class="orbit-item" style="--i:4"><img src="assets/images/app-5.jpg" alt="App screen 5"></div>
+      <div class="orbit-item" style="--i:5"><img src="assets/images/app-6.jpg" alt="App screen 6"></div>
+    </div>
+    <div class="orbit-center">
+      <div class="orbit-phone">
+        <div class="orbit-notch"></div>
+        <img src="assets/images/app-1.jpg" alt="ShareSweat app" class="orbit-phone-img">
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="section" style="padding-top:10px">
