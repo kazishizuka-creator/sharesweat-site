@@ -60,7 +60,18 @@
   /* product flow animation */
   .flow-stage{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:nowrap;min-height:420px;max-width:900px;margin:0 auto}
   .flow-body{flex-shrink:0;width:160px;text-align:center}
-  .body-svg{width:120px;height:200px;margin:0 auto}
+  .body-svg{width:140px;height:200px;margin:0 auto}
+  .limb{transform-origin:70px 55px}
+  .leg-front,.leg-back{transform-origin:66px 110px}
+  .arm-front{animation:swingA 0.6s ease-in-out infinite alternate}
+  .arm-back{animation:swingB 0.6s ease-in-out infinite alternate}
+  .leg-front{animation:swingB 0.6s ease-in-out infinite alternate}
+  .leg-back{animation:swingA 0.6s ease-in-out infinite alternate}
+  @keyframes swingA{from{transform:rotate(-18deg)}to{transform:rotate(18deg)}}
+  @keyframes swingB{from{transform:rotate(18deg)}to{transform:rotate(-18deg)}}
+  /* 全体を上下に弾ませてランニング感 */
+  .body-svg{animation:bounce 0.6s ease-in-out infinite}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
   .imu-dot{fill:var(--cyan);filter:drop-shadow(0 0 6px var(--cyan));animation:imuPulse 1.8s ease-in-out infinite;animation-delay:var(--dl)}
   @keyframes imuPulse{0%,100%{opacity:1;r:6}50%{opacity:.4;r:8}}
   .flow-label{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.14em;color:var(--violet-bright);text-transform:uppercase;margin-top:14px}
@@ -70,12 +81,10 @@
   .flow-phone{flex-shrink:0;position:relative;width:220px;height:420px;border-radius:36px;background:linear-gradient(160deg,#15151f,#0a0a12);border:1px solid rgba(139,123,240,.3);box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 60px rgba(139,123,240,.25);padding:14px}
   .flow-notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:80px;height:20px;border-radius:0 0 12px 12px;background:#0a0a12;z-index:3}
   .flow-screen{width:100%;height:100%;border-radius:26px;background:linear-gradient(180deg,#0d0d18,#060610);padding:40px 18px 18px;overflow:hidden}
-  .wave-row{display:flex;align-items:center;justify-content:center;gap:3px;height:60px;margin-bottom:20px}
-  .wave-row span{width:4px;background:linear-gradient(var(--cyan),var(--violet));border-radius:2px;animation:waveMove 1.2s ease-in-out infinite}
-  .wave-row span:nth-child(odd){animation-delay:.2s}
-  .wave-row span:nth-child(3n){animation-delay:.4s}
-  .wave-row span:nth-child(4n){animation-delay:.6s}
-  @keyframes waveMove{0%,100%{height:10px;opacity:.5}50%{height:50px;opacity:1}}
+  .ecg-wrap{height:70px;margin-bottom:20px;overflow:hidden;position:relative;border-bottom:1px solid var(--line)}
+  .ecg{width:200%;height:100%;animation:ecgScroll 3s linear infinite}
+  .ecg-line{fill:none;stroke:var(--cyan);stroke-width:2;filter:drop-shadow(0 0 4px var(--cyan))}
+  @keyframes ecgScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .advice-feed{display:flex;flex-direction:column;gap:10px}
   .advice{font-family:'Noto Sans JP',sans-serif;font-size:12px;color:var(--text-dim);padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:rgba(20,18,40,.4);opacity:0;transform:translateX(20px);animation:adviceIn .6s ease forwards;animation-delay:var(--ad)}
   .advice-feed{animation:feedLoop 6s linear infinite}
@@ -143,17 +152,29 @@
     <div class="flow-stage reveal">
       <!-- 左：人型（4点が光る） -->
       <div class="flow-body">
-        <svg viewBox="0 0 120 200" class="body-svg">
-          <line x1="60" y1="30" x2="60" y2="120" stroke="rgba(139,123,240,.4)" stroke-width="2"/>
-          <line x1="60" y1="50" x2="30" y2="95" stroke="rgba(139,123,240,.4)" stroke-width="2"/>
-          <line x1="60" y1="50" x2="90" y2="95" stroke="rgba(139,123,240,.4)" stroke-width="2"/>
-          <line x1="60" y1="120" x2="40" y2="185" stroke="rgba(139,123,240,.4)" stroke-width="2"/>
-          <line x1="60" y1="120" x2="80" y2="185" stroke="rgba(139,123,240,.4)" stroke-width="2"/>
-          <circle cx="60" cy="20" r="12" fill="none" stroke="rgba(139,123,240,.4)" stroke-width="2"/>
-          <circle cx="30" cy="95" r="6" class="imu-dot" style="--dl:0s"/>
-          <circle cx="90" cy="95" r="6" class="imu-dot" style="--dl:.4s"/>
-          <circle cx="40" cy="185" r="6" class="imu-dot" style="--dl:.8s"/>
-          <circle cx="80" cy="185" r="6" class="imu-dot" style="--dl:1.2s"/>
+        <svg viewBox="0 0 140 200" class="body-svg">
+          <!-- 頭 -->
+          <circle cx="70" cy="22" r="12" fill="none" stroke="rgba(139,123,240,.5)" stroke-width="2"/>
+          <!-- 胴 -->
+          <line x1="70" y1="34" x2="66" y2="110" stroke="rgba(139,123,240,.5)" stroke-width="2"/>
+          <!-- 腕（前後に振る） -->
+          <g class="limb arm-front">
+            <line x1="70" y1="55" x2="95" y2="90" stroke="rgba(139,123,240,.5)" stroke-width="2"/>
+            <circle cx="95" cy="90" r="6" class="imu-dot" style="--dl:0s"/>
+          </g>
+          <g class="limb arm-back">
+            <line x1="70" y1="55" x2="45" y2="85" stroke="rgba(139,123,240,.5)" stroke-width="2"/>
+            <circle cx="45" cy="85" r="6" class="imu-dot" style="--dl:.4s"/>
+          </g>
+          <!-- 脚（前後に蹴る） -->
+          <g class="limb leg-front">
+            <line x1="66" y1="110" x2="92" y2="165" stroke="rgba(139,123,240,.5)" stroke-width="2"/>
+            <circle cx="92" cy="165" r="6" class="imu-dot" style="--dl:.8s"/>
+          </g>
+          <g class="limb leg-back">
+            <line x1="66" y1="110" x2="42" y2="172" stroke="rgba(139,123,240,.5)" stroke-width="2"/>
+            <circle cx="42" cy="172" r="6" class="imu-dot" style="--dl:1.2s"/>
+          </g>
         </svg>
         <div class="flow-label">4点で計測</div>
       </div>
@@ -170,8 +191,10 @@
       <div class="flow-phone">
         <div class="flow-notch"></div>
         <div class="flow-screen">
-          <div class="wave-row">
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          <div class="ecg-wrap">
+            <svg class="ecg" viewBox="0 0 200 80" preserveAspectRatio="none">
+              <polyline class="ecg-line" points="0,40 20,40 30,40 38,18 46,62 54,40 70,40 90,40 100,40 108,22 116,58 124,40 140,40 160,40 170,40 178,16 186,64 194,40 200,40"/>
+            </svg>
           </div>
           <div class="advice-feed">
             <div class="advice" style="--ad:0s">✓ 左右バランス 良好</div>
