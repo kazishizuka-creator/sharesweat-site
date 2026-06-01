@@ -18,15 +18,16 @@
   .live .d{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 1.6s infinite}
 
   .stores{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
-  .store{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:12px 22px;transition:.3s;background:rgba(20,18,40,.3)}
-  .store:hover{border-color:var(--violet);transform:translateY(-2px)}
+  .store{display:flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:12px 22px;transition:.3s;background:rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .store:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12);transform:translateY(-2px)}
   .store .ic{font-family:'Space Grotesk',sans-serif;font-size:22px}
   .store .tx small{display:block;font-size:9px;letter-spacing:.1em;color:var(--text-faint);text-transform:uppercase}
   .store .tx b{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:15px}
 
   .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
   @media(max-width:880px){.feat-grid{grid-template-columns:1fr}}
-  .feat{border:1px solid var(--line);border-radius:18px;padding:28px;background:linear-gradient(160deg,rgba(20,18,40,.4),rgba(10,10,20,.2))}
+  .feat{border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:28px;background:rgba(255,255,255,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:.3s}
+  .feat:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.1)}
   .feat .k{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.14em;color:var(--violet-bright);text-transform:uppercase;margin-bottom:12px}
   .feat h3{font-weight:500;font-size:1.1rem;margin-bottom:8px}
   .feat p{color:var(--text-dim);font-size:.92rem}
@@ -83,12 +84,12 @@
     </div>
     <div class="reveal">
       <h2 class="h-sec">
-        <span data-lang-ja>すでに、<span class="grad">動いている実績。</span></span>
-        <span data-lang-en>Already <span class="grad">in people's hands.</span></span>
+        <span data-lang-ja>SHARESWEAT <span class="grad">アプリ。</span></span>
+        <span data-lang-en>The SHARESWEAT <span class="grad">app.</span></span>
       </h2>
       <p class="lead" style="margin-bottom:26px">
-        <span data-lang-ja>構想だけではありません。私たちはすでにアプリを世に出し、ユーザーに使われています。将来このアプリが、4点IMUデバイスと連携していきます。</span>
-        <span data-lang-en>This isn't just a concept. Our app is shipped and in use today — and it will connect with the 4-point IMU device in the future.</span>
+        <span data-lang-ja>デバイス連携はこれから。記録機能・シェア機能に特化したアプリをリリースしています。</span>
+        <span data-lang-en>Device integration is coming. For now, we've released an app focused on logging and sharing.</span>
       </p>
       <div class="stores">
         <a class="store" href="https://play.google.com/store/apps/details?id=com.sharesweat.app" target="_blank" rel="noopener">
