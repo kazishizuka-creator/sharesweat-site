@@ -92,7 +92,12 @@
   .imu-image-box{width:100%;aspect-ratio:4/3;border-radius:16px;border:1px solid var(--line);background:rgba(20,18,40,.4);overflow:hidden;display:flex;align-items:center;justify-content:center}
   .imu-image-box img{width:100%;height:100%;object-fit:cover;}
   .img-placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.08em;color:var(--text-faint);text-align:center;padding:20px}
-  .imu-cross{font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:700;color:var(--text-faint);opacity:.4;align-self:center;padding-top:32px}
+  .imu-cross{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:300;color:#fff;align-self:center;padding-top:32px;
+    width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    box-shadow:0 0 24px rgba(255,255,255,.12)}
+  @media(max-width:880px){.imu-cross{padding-top:0}}
 
   /* WHAT WE'RE BUILDING */
   .wwb-section{padding-top:80px;padding-bottom:80px}
@@ -103,6 +108,7 @@
   .wwb-visual{display:flex;align-items:center;justify-content:center}
   .phone-mockup-box{width:100%;max-width:320px;aspect-ratio:9/16;border-radius:32px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(40,36,80,.4),rgba(10,10,20,.3));display:flex;align-items:center;justify-content:center;box-shadow:0 30px 60px rgba(0,0,0,.4),inset 0 0 30px rgba(0,0,0,.3)}
   .phone-placeholder{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.08em;color:var(--text-faint);text-align:center;padding:20px;line-height:1.8}
+  .analysis-img{width:100%;height:100%;object-fit:cover;border-radius:30px}
   @media(max-width:860px){
     .wwb-inner{grid-template-columns:1fr;gap:40px}
     .phone-mockup-box{max-width:240px;margin:0 auto}
@@ -155,8 +161,8 @@
     <span data-lang-en>Four wearable sensors on the wrists and ankles, paired with motion-analysis AI, turn everyday training into reliable data.</span>
   </p>
   <div class="cta-row rise d5">
-    <a href="vision.html" class="btn btn-primary"><span data-lang-ja>私たちの構想</span><span data-lang-en>Our Vision</span> →</a>
-    <a href="product.html" class="btn btn-ghost"><span data-lang-ja>プロダクト</span><span data-lang-en>Product</span></a>
+    <a href="vision.html" class="btn btn-primary"><span data-lang-ja>Our Vision</span><span data-lang-en>Our Vision</span> →</a>
+    <a href="product.html" class="btn btn-ghost"><span data-lang-ja>Product</span><span data-lang-en>Product</span></a>
   </div>
 </section>
 
@@ -199,10 +205,7 @@
     </div>
     <div class="wwb-visual">
       <div class="phone-mockup-box">
-        <div class="phone-placeholder">
-          <span data-lang-ja>解析結果イメージ<br>（スマホ画面）</span>
-          <span data-lang-en>App screen mockup</span>
-        </div>
+        <img src="assets/images/analysis-result.jpg" alt="解析結果イメージ" class="analysis-img">
       </div>
     </div>
   </div>
