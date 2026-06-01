@@ -139,6 +139,23 @@
   .pcard h3{font-weight:500;font-size:1.2rem;margin-bottom:10px}
   .pcard p{color:var(--text-dim);font-size:.95rem}
   @media(max-width:880px){.platform-cards{grid-template-columns:1fr}}
+  @media(max-width:720px){
+    .pcard{
+      border-color:rgba(255,255,255,.4);
+      animation:pcardGlow 2.8s ease-in-out infinite;
+    }
+    .pcard:nth-child(2){animation-delay:1.4s}
+    @keyframes pcardGlow{
+      0%,100%{
+        border-color:rgba(255,255,255,.25);
+        box-shadow:0 0 16px rgba(255,255,255,.1);
+      }
+      50%{
+        border-color:rgba(255,255,255,.7);
+        box-shadow:0 0 30px rgba(255,255,255,.35),0 0 50px rgba(139,123,240,.2);
+      }
+    }
+  }
 </style>
 </head>
 <body>
