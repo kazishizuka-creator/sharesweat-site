@@ -65,6 +65,7 @@ header.site{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-it
   padding:18px 6vw;backdrop-filter:blur(12px);background:rgba(5,5,10,.55);border-bottom:1px solid var(--line)}
 .brand{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;letter-spacing:.14em;display:flex;align-items:center;gap:10px}
 .brand .mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--violet-bright),var(--violet-deep));display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
+.mark-img{width:28px;height:28px;border-radius:50%;object-fit:cover;display:inline-block}
 .nav{display:flex;gap:30px;font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.06em;color:var(--text-dim)}
 .nav a{transition:color .25s;position:relative}
 .nav a:hover,.nav a.active{color:var(--text)}
