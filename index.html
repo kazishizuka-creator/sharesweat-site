@@ -23,28 +23,25 @@
   .d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}.d4{animation-delay:.6s}.d5{animation-delay:.8s}
   @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 
-  /* hero device (CSS ring) */
-  .hero-visual{position:absolute;right:6vw;top:50%;transform:translateY(-50%);width:380px;height:380px;z-index:1;pointer-events:none}
-  .ring{position:absolute;inset:0;margin:auto;width:300px;height:300px;border-radius:50%;
-    background:conic-gradient(from 210deg,#2a2a36 0deg,#4a4a5e 60deg,#6e6e85 110deg,#3a3a48 160deg,#1a1a24 220deg,#454556 290deg,#2a2a36 360deg);
-    box-shadow:0 30px 60px rgba(0,0,0,.6),inset 0 0 40px rgba(0,0,0,.5),inset 0 6px 12px rgba(255,255,255,.08);
-    animation:spin 26s linear infinite;opacity:.92}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .ring::before{content:'';position:absolute;inset:44px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 30px rgba(0,0,0,.8)}
-  .pod{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:60px;height:44px;border-radius:13px;z-index:5;
-    background:linear-gradient(150deg,#2c2c3a,#16161e);border:1px solid rgba(139,123,240,.3);
-    box-shadow:0 8px 20px rgba(0,0,0,.5),0 0 24px rgba(139,123,240,.35);display:flex;align-items:center;justify-content:center;
-    animation:spinrev 26s linear infinite}
-  @keyframes spinrev{to{transform:translateX(-50%) rotate(-360deg)}}
-  .pod .led{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle,var(--cyan),var(--violet));box-shadow:0 0 12px var(--cyan),0 0 22px var(--violet);animation:blink 2.2s ease-in-out infinite}
-  @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
-  .tick{position:absolute;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.05em;color:var(--cyan);opacity:.8}
-  .tick .u{color:var(--text-faint);font-size:8px}
-  .tick.a{top:40px;right:6px;animation:bob 4s ease-in-out infinite}
-  .tick.b{bottom:80px;left:0;animation:bob 4s ease-in-out .9s infinite}
-  @keyframes bob{0%,100%{transform:translateY(0);opacity:.8}50%{transform:translateY(-6px);opacity:1}}
-  @media(max-width:1080px){.hero-visual{opacity:.28;right:-40px}}
-  @media(max-width:720px){.hero-visual{width:300px;height:300px;opacity:.18}}
+  /* hero visual image */
+  .hero-visual-img{
+    position:absolute;
+    right:0;
+    top:0;
+    width:62%;
+    height:100%;
+    z-index:1;
+    pointer-events:none;
+    background:url('assets/images/hero-visual.jpg') center center / cover no-repeat;
+    mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 18%, rgba(0,0,0,0.85) 38%, #000 60%);
+    -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 18%, rgba(0,0,0,0.85) 38%, #000 60%);
+  }
+  @media(max-width:1080px){
+    .hero-visual-img{width:70%;mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.2) 12%,rgba(0,0,0,0.7) 35%,#000 55%);-webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.2) 12%,rgba(0,0,0,0.7) 35%,#000 55%)}
+  }
+  @media(max-width:720px){
+    .hero-visual-img{width:100%;opacity:.25;mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.5) 30%,#000 60%);-webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.5) 30%,#000 60%)}
+  }
 
   /* datastrip */
   .datastrip{position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(11,11,22,.4);backdrop-filter:blur(8px)}
@@ -116,11 +113,7 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-visual">
-    <div class="ring"><div class="pod"><span class="led"></span></div></div>
-    <div class="tick a">200<span class="u">Hz</span></div>
-    <div class="tick b">6-AXIS IMU</div>
-  </div>
+  <div class="hero-visual-img"></div>
   <span class="eyebrow rise d1"><span class="dot"></span><span data-lang-ja>4点IMU × 動作解析AI</span><span data-lang-en>4-POINT IMU × MOTION AI</span></span>
   <div class="en-mini rise d2">Sports form analysis &amp; human-motion data platform</div>
   <h1 class="rise d3">
