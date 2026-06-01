@@ -56,14 +56,16 @@
     }
   }
   @media(max-width:720px){
-    .hero-visual-img{
-      position:absolute;right:0;top:0;width:100%;height:100%;opacity:.55;
-      -webkit-mask-image:linear-gradient(to bottom, #000 40%, transparent 95%);
-      mask-image:linear-gradient(to bottom, #000 40%, transparent 95%);
-    }
-    .hero{justify-content:flex-start;padding-top:140px}
+    .hero{justify-content:flex-start;padding-top:130px;min-height:auto}
     .hero h1{font-size:clamp(1.9rem,7vw,2.6rem)}
     .en-mini{display:none}
+    .hero-visual-img{
+      position:absolute;right:0;top:0;width:100%;height:420px;opacity:.55;
+      -webkit-mask-image:linear-gradient(to bottom, #000 45%, transparent 100%);
+      mask-image:linear-gradient(to bottom, #000 45%, transparent 100%);
+    }
+    /* 説明文を画像領域より下へ。上に余白を取って重なりを防ぐ */
+    .hero .sub{margin-top:200px;position:relative;z-index:2;background:rgba(5,5,10,.4);border-radius:12px;padding:14px 16px}
   }
 
   /* datastrip */
