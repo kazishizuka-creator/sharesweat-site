@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision — SHARESWEAT</title>
+<meta name="description" content="テキスト・画像・音声の次に、AIが理解すべきは人の身体動作。身体動作AIの基盤を、日本から。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .page-hero{padding:170px 0 70px;position:relative;z-index:2}
+  .page-hero h1{font-weight:700;font-size:clamp(2.2rem,5vw,4rem);line-height:1.18;letter-spacing:-.01em;max-width:18ch;margin-bottom:24px}
+  .page-hero h1 .grad{background:linear-gradient(100deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .page-hero .sub{font-size:clamp(1rem,1.5vw,1.18rem);color:var(--text-dim);max-width:52ch}
+  .statement{font-weight:300;font-size:clamp(1.3rem,2.6vw,2rem);line-height:1.7;letter-spacing:-.01em;max-width:24ch}
+  .statement .grad{background:linear-gradient(100deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .layers{display:flex;flex-direction:column;gap:14px;margin-top:10px}
+  .layer{display:flex;align-items:center;gap:18px;padding:18px 24px;border:1px solid var(--line);border-radius:16px;background:rgba(20,18,40,.3)}
+  .layer .idx{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--text-faint);width:34px}
+  .layer .nm{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;letter-spacing:.04em}
+  .layer.done{opacity:.5}
+  .layer.done .nm::after{content:' ✓';color:var(--cyan)}
+  .layer.now{border-color:var(--violet);box-shadow:0 0 30px rgba(139,123,240,.25)}
+  .layer.now .nm{color:var(--violet-bright)}
+</style>
+</head>
+<body class="lang-ja">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+<div class="bg-grid"></div>
+
+<header class="site">
+  <a href="index.html" class="brand"><span class="mark">S</span>SHARESWEAT</a>
+  <nav class="nav">
+    <a href="vision.html" class="active">Vision</a>
+    <a href="product.html">Product</a>
+    <a href="app.html">App</a>
+    <a href="company.html">Company</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang">EN / 日本語</button>
+    <a href="contact.html" class="nav-cta">CONTACT</a>
+    <button class="menu-btn" aria-label="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero wrap">
+  <span class="eyebrow"><span class="dot"></span>Vision</span>
+  <h1>
+    <span data-lang-ja>身体動作がAIに理解される時代を、<span class="grad">見据えて。</span></span>
+    <span data-lang-en>Looking ahead to when AI <span class="grad">understands human motion.</span></span>
+  </h1>
+  <p class="sub">
+    <span data-lang-ja>私たちが挑んでいるのは、まだ誰のものでもない領域です。</span>
+    <span data-lang-en>We are pursuing a frontier that no one owns yet.</span>
+  </p>
+</section>
+
+<section class="section" style="padding-top:30px">
+  <div class="wrap grid-2" style="align-items:center">
+    <div class="reveal">
+      <p class="statement">
+        <span data-lang-ja>AIはすでに、テキスト・画像・動画・音声を扱えるようになりました。<br><br>残された大きな領域は、<span class="grad">人の身体動作</span>である。</span>
+        <span data-lang-en>AI can already handle text, images, video, and audio.<br><br>The remaining frontier is <span class="grad">human motion.</span></span>
+      </p>
+    </div>
+    <div class="reveal">
+      <div class="layers">
+        <div class="layer done"><span class="idx">01</span><span class="nm">Text</span></div>
+        <div class="layer done"><span class="idx">02</span><span class="nm">Image</span></div>
+        <div class="layer done"><span class="idx">03</span><span class="nm">Audio</span></div>
+        <div class="layer now"><span class="idx">04</span><span class="nm">Human Motion</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="card reveal" style="padding:48px">
+      <p class="lead" style="font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--text)">
+        <span data-lang-ja>身体の動きがデータ化され、AIが理解し、上達・健康・リハビリに活かされる時代は、必ず来ます。私たちは、その<span style="color:var(--violet-bright)">身体動作AIの基盤を日本から作りたい</span>と考えています。</span>
+        <span data-lang-en>The era when body movement is captured as data, understood by AI, and applied to skill, health, and rehabilitation will surely come. We want to build that <span style="color:var(--violet-bright)">foundation for motion AI — from Japan.</span></span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="grid-3">
+      <div class="card reveal">
+        <h3 data-lang-ja>上達のために</h3><h3 data-lang-en>For mastery</h3>
+        <p data-lang-ja>正しいフォームを、感覚ではなくデータで。自主練習でも、客観的に自分を確かめられる世界へ。</p>
+        <p data-lang-en>Correct form by data, not by feel — so anyone can check themselves objectively, even alone.</p>
+      </div>
+      <div class="card reveal">
+        <h3 data-lang-ja>健康のために</h3><h3 data-lang-en>For health</h3>
+        <p data-lang-ja>日々の動きが積み重なり、身体の状態を映す確かな記録になる。</p>
+        <p data-lang-en>Everyday movement accumulates into a reliable record of how the body is doing.</p>
+      </div>
+      <div class="card reveal">
+        <h3 data-lang-ja>研究のために</h3><h3 data-lang-en>For research</h3>
+        <p data-lang-ja>多様で大規模な実環境の動作データは、これからの研究に欠かせない土台になる。</p>
+        <p data-lang-en>Large, diverse, real-world motion data becomes an essential basis for future research.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="text-align:center">
+  <div class="wrap">
+    <p class="lead reveal" style="margin:0 auto 28px;font-size:1.1rem;color:var(--text)">
+      <span data-lang-ja>ここで語れるのは、思想の輪郭までです。その先は、ぜひ直接。</span>
+      <span data-lang-en>This page outlines the philosophy. The rest, we'd love to share in person.</span>
+    </p>
+    <a href="contact.html" class="btn btn-primary reveal"><span data-lang-ja>話を聞く</span><span data-lang-en>Talk with us</span> →</a>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand"><span class="mark">S</span>SHARESWEAT</div>
+        <p data-lang-ja>身体動作を、データ化する。</p><p data-lang-en>Turning human motion into data.</p>
+      </div>
+      <div><h4>Explore</h4><ul><li><a href="vision.html">Vision</a></li><li><a href="product.html">Product</a></li><li><a href="app.html">App</a></li><li><a href="company.html">Company</a></li></ul></div>
+      <div><h4>App</h4><ul><li><a href="https://play.google.com/store/apps/details?id=com.sharesweat.app" target="_blank" rel="noopener">Google Play</a></li><li><a href="app.html">App Store</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-use.html">Terms of Use</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="contact.html">Contact form</a></li><li><a href="mailto:sharesweat.contactus@sharesweat.com">Email</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 SHARESWEAT, K.K. All rights reserved.</span><span>Tokyo, Japan</span></div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

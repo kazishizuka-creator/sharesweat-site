@@ -3,148 +3,232 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHARESWEAT — 身体動作を、データ化する</title>
+<title>SHARESWEAT — 身体知を、データ化する</title>
+<meta name="description" content="4点IMUウェアラブル × 動作解析AIで、スポーツのフォームを解析する。身体動作のデータ基盤を、日本から。">
+<meta property="og:title" content="SHARESWEAT">
+<meta property="og:description" content="身体知を、データ化する世界へ。4点IMU × 動作解析AI。">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 <style>
-  :root{
-    --bg:#05050a;
-    --bg-soft:#0b0b16;
-    --violet:#8B7BF0;
-    --violet-bright:#A99CFF;
-    --violet-deep:#534AB7;
-    --cyan:#5BD8FF;
-    --text:#EDEDF5;
-    --text-dim:#9A9AB2;
-    --text-faint:#5A5A72;
-    --line:rgba(139,123,240,.18);
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Noto Sans JP',sans-serif;
-    font-weight:300;
-    overflow-x:hidden;
-    line-height:1.7;
-  }
-  ::selection{background:var(--violet);color:#fff}
+  /* ---- home hero ---- */
+  .hero{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;justify-content:center;max-width:var(--maxw);margin:0 auto;padding:120px 6vw 0}
+  .hero h1{font-weight:700;font-size:clamp(2.4rem,6.4vw,5.4rem);line-height:1.12;letter-spacing:-.01em;margin-bottom:28px;max-width:17ch}
+  .hero h1 .grad{background:linear-gradient(100deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .sub{font-size:clamp(1rem,1.5vw,1.2rem);color:var(--text-dim);max-width:48ch;margin-bottom:42px}
+  .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .rise{opacity:0;animation:rise 1s forwards}
+  .d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}.d4{animation-delay:.6s}.d5{animation-delay:.8s}
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 
-  /* ---- ambient glow background ---- */
-  .glow{position:fixed;border-radius:50%;filter:blur(120px);opacity:.5;pointer-events:none;z-index:0}
-  .glow-1{width:50vw;height:50vw;background:#4A3FB0;top:-15vw;right:-10vw;animation:float1 14s ease-in-out infinite}
-  .glow-2{width:40vw;height:40vw;background:#2A4FA0;bottom:-10vw;left:-8vw;animation:float2 18s ease-in-out infinite}
-  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(-4vw,4vw)}}
-  @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(4vw,-3vw)}}
+  /* hero device (CSS ring) */
+  .hero-visual{position:absolute;right:6vw;top:50%;transform:translateY(-50%);width:380px;height:380px;z-index:1;pointer-events:none}
+  .ring{position:absolute;inset:0;margin:auto;width:300px;height:300px;border-radius:50%;
+    background:conic-gradient(from 210deg,#2a2a36 0deg,#4a4a5e 60deg,#6e6e85 110deg,#3a3a48 160deg,#1a1a24 220deg,#454556 290deg,#2a2a36 360deg);
+    box-shadow:0 30px 60px rgba(0,0,0,.6),inset 0 0 40px rgba(0,0,0,.5),inset 0 6px 12px rgba(255,255,255,.08);
+    animation:spin 26s linear infinite;opacity:.92}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ring::before{content:'';position:absolute;inset:44px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 30px rgba(0,0,0,.8)}
+  .pod{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:60px;height:44px;border-radius:13px;z-index:5;
+    background:linear-gradient(150deg,#2c2c3a,#16161e);border:1px solid rgba(139,123,240,.3);
+    box-shadow:0 8px 20px rgba(0,0,0,.5),0 0 24px rgba(139,123,240,.35);display:flex;align-items:center;justify-content:center;
+    animation:spinrev 26s linear infinite}
+  @keyframes spinrev{to{transform:translateX(-50%) rotate(-360deg)}}
+  .pod .led{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle,var(--cyan),var(--violet));box-shadow:0 0 12px var(--cyan),0 0 22px var(--violet);animation:blink 2.2s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+  .tick{position:absolute;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.05em;color:var(--cyan);opacity:.8}
+  .tick .u{color:var(--text-faint);font-size:8px}
+  .tick.a{top:40px;right:6px;animation:bob 4s ease-in-out infinite}
+  .tick.b{bottom:80px;left:0;animation:bob 4s ease-in-out .9s infinite}
+  @keyframes bob{0%,100%{transform:translateY(0);opacity:.8}50%{transform:translateY(-6px);opacity:1}}
+  @media(max-width:1080px){.hero-visual{opacity:.28;right:-40px}}
+  @media(max-width:720px){.hero-visual{width:300px;height:300px;opacity:.18}}
 
-  /* fine grid texture */
-  .grid-tex{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4;
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:64px 64px;
-    -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 80%);
-    mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 80%);
-  }
-
-  /* ---- nav ---- */
-  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
-    padding:20px 6vw;backdrop-filter:blur(12px);background:rgba(5,5,10,.55);border-bottom:1px solid var(--line)}
-  .logo{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:20px;letter-spacing:.14em;display:flex;align-items:center;gap:10px}
-  .logo .mark{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--violet-bright),var(--violet-deep));display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff}
-  .navlinks{display:flex;gap:34px;font-size:13px;letter-spacing:.08em;color:var(--text-dim)}
-  .navlinks a{color:inherit;text-decoration:none;transition:color .25s}
-  .navlinks a:hover{color:var(--text)}
-  .nav-cta{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.1em;padding:9px 18px;border:1px solid var(--violet);border-radius:100px;color:var(--violet-bright);text-decoration:none;transition:.25s}
-  .nav-cta:hover{background:var(--violet);color:#fff;box-shadow:0 0 24px rgba(139,123,240,.5)}
-  @media(max-width:780px){.navlinks{display:none}}
-
-  /* ---- hero ---- */
-  .hero{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 6vw;max-width:1400px;margin:0 auto}
-  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.22em;color:var(--violet-bright);
-    border:1px solid var(--line);border-radius:100px;padding:8px 16px;width:max-content;margin-bottom:34px;
-    opacity:0;animation:rise .9s .1s forwards}
-  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 2s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-  h1{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:clamp(2.4rem,6.2vw,5.4rem);line-height:1.12;letter-spacing:-.01em;margin-bottom:30px;max-width:16ch}
-  h1 .l{display:block;opacity:0;animation:rise 1s forwards}
-  h1 .l:nth-child(1){animation-delay:.2s}
-  h1 .l:nth-child(2){animation-delay:.34s}
-  h1 .grad{background:linear-gradient(100deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sub{font-size:clamp(1rem,1.5vw,1.2rem);font-weight:300;color:var(--text-dim);max-width:46ch;margin-bottom:46px;opacity:0;animation:rise 1s .5s forwards}
-  .en-tag{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.05em;color:var(--text-faint);margin-bottom:14px;opacity:0;animation:rise 1s .15s forwards}
-
-  .cta-row{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:rise 1s .65s forwards}
-  .btn-primary{font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:.06em;padding:15px 32px;border-radius:100px;
-    background:linear-gradient(120deg,var(--violet),var(--violet-deep));color:#fff;text-decoration:none;border:none;
-    display:inline-flex;align-items:center;gap:10px;transition:.3s;box-shadow:0 0 0 rgba(139,123,240,0)}
-  .btn-primary:hover{box-shadow:0 8px 40px rgba(139,123,240,.45);transform:translateY(-2px)}
-  .btn-ghost{font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:.06em;padding:15px 30px;border-radius:100px;
-    border:1px solid var(--line);color:var(--text);text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:.3s}
-  .btn-ghost:hover{border-color:var(--violet);color:var(--violet-bright)}
-
-  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
-
-  /* ---- live data strip ---- */
-  .datastrip{position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(11,11,22,.4);backdrop-filter:blur(8px);margin-top:6vh;opacity:0;animation:rise 1s .85s forwards}
-  .datastrip-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  /* datastrip */
+  .datastrip{position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(11,11,22,.4);backdrop-filter:blur(8px)}
+  .datastrip .inner{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
   .stat{padding:26px 6vw;border-right:1px solid var(--line)}
   .stat:last-child{border-right:none}
-  .stat .label{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--text-faint);margin-bottom:8px;text-transform:uppercase}
-  .stat .val{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,2.4vw,2.1rem);font-weight:600;color:var(--text)}
-  .stat .val .u{font-size:.55em;color:var(--violet-bright);margin-left:4px}
-  @media(max-width:780px){
-    .datastrip-inner{grid-template-columns:repeat(2,1fr)}
-    .stat{border-bottom:1px solid var(--line)}
-    .stat:nth-child(2){border-right:none}
-    .stat{padding:22px 6vw}
-  }
+  .stat .l{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--text-faint);text-transform:uppercase;margin-bottom:6px}
+  .stat .v{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,2.4vw,2rem);font-weight:600}
+  .stat .v .u{font-size:.55em;color:var(--violet-bright);margin-left:4px}
+  @media(max-width:720px){.datastrip .inner{grid-template-columns:repeat(2,1fr)}.stat{border-bottom:1px solid var(--line)}.stat:nth-child(2){border-right:none}}
 
-  .scrollhint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.2em;color:var(--text-faint);display:flex;flex-direction:column;align-items:center;gap:10px}
-  .scrollhint .bar{width:1px;height:40px;background:linear-gradient(var(--violet),transparent);animation:drop 2s infinite}
-  @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+  /* nav cards to other pages */
+  .navcards{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  @media(max-width:880px){.navcards{grid-template-columns:1fr}}
+  .navcard{display:block;border:1px solid var(--line);border-radius:22px;padding:34px;background:linear-gradient(160deg,rgba(20,18,40,.5),rgba(10,10,20,.25));transition:.3s;position:relative;overflow:hidden}
+  .navcard:hover{border-color:var(--violet);transform:translateY(-3px)}
+  .navcard .k{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--violet-bright);text-transform:uppercase;margin-bottom:14px}
+  .navcard h3{font-weight:500;font-size:1.4rem;margin-bottom:10px}
+  .navcard p{color:var(--text-dim);font-size:.95rem;margin-bottom:18px}
+  .navcard .go{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--violet-bright)}
 </style>
 </head>
 <body>
-  <div class="glow glow-1"></div>
-  <div class="glow glow-2"></div>
-  <div class="grid-tex"></div>
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+<div class="bg-grid"></div>
 
-  <nav>
-    <div class="logo"><span class="mark">S</span>SHARESWEAT</div>
-    <div class="navlinks">
-      <a href="#about">事業概要</a>
-      <a href="#tech">テクノロジー</a>
-      <a href="#product">プロダクト</a>
-      <a href="#company">会社情報</a>
-    </div>
-    <a href="#contact" class="nav-cta">CONTACT</a>
+<!-- ===== HEADER (全ページ共通) ===== -->
+<header class="site">
+  <a href="index.html" class="brand"><span class="mark">S</span>SHARESWEAT</a>
+  <nav class="nav">
+    <a href="vision.html">Vision</a>
+    <a href="product.html">Product</a>
+    <a href="app.html">App</a>
+    <a href="company.html">Company</a>
   </nav>
+  <div class="nav-right">
+    <button class="lang">EN / 日本語</button>
+    <a href="contact.html" class="nav-cta">CONTACT</a>
+    <button class="menu-btn" aria-label="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
 
-  <header class="hero">
-    <span class="eyebrow"><span class="dot"></span>4-POINT IMU × MOTION AI</span>
-    <div class="en-tag">Sports form analysis &amp; human-motion data platform</div>
-    <h1>
-      <span class="l">身体知を、</span>
-      <span class="l"><span class="grad">データ</span>化する世界へ。</span>
-    </h1>
-    <p class="sub">手首・足首に装着する4点のウェアラブルと動作解析AIで、スポーツのフォームを解析する。日々の積み重ねが、確かなデータになる。</p>
-    <div class="cta-row">
-      <a href="#about" class="btn-primary">事業を見る →</a>
-      <a href="#product" class="btn-ghost">プロダクト</a>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-visual">
+    <div class="ring"><div class="pod"><span class="led"></span></div></div>
+    <div class="tick a">200<span class="u">Hz</span></div>
+    <div class="tick b">6-AXIS IMU</div>
+  </div>
+  <span class="eyebrow rise d1"><span class="dot"></span><span data-lang-ja>4点IMU × 動作解析AI</span><span data-lang-en>4-POINT IMU × MOTION AI</span></span>
+  <div class="en-mini rise d2">Sports form analysis &amp; human-motion data platform</div>
+  <h1 class="rise d3">
+    <span data-lang-ja>身体知を、<span class="grad">データ</span>化する世界へ。</span>
+    <span data-lang-en>Turning <span class="grad">body intelligence</span> into data.</span>
+  </h1>
+  <p class="sub rise d4">
+    <span data-lang-ja>手首・足首に着ける4点のウェアラブルと動作解析AIで、スポーツのフォームを解析する。日々の積み重ねが、確かなデータになる。</span>
+    <span data-lang-en>Four wearable sensors on the wrists and ankles, paired with motion-analysis AI, turn everyday training into reliable data.</span>
+  </p>
+  <div class="cta-row rise d5">
+    <a href="vision.html" class="btn btn-primary"><span data-lang-ja>私たちの構想</span><span data-lang-en>Our Vision</span> →</a>
+    <a href="product.html" class="btn btn-ghost"><span data-lang-ja>プロダクト</span><span data-lang-en>Product</span></a>
+  </div>
+</section>
+
+<!-- ===== DATA STRIP ===== -->
+<div class="datastrip">
+  <div class="inner">
+    <div class="stat"><div class="l">Sampling</div><div class="v">200<span class="u">Hz</span></div></div>
+    <div class="stat"><div class="l">Sensors</div><div class="v">4<span class="u">IMU</span></div></div>
+    <div class="stat"><div class="l">Motion Classes</div><div class="v">150<span class="u">+</span></div></div>
+    <div class="stat"><div class="l">Sports</div><div class="v">4<span class="u">fields</span></div></div>
+  </div>
+</div>
+
+<!-- ===== WHAT WE'RE BUILDING (短い概要) ===== -->
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow reveal"><span class="dot"></span><span data-lang-ja>私たちがつくるもの</span><span data-lang-en>What we build</span></span>
+    <h2 class="h-sec reveal">
+      <span data-lang-ja>つけて運動するだけで、<br><span class="grad">フォームがデータになる。</span></span>
+      <span data-lang-en>Just move — and your <span class="grad">form becomes data.</span></span>
+    </h2>
+    <p class="lead reveal">
+      <span data-lang-ja>筋トレ・ランニング・ゴルフ・ヨガ。趣味のスポーツに本気で向き合う人ほど、「自分のフォームが正しいのか」を客観的に確かめる手段を持っていません。私たちは、身体に着けた4点のセンサーと動作解析AIで、その問いに答えようとしています。</span>
+      <span data-lang-en>Strength, running, golf, yoga. The more seriously people pursue their sport, the harder it is to objectively check their own form. We answer that question with four body-worn sensors and motion-analysis AI.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ===== NAV CARDS ===== -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="navcards">
+      <a href="vision.html" class="navcard reveal">
+        <div class="k">Vision</div>
+        <h3 data-lang-ja>身体動作という、AIの次の領域</h3><h3 data-lang-en>The next frontier for AI</h3>
+        <p data-lang-ja>テキスト・画像・音声の次に、AIが理解すべきは人の身体動作だと考えています。</p>
+        <p data-lang-en>After text, image, and audio, we believe human motion is what AI should understand next.</p>
+        <span class="go" data-lang-ja>構想を見る →</span><span class="go" data-lang-en>Explore →</span>
+      </a>
+      <a href="product.html" class="navcard reveal">
+        <div class="k">Product</div>
+        <h3 data-lang-ja>4点IMUウェアラブル</h3><h3 data-lang-en>4-point IMU wearable</h3>
+        <p data-lang-ja>手首・足首に着ける、機能美のあるデバイス。2027年クラウドファンディング予定。</p>
+        <p data-lang-en>An elegant device for wrists and ankles. Crowdfunding planned for 2027.</p>
+        <span class="go" data-lang-ja>プロダクトを見る →</span><span class="go" data-lang-en>See product →</span>
+      </a>
+      <a href="app.html" class="navcard reveal">
+        <div class="k">App — Available Now</div>
+        <h3 data-lang-ja>筋トレアプリは、もう動いている</h3><h3 data-lang-en>Our app is already live</h3>
+        <p data-lang-ja>「ShareSweat」はApp Store / Google Playで公開中。記録・分析・シェアを一つに。</p>
+        <p data-lang-en>"ShareSweat" is live on the App Store and Google Play. Log, analyze, and share.</p>
+        <span class="go" data-lang-ja>アプリを見る →</span><span class="go" data-lang-en>Get the app →</span>
+      </a>
+      <a href="company.html" class="navcard reveal">
+        <div class="k">Company</div>
+        <h3 data-lang-ja>つくる人</h3><h3 data-lang-en>Who we are</h3>
+        <p data-lang-ja>ビジネス設計から機械学習の実装までを一人で担う創業者が、覚悟を持って挑む領域。</p>
+        <p data-lang-en>A founder who handles everything from business design to ML implementation.</p>
+        <span class="go" data-lang-ja>会社情報 →</span><span class="go" data-lang-en>About us →</span>
+      </a>
     </div>
+  </div>
+</section>
 
-    <div class="scrollhint">SCROLL<span class="bar"></span></div>
-  </header>
+<!-- ===== CTA ===== -->
+<section class="section" style="text-align:center">
+  <div class="wrap">
+    <h2 class="h-sec reveal" style="margin-left:auto;margin-right:auto;max-width:20ch">
+      <span data-lang-ja>詳しい話は、<span class="grad">直接</span>させてください。</span>
+      <span data-lang-en>Let's talk <span class="grad">directly.</span></span>
+    </h2>
+    <p class="lead reveal" style="margin:0 auto 30px">
+      <span data-lang-ja>ここに書けるのは、構想のほんの一部です。パートナー・専門家の方とは、個別に深くお話しします。</span>
+      <span data-lang-en>This page shows only a fraction of the vision. We share the details directly with partners and experts.</span>
+    </p>
+    <a href="contact.html" class="btn btn-primary reveal"><span data-lang-ja>お問い合わせ</span><span data-lang-en>Get in touch</span> →</a>
+  </div>
+</section>
 
-  <section class="datastrip">
-    <div class="datastrip-inner">
-      <div class="stat"><div class="label">Sampling Rate</div><div class="val">200<span class="u">Hz</span></div></div>
-      <div class="stat"><div class="label">Sensor Points</div><div class="val">4<span class="u">IMU</span></div></div>
-      <div class="stat"><div class="label">Motion Classes</div><div class="val">150<span class="u">+</span></div></div>
-      <div class="stat"><div class="label">Target Sports</div><div class="val">4<span class="u">fields</span></div></div>
+<!-- ===== FOOTER (全ページ共通) ===== -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand"><span class="mark">S</span>SHARESWEAT</div>
+        <p data-lang-ja>身体動作を、データ化する。スポーツフォーム解析と身体動作データ基盤の構築。</p>
+        <p data-lang-en>Turning human motion into data. Sports form analysis and a motion-data platform.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="vision.html">Vision</a></li>
+          <li><a href="product.html">Product</a></li>
+          <li><a href="app.html">App</a></li>
+          <li><a href="company.html">Company</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>App</h4>
+        <ul>
+          <li><a href="https://play.google.com/store/apps/details?id=com.sharesweat.app" target="_blank" rel="noopener">Google Play</a></li>
+          <li><a href="app.html">App Store</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-use.html">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="contact.html">Contact form</a></li>
+          <li><a href="mailto:sharesweat.contactus@sharesweat.com">Email</a></li>
+        </ul>
+      </div>
     </div>
-  </section>
+    <div class="foot-bottom">
+      <span>© 2026 SHARESWEAT, K.K. All rights reserved.</span>
+      <span>Tokyo, Japan</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
 </body>
 </html>

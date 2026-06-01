@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App — SHARESWEAT</title>
+<meta name="description" content="ShareSweat — 継続にコミットする筋トレアプリ。12週間プラン自動生成・進捗ダッシュボード・ワンタップ記録。App Store / Google Playで公開中。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .page-hero{padding:170px 0 40px;position:relative;z-index:2}
+  .page-hero h1{font-weight:700;font-size:clamp(2.2rem,5vw,4rem);line-height:1.18;max-width:18ch;margin-bottom:24px}
+  .page-hero h1 .grad{background:linear-gradient(100deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .page-hero .sub{font-size:clamp(1rem,1.5vw,1.18rem);color:var(--text-dim);max-width:54ch}
+  .live{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--cyan);text-transform:uppercase;margin-bottom:18px}
+  .live .d{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 1.6s infinite}
+
+  /* phone mockup (CSS) */
+  .phone{position:relative;width:260px;height:540px;border-radius:40px;margin:0 auto;
+    background:linear-gradient(160deg,#15151f,#0a0a12);border:1px solid rgba(139,123,240,.25);
+    box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 60px rgba(139,123,240,.18),inset 0 1px 2px rgba(255,255,255,.08);padding:14px}
+  .phone .notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:90px;height:22px;border-radius:0 0 14px 14px;background:#0a0a12;z-index:3}
+  .phone .scr{width:100%;height:100%;border-radius:28px;background:linear-gradient(180deg,#0d0d18,#060610);overflow:hidden;position:relative;padding:40px 18px 18px}
+  .scr .ttl{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.14em;color:var(--text-faint);text-transform:uppercase;margin-bottom:14px}
+  .scr .ring2{position:relative;width:120px;height:120px;margin:0 auto 18px}
+  .scr .ring2 .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .scr .ring2 .num b{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:600;color:#fff}
+  .scr .ring2 .num span{font-size:8px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
+  .scr .row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .scr .row .l{font-family:'Space Grotesk',sans-serif;font-size:8px;letter-spacing:.06em;color:var(--text-dim);width:54px;text-transform:uppercase}
+  .scr .row .tr{flex:1;height:4px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+  .scr .row .fl{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--violet),var(--cyan));animation:grow 1.6s cubic-bezier(.2,.8,.2,1) forwards;width:0}
+  @keyframes grow{to{width:var(--w)}}
+
+  .stores{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+  .store{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:12px 22px;transition:.3s;background:rgba(20,18,40,.3)}
+  .store:hover{border-color:var(--violet);transform:translateY(-2px)}
+  .store .ic{font-family:'Space Grotesk',sans-serif;font-size:22px}
+  .store .tx small{display:block;font-size:9px;letter-spacing:.1em;color:var(--text-faint);text-transform:uppercase}
+  .store .tx b{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:15px}
+
+  .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  @media(max-width:880px){.feat-grid{grid-template-columns:1fr}}
+  .feat{border:1px solid var(--line);border-radius:18px;padding:28px;background:linear-gradient(160deg,rgba(20,18,40,.4),rgba(10,10,20,.2))}
+  .feat .k{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.14em;color:var(--violet-bright);text-transform:uppercase;margin-bottom:12px}
+  .feat h3{font-weight:500;font-size:1.1rem;margin-bottom:8px}
+  .feat p{color:var(--text-dim);font-size:.92rem}
+
+  .legal-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+  .legal-row a{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.04em;color:var(--text-dim);border:1px solid var(--line);border-radius:100px;padding:10px 22px;transition:.25s}
+  .legal-row a:hover{border-color:var(--violet);color:var(--violet-bright)}
+</style>
+</head>
+<body class="lang-ja">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+<div class="bg-grid"></div>
+
+<header class="site">
+  <a href="index.html" class="brand"><span class="mark">S</span>SHARESWEAT</a>
+  <nav class="nav">
+    <a href="vision.html">Vision</a>
+    <a href="product.html">Product</a>
+    <a href="app.html" class="active">App</a>
+    <a href="company.html">Company</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang">EN / 日本語</button>
+    <a href="contact.html" class="nav-cta">CONTACT</a>
+    <button class="menu-btn" aria-label="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero wrap">
+  <span class="live"><span class="d"></span><span data-lang-ja>公開中</span><span data-lang-en>Available now</span></span>
+  <h1>
+    <span data-lang-ja>続けられるから、<span class="grad">変わる。</span></span>
+    <span data-lang-en>Consistency you can <span class="grad">actually keep.</span></span>
+  </h1>
+  <p class="sub">
+    <span data-lang-ja>「ShareSweat」は、継続にコミットする筋トレアプリ。プランの自動生成から進捗の可視化、シェアまでを一つに。デバイスに先がけて、すでに世界で公開しています。</span>
+    <span data-lang-en>"ShareSweat" is a workout app built for consistency — from auto-generated plans to progress dashboards and sharing. It's already live worldwide, ahead of our device.</span>
+  </p>
+</section>
+
+<section class="section" style="padding-top:10px">
+  <div class="wrap grid-2" style="align-items:center">
+    <div class="reveal">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="scr">
+          <div class="ttl">Form Score</div>
+          <div class="ring2">
+            <svg width="120" height="120" style="transform:rotate(-90deg)">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="7"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="url(#pg)" stroke-width="7" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="52" style="filter:drop-shadow(0 0 5px var(--cyan))"/>
+              <defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8B7BF0"/><stop offset="1" stop-color="#5BD8FF"/></linearGradient></defs>
+            </svg>
+            <div class="num"><b>86</b><span>Score</span></div>
+          </div>
+          <div class="row"><span class="l">Volume</span><span class="tr"><span class="fl" style="--w:85%"></span></span></div>
+          <div class="row"><span class="l">Streak</span><span class="tr"><span class="fl" style="--w:72%;animation-delay:.15s"></span></span></div>
+          <div class="row"><span class="l">Balance</span><span class="tr"><span class="fl" style="--w:90%;animation-delay:.3s"></span></span></div>
+          <div class="row"><span class="l">Tempo</span><span class="tr"><span class="fl" style="--w:78%;animation-delay:.45s"></span></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <h2 class="h-sec">
+        <span data-lang-ja>すでに、<span class="grad">動いている実績。</span></span>
+        <span data-lang-en>Already <span class="grad">in people's hands.</span></span>
+      </h2>
+      <p class="lead" style="margin-bottom:26px">
+        <span data-lang-ja>構想だけではありません。私たちはすでにアプリを世に出し、ユーザーに使われています。将来このアプリが、4点IMUデバイスと連携していきます。</span>
+        <span data-lang-en>This isn't just a concept. Our app is shipped and in use today — and it will connect with the 4-point IMU device in the future.</span>
+      </p>
+      <div class="stores">
+        <a class="store" href="https://play.google.com/store/apps/details?id=com.sharesweat.app" target="_blank" rel="noopener">
+          <span class="ic">▶</span><span class="tx"><small>Get it on</small><b>Google Play</b></span>
+        </a>
+        <a class="store" href="#" target="_blank" rel="noopener">
+          <span class="ic"></span><span class="tx"><small>Download on the</small><b>App Store</b></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow reveal"><span class="dot"></span><span data-lang-ja>主な機能</span><span data-lang-en>Key features</span></span>
+    <div class="feat-grid" style="margin-top:20px">
+      <div class="feat reveal"><div class="k">Auto Plan</div><h3 data-lang-ja>12週間プランを自動生成</h3><h3 data-lang-en>Auto-generated 12-week plans</h3><p data-lang-ja>レベルと目標に合わせて、3ヶ月で初心者卒業へ導くプログラムを自動で作成。</p><p data-lang-en>Personalized programs by level and goal — designed to graduate beginners in three months.</p></div>
+      <div class="feat reveal"><div class="k">Dashboard</div><h3 data-lang-ja>つい眺めたくなるダッシュボード</h3><h3 data-lang-en>A dashboard you'll keep checking</h3><p data-lang-ja>総量・継続・部位別バランスを、美しいグラフで可視化。成長が見えるから続く。</p><p data-lang-en>Volume, consistency, and balance in beautiful graphs. Visible progress keeps you going.</p></div>
+      <div class="feat reveal"><div class="k">One-tap Log</div><h3 data-lang-ja>ワンタップ記録</h3><h3 data-lang-en>One-tap logging</h3><p data-lang-ja>キーボード不要。トレーニングを止めずに、さっと記録。</p><p data-lang-en>No keyboard. Log sets in a tap without breaking your flow.</p></div>
+      <div class="feat reveal"><div class="k">Share</div><h3 data-lang-ja>おしゃれにシェア</h3><h3 data-lang-en>Share in style</h3><p data-lang-ja>30種類以上のフレームで、記録をそのまま美しい投稿に。</p><p data-lang-en>Turn records into beautiful posts with 30+ stylish frames.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- legal links live here (URLは固定) -->
+<section class="section" style="padding-top:0;text-align:center">
+  <div class="wrap">
+    <p class="lead reveal" style="margin:0 auto 18px;color:var(--text-faint);font-size:.92rem">
+      <span data-lang-ja>アプリに関する規約・ポリシー</span>
+      <span data-lang-en>App policies</span>
+    </p>
+    <div class="legal-row reveal">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-use.html">Terms of Use</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand"><div class="brand"><span class="mark">S</span>SHARESWEAT</div><p data-lang-ja>身体動作を、データ化する。</p><p data-lang-en>Turning human motion into data.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="vision.html">Vision</a></li><li><a href="product.html">Product</a></li><li><a href="app.html">App</a></li><li><a href="company.html">Company</a></li></ul></div>
+      <div><h4>App</h4><ul><li><a href="https://play.google.com/store/apps/details?id=com.sharesweat.app" target="_blank" rel="noopener">Google Play</a></li><li><a href="app.html">App Store</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-use.html">Terms of Use</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="contact.html">Contact form</a></li><li><a href="mailto:sharesweat.contactus@sharesweat.com">Email</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 SHARESWEAT, K.K. All rights reserved.</span><span>Tokyo, Japan</span></div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

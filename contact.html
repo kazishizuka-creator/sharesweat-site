@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — SHARESWEAT</title>
+<meta name="description" content="SHARESWEATへのお問い合わせ。パートナー・専門家・メディアの方からのご連絡をお待ちしています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .page-hero{padding:170px 0 40px;position:relative;z-index:2}
+  .page-hero h1{font-weight:700;font-size:clamp(2.2rem,5vw,4rem);line-height:1.18;max-width:16ch;margin-bottom:24px}
+  .page-hero h1 .grad{background:linear-gradient(100deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .page-hero .sub{font-size:clamp(1rem,1.5vw,1.18rem);color:var(--text-dim);max-width:52ch}
+
+  .form{display:flex;flex-direction:column;gap:18px;max-width:620px}
+  .field label{display:block;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.1em;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px}
+  .field input,.field textarea,.field select{width:100%;background:rgba(20,18,40,.4);border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:.98rem;font-weight:300;transition:.25s;outline:none}
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(139,123,240,.15)}
+  .field textarea{min-height:140px;resize:vertical}
+  .field input::placeholder,.field textarea::placeholder{color:var(--text-faint)}
+  .note{color:var(--text-faint);font-size:.85rem;margin-top:4px}
+  .alt{margin-top:40px;padding-top:30px;border-top:1px solid var(--line);color:var(--text-dim)}
+  .alt a{color:var(--violet-bright)}
+</style>
+</head>
+<body class="lang-ja">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+<div class="bg-grid"></div>
+
+<header class="site">
+  <a href="index.html" class="brand"><span class="mark">S</span>SHARESWEAT</a>
+  <nav class="nav">
+    <a href="vision.html">Vision</a>
+    <a href="product.html">Product</a>
+    <a href="app.html">App</a>
+    <a href="company.html">Company</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang">EN / 日本語</button>
+    <a href="contact.html" class="nav-cta">CONTACT</a>
+    <button class="menu-btn" aria-label="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero wrap">
+  <span class="eyebrow"><span class="dot"></span>Contact</span>
+  <h1>
+    <span data-lang-ja>その先の話は、<span class="grad">ここから。</span></span>
+    <span data-lang-en>The deeper story <span class="grad">starts here.</span></span>
+  </h1>
+  <p class="sub">
+    <span data-lang-ja>パートナー・専門家・メディアの方からのご連絡をお待ちしています。サイトに書ききれない構想は、個別にお話しします。</span>
+    <span data-lang-en>We welcome partners, experts, and media. The parts we couldn't put on this site, we'll share with you directly.</span>
+  </p>
+</section>
+
+<section class="section" style="padding-top:20px">
+  <div class="wrap">
+    <!-- フォーム: action は後でFormspree等のURLに差し替え。今はメール導線も併設 -->
+    <form class="form reveal" action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST">
+      <div class="field">
+        <label data-lang-ja>お名前 / Name</label>
+        <input type="text" name="name" placeholder="山田 太郎" required>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label data-lang-ja>ご用件 / Topic</label>
+        <select name="topic">
+          <option data-lang-ja>パートナーシップ・協業</option>
+          <option data-lang-ja>取材・メディア</option>
+          <option data-lang-ja>製品に関する問い合わせ</option>
+          <option data-lang-ja>その他</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-lang-ja>メッセージ / Message</label>
+        <textarea name="message" placeholder="ご自由にお書きください" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="align-self:flex-start"><span data-lang-ja>送信する</span><span data-lang-en>Send</span> →</button>
+      <p class="note" data-lang-ja>※ 送信フォームは現在準備中です。お急ぎの場合は下記メールへ直接ご連絡ください。</p>
+      <p class="note" data-lang-en>The form is being set up. For now, please email us directly below.</p>
+    </form>
+
+    <div class="alt reveal">
+      <p data-lang-ja>直接メールでも受け付けています：<br><a href="mailto:sharesweat.contactus@sharesweat.com">sharesweat.contactus@sharesweat.com</a></p>
+      <p data-lang-en>You can also email us directly:<br><a href="mailto:sharesweat.contactus@sharesweat.com">sharesweat.contactus@sharesweat.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand"><div class="brand"><span class="mark">S</span>SHARESWEAT</div><p data-lang-ja>身体動作を、データ化する。</p><p data-lang-en>Turning human motion into data.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="vision.html">Vision</a></li><li><a href="product.html">Product</a></li><li><a href="app.html">App</a></li><li><a href="company.html">Company</a></li></ul></div>
+      <div><h4>App</h4><ul><li><a href="https://play.google.com/store/apps/details?id=com.sharesweat.app" target="_blank" rel="noopener">Google Play</a></li><li><a href="app.html">App Store</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-use.html">Terms of Use</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="contact.html">Contact form</a></li><li><a href="mailto:sharesweat.contactus@sharesweat.com">Email</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 SHARESWEAT, K.K. All rights reserved.</span><span>Tokyo, Japan</span></div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

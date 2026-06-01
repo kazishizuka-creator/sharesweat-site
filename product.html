@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product — SHARESWEAT</title>
+<meta name="description" content="手首・足首に着ける4点IMUウェアラブル。加速度・ジャイロを200Hzで計測。2027年クラウドファンディング予定。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .page-hero{padding:170px 0 50px;position:relative;z-index:2}
+  .page-hero h1{font-weight:700;font-size:clamp(2.2rem,5vw,4rem);line-height:1.18;max-width:18ch;margin-bottom:24px}
+  .page-hero h1 .grad{background:linear-gradient(100deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .page-hero .sub{font-size:clamp(1rem,1.5vw,1.18rem);color:var(--text-dim);max-width:52ch}
+
+  /* device stage */
+  .device-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:420px;margin:20px 0 10px}
+  .ring{position:relative;width:260px;height:260px;border-radius:50%;
+    background:conic-gradient(from 210deg,#2a2a36 0deg,#4a4a5e 60deg,#6e6e85 110deg,#3a3a48 160deg,#1a1a24 220deg,#454556 290deg,#2a2a36 360deg);
+    box-shadow:0 30px 60px rgba(0,0,0,.6),inset 0 0 40px rgba(0,0,0,.5),inset 0 6px 12px rgba(255,255,255,.08);animation:spin 24s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ring::before{content:'';position:absolute;inset:38px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 30px rgba(0,0,0,.8)}
+  .pod{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:64px;height:46px;border-radius:14px;z-index:5;
+    background:linear-gradient(150deg,#2c2c3a,#16161e);border:1px solid rgba(139,123,240,.3);
+    box-shadow:0 8px 20px rgba(0,0,0,.5),0 0 24px rgba(139,123,240,.35);display:flex;align-items:center;justify-content:center;animation:spinrev 24s linear infinite}
+  @keyframes spinrev{to{transform:translateX(-50%) rotate(-360deg)}}
+  .pod .led{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,var(--cyan),var(--violet));box-shadow:0 0 12px var(--cyan),0 0 22px var(--violet);animation:blink 2.2s ease-in-out infinite}
+  .pod .lg{position:absolute;bottom:5px;font-family:'Space Grotesk',sans-serif;font-size:7px;letter-spacing:.1em;color:var(--text-faint)}
+  @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+  .tick{position:absolute;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.05em;color:var(--cyan);opacity:.85}
+  .tick .u{color:var(--text-faint);font-size:8px}
+  .tick.t1{top:60px;right:18%;animation:bob 4s ease-in-out infinite}
+  .tick.t2{bottom:90px;left:16%;animation:bob 4s ease-in-out .9s infinite}
+  @keyframes bob{0%,100%{transform:translateY(0);opacity:.85}50%{transform:translateY(-6px);opacity:1}}
+
+  .spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .spec{padding:26px;border-right:1px solid var(--line)}
+  .spec:last-child{border-right:none}
+  .spec .l{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.14em;color:var(--text-faint);text-transform:uppercase;margin-bottom:8px}
+  .spec .v{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:600}
+  .spec .v .u{font-size:.5em;color:var(--violet-bright);margin-left:3px}
+  @media(max-width:780px){.spec-grid{grid-template-columns:1fr 1fr}.spec{border-bottom:1px solid var(--line)}.spec:nth-child(2){border-right:none}}
+
+  .mini-set{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+  .mini{display:flex;flex-direction:column;align-items:center;gap:12px}
+  .mini-ring{position:relative;width:80px;height:80px;border-radius:50%;background:conic-gradient(from 210deg,#2a2a36,#5a5a70,#3a3a48,#1a1a24,#454556,#2a2a36);box-shadow:0 12px 24px rgba(0,0,0,.5),inset 0 0 16px rgba(0,0,0,.5)}
+  .mini-ring::before{content:'';position:absolute;inset:14px;border-radius:50%;background:var(--bg)}
+  .mini-pod{position:absolute;top:-3px;left:50%;transform:translateX(-50%);width:26px;height:18px;border-radius:7px;background:linear-gradient(150deg,#2c2c3a,#16161e);border:1px solid rgba(139,123,240,.3);box-shadow:0 0 12px rgba(139,123,240,.4);display:flex;align-items:center;justify-content:center}
+  .mini-pod .led{width:5px;height:5px;border-radius:50%;background:radial-gradient(circle,var(--cyan),var(--violet));box-shadow:0 0 8px var(--cyan);animation:blink 2.2s infinite}
+  .mini .lbl{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.1em;color:var(--text-dim);text-transform:uppercase}
+
+  /* crowdfunding banner */
+  .cf{border:1px solid var(--violet);border-radius:22px;padding:42px;background:linear-gradient(120deg,rgba(83,74,183,.25),rgba(43,79,160,.12));box-shadow:0 0 50px rgba(139,123,240,.2);text-align:center}
+  .cf .badge{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;margin-bottom:14px}
+  .cf h3{font-weight:600;font-size:clamp(1.4rem,2.6vw,2rem);margin-bottom:12px}
+  .cf p{color:var(--text-dim);max-width:46ch;margin:0 auto}
+</style>
+</head>
+<body class="lang-ja">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+<div class="bg-grid"></div>
+
+<header class="site">
+  <a href="index.html" class="brand"><span class="mark">S</span>SHARESWEAT</a>
+  <nav class="nav">
+    <a href="vision.html">Vision</a>
+    <a href="product.html" class="active">Product</a>
+    <a href="app.html">App</a>
+    <a href="company.html">Company</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang">EN / 日本語</button>
+    <a href="contact.html" class="nav-cta">CONTACT</a>
+    <button class="menu-btn" aria-label="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero wrap">
+  <span class="eyebrow"><span class="dot"></span>Product</span>
+  <h1>
+    <span data-lang-ja>つけて動くだけ。<br><span class="grad">あとは、AIが読み取る。</span></span>
+    <span data-lang-en>Just wear it and move.<br><span class="grad">The AI reads the rest.</span></span>
+  </h1>
+  <p class="sub">
+    <span data-lang-ja>手首・足首に着ける4点のウェアラブル。加速度とジャイロを高頻度で計測し、動作解析AIがフォームを読み解きます。</span>
+    <span data-lang-en>Four wearables for the wrists and ankles. They capture acceleration and gyroscope data at high frequency, and motion-analysis AI interprets your form.</span>
+  </p>
+</section>
+
+<section class="section" style="padding-top:10px">
+  <div class="wrap">
+    <div class="device-stage reveal">
+      <div class="tick t1">200<span class="u">Hz</span></div>
+      <div class="tick t2">ACCEL · GYRO</div>
+      <div class="ring"><div class="pod"><span class="led"></span><span class="lg">SHARESWEAT</span></div></div>
+    </div>
+    <div class="mini-set reveal">
+      <div class="mini"><div class="mini-ring"><div class="mini-pod"><span class="led"></span></div></div><span class="lbl">Wrist L</span></div>
+      <div class="mini"><div class="mini-ring"><div class="mini-pod"><span class="led"></span></div></div><span class="lbl">Wrist R</span></div>
+      <div class="mini"><div class="mini-ring"><div class="mini-pod"><span class="led"></span></div></div><span class="lbl">Ankle L</span></div>
+      <div class="mini"><div class="mini-ring"><div class="mini-pod"><span class="led"></span></div></div><span class="lbl">Ankle R</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="spec-grid reveal">
+      <div class="spec"><div class="l">Sensors</div><div class="v">4<span class="u">points</span></div></div>
+      <div class="spec"><div class="l">Measurement</div><div class="v">6<span class="u">axis</span></div></div>
+      <div class="spec"><div class="l">Sampling</div><div class="v">200<span class="u">Hz</span></div></div>
+      <div class="spec"><div class="l">Wear</div><div class="v">Wrist<span class="u">/ankle</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap grid-3">
+    <div class="card reveal">
+      <h3 data-lang-ja>機能美のあるデザイン</h3><h3 data-lang-en>Designed to be worn</h3>
+      <p data-lang-ja>毎日身につけたくなる、洗練されたかたち。スポーツの場にも、日常にも自然に溶け込みます。</p>
+      <p data-lang-en>A refined form you'll want to wear every day — at the gym and beyond.</p>
+    </div>
+    <div class="card reveal">
+      <h3 data-lang-ja>4点だからこそ</h3><h3 data-lang-en>Why four points</h3>
+      <p data-lang-ja>手首だけでは取れない下半身の動きまで。少ない装着負荷と、十分な情報量のバランスを取った構成です。</p>
+      <p data-lang-en>Four points capture lower-body motion a single wrist sensor cannot — balancing low burden with enough signal.</p>
+    </div>
+    <div class="card reveal">
+      <h3 data-lang-ja>動作解析AI</h3><h3 data-lang-en>Motion-analysis AI</h3>
+      <p data-lang-ja>プロの動きを基準に、フォームの違いや左右差を読み解きます。<span style="color:var(--text-faint)">※解析手法の詳細は非公開です。</span></p>
+      <p data-lang-en>Benchmarked against expert movement, it reads differences in form and left-right balance. <span style="color:var(--text-faint)">Methods undisclosed.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="cf reveal">
+      <div class="badge">Coming 2027</div>
+      <h3>
+        <span data-lang-ja>2027年、クラウドファンディング予定。</span>
+        <span data-lang-en>Crowdfunding planned for 2027.</span>
+      </h3>
+      <p>
+        <span data-lang-ja>いま、プロトタイプの開発と動作解析AIの構築を進めています。最新情報を受け取りたい方は、ぜひご連絡ください。</span>
+        <span data-lang-en>We're now developing the prototype and building our motion-analysis AI. Reach out to receive updates.</span>
+      </p>
+      <a href="contact.html" class="btn btn-primary" style="margin-top:24px"><span data-lang-ja>最新情報を受け取る</span><span data-lang-en>Get updates</span> →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="text-align:center;padding-top:0">
+  <div class="wrap">
+    <p class="lead reveal" style="margin:0 auto 26px;color:var(--text)">
+      <span data-lang-ja>まずは、すでに公開中のアプリから世界観に触れてみてください。</span>
+      <span data-lang-en>In the meantime, get a feel for it through our live app.</span>
+    </p>
+    <a href="app.html" class="btn btn-ghost reveal"><span data-lang-ja>アプリを見る</span><span data-lang-en>See the app</span> →</a>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand"><div class="brand"><span class="mark">S</span>SHARESWEAT</div><p data-lang-ja>身体動作を、データ化する。</p><p data-lang-en>Turning human motion into data.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="vision.html">Vision</a></li><li><a href="product.html">Product</a></li><li><a href="app.html">App</a></li><li><a href="company.html">Company</a></li></ul></div>
+      <div><h4>App</h4><ul><li><a href="https://play.google.com/store/apps/details?id=com.sharesweat.app" target="_blank" rel="noopener">Google Play</a></li><li><a href="app.html">App Store</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-use.html">Terms of Use</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="contact.html">Contact form</a></li><li><a href="mailto:sharesweat.contactus@sharesweat.com">Email</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 SHARESWEAT, K.K. All rights reserved.</span><span>Tokyo, Japan</span></div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

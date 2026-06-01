@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company — SHARESWEAT</title>
+<meta name="description" content="株式会社SHARESWEAT 会社概要・代表紹介。ビジネス設計から機械学習の実装までを担う創業者。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .page-hero{padding:170px 0 50px;position:relative;z-index:2}
+  .page-hero h1{font-weight:700;font-size:clamp(2.2rem,5vw,4rem);line-height:1.18;max-width:18ch;margin-bottom:24px}
+  .page-hero h1 .grad{background:linear-gradient(100deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .page-hero .sub{font-size:clamp(1rem,1.5vw,1.18rem);color:var(--text-dim);max-width:52ch}
+
+  .founder{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:start}
+  @media(max-width:780px){.founder{grid-template-columns:1fr}}
+  .portrait{aspect-ratio:3/4;border-radius:20px;border:1px solid var(--line);
+    background:linear-gradient(160deg,rgba(40,36,80,.5),rgba(10,10,20,.4));
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .portrait .ph{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.1em;color:var(--text-faint);text-align:center;padding:20px}
+  .portrait::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(139,123,240,.18),transparent 70%)}
+  .founder .nm{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:500;margin-bottom:2px}
+  .founder .nm small{display:block;font-size:.9rem;color:var(--text-faint);letter-spacing:.04em;margin-top:4px}
+  .founder .role{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.14em;color:var(--violet-bright);text-transform:uppercase;margin-bottom:20px}
+  .creds{list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:8px}
+  .creds li{display:flex;gap:16px;align-items:flex-start}
+  .creds .n{font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--violet-bright);border:1px solid var(--line);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .creds .tx b{font-weight:500;display:block;margin-bottom:2px}
+  .creds .tx span{color:var(--text-dim);font-size:.92rem}
+
+  .info-table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .info-table tr{border-bottom:1px solid var(--line)}
+  .info-table tr:last-child{border-bottom:none}
+  .info-table th{text-align:left;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:12px;letter-spacing:.1em;color:var(--text-faint);text-transform:uppercase;padding:18px 24px;width:200px;vertical-align:top;background:rgba(20,18,40,.3)}
+  .info-table td{padding:18px 24px;color:var(--text-dim);font-size:.95rem}
+  @media(max-width:680px){.info-table th{width:120px;padding:14px}.info-table td{padding:14px}}
+</style>
+</head>
+<body class="lang-ja">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+<div class="bg-grid"></div>
+
+<header class="site">
+  <a href="index.html" class="brand"><span class="mark">S</span>SHARESWEAT</a>
+  <nav class="nav">
+    <a href="vision.html">Vision</a>
+    <a href="product.html">Product</a>
+    <a href="app.html">App</a>
+    <a href="company.html" class="active">Company</a>
+  </nav>
+  <div class="nav-right">
+    <button class="lang">EN / 日本語</button>
+    <a href="contact.html" class="nav-cta">CONTACT</a>
+    <button class="menu-btn" aria-label="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero wrap">
+  <span class="eyebrow"><span class="dot"></span>Company</span>
+  <h1>
+    <span data-lang-ja>つくるのは、<span class="grad">一人の覚悟から。</span></span>
+    <span data-lang-en>Built from <span class="grad">one founder's resolve.</span></span>
+  </h1>
+  <p class="sub">
+    <span data-lang-ja>ビジネス設計を理解し、プロダクトを作り、ユーザーニーズを熟知し、機械学習までも自ら実装する。その全部を一人で担う人間が、覚悟を持って挑むべき領域だと考えています。</span>
+    <span data-lang-en>Understanding business, building product, knowing the user, and implementing machine learning — all by one person. We believe this is a frontier that demands exactly that.</span>
+  </p>
+</section>
+
+<section class="section" style="padding-top:20px">
+  <div class="wrap">
+    <div class="founder reveal">
+      <div class="portrait"><div class="ph" data-lang-ja>代表写真<br>（後で差し替え）</div><div class="ph" data-lang-en>Founder photo<br>(to be added)</div></div>
+      <div>
+        <div class="role">Founder &amp; CEO</div>
+        <div class="nm">石塚 一真<small>Ishizuka Kazuma</small></div>
+        <ul class="creds">
+          <li><span class="n">01</span><span class="tx"><b data-lang-ja>東京大学大学院 工学系研究科 精密工学専攻 修了</b><b data-lang-en>M.Eng., Precision Engineering, The University of Tokyo</b><span data-lang-ja>ソフトウェア（アプリ開発・AI推論）を自ら実装できる。</span><span data-lang-en>Implements software — app development and AI inference — first-hand.</span></span></li>
+          <li><span class="n">02</span><span class="tx"><b data-lang-ja>デロイト トーマツ コンサルティングで約10年</b><b data-lang-en>~10 years at Deloitte Tohmatsu Consulting</b><span data-lang-ja>モノを作れるだけでなく、ビジネス設計（顧客UX・マーケ戦略）も担える。</span><span data-lang-en>Not only builds, but designs the business — customer UX and marketing strategy.</span></span></li>
+          <li><span class="n">03</span><span class="tx"><b data-lang-ja>体育会出身の体力・行動力</b><b data-lang-en>Athletic background &amp; drive</b><span data-lang-ja>東京大学運動会庭球部に所属。各業界にコネクションを持つ。</span><span data-lang-en>Former University of Tokyo tennis team; connections across industries.</span></span></li>
+          <li><span class="n">04</span><span class="tx"><b data-lang-ja>筋トレ歴10年以上・大会出場経験</b><b data-lang-en>10+ years of training; competition experience</b><span data-lang-ja>ニーズを深く理解したプロダクト構築ができる。</span><span data-lang-en>Builds products grounded in a deep understanding of real user needs.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:20px">
+  <div class="wrap">
+    <span class="eyebrow reveal"><span class="dot"></span><span data-lang-ja>会社概要</span><span data-lang-en>Company info</span></span>
+    <table class="info-table reveal" style="margin-top:20px">
+      <tr><th data-lang-ja>会社名</th><th data-lang-en>Company</th><td>株式会社SHARESWEAT / SHARESWEAT, K.K.</td></tr>
+      <tr><th data-lang-ja>代表</th><th data-lang-en>Founder</th><td data-lang-ja>石塚 一真</td><td data-lang-en>Kazuma Ishizuka</td></tr>
+      <tr><th data-lang-ja>所在地</th><th data-lang-en>Address</th><td>〒101-0024 東京都千代田区神田和泉町1-6-16 YAMATO BLDG. 405<br><span style="color:var(--text-faint);font-size:.85rem">1-6-16 Kandaizumicho, Yamato Bldg. 405, Chiyoda-ku, Tokyo, Japan</span></td></tr>
+      <tr><th data-lang-ja>事業内容</th><th data-lang-en>Business</th><td data-lang-ja>スポーツフォーム解析・身体動作データ基盤の構築／ウェアラブルデバイス・アプリの開発</td><td data-lang-en>Sports form analysis and human-motion data platform; wearable device and app development</td></tr>
+      <tr><th data-lang-ja>連絡先</th><th data-lang-en>Contact</th><td><a href="mailto:sharesweat.contactus@sharesweat.com" style="color:var(--violet-bright)">sharesweat.contactus@sharesweat.com</a></td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="section" style="text-align:center;padding-top:0">
+  <div class="wrap">
+    <a href="contact.html" class="btn btn-primary reveal"><span data-lang-ja>お問い合わせ</span><span data-lang-en>Get in touch</span> →</a>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand"><div class="brand"><span class="mark">S</span>SHARESWEAT</div><p data-lang-ja>身体動作を、データ化する。</p><p data-lang-en>Turning human motion into data.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="vision.html">Vision</a></li><li><a href="product.html">Product</a></li><li><a href="app.html">App</a></li><li><a href="company.html">Company</a></li></ul></div>
+      <div><h4>App</h4><ul><li><a href="https://play.google.com/store/apps/details?id=com.sharesweat.app" target="_blank" rel="noopener">Google Play</a></li><li><a href="app.html">App Store</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-use.html">Terms of Use</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="contact.html">Contact form</a></li><li><a href="mailto:sharesweat.contactus@sharesweat.com">Email</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 SHARESWEAT, K.K. All rights reserved.</span><span>Tokyo, Japan</span></div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>
