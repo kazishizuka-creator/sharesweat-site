@@ -92,12 +92,13 @@
   .imu-image-box{width:100%;aspect-ratio:4/3;border-radius:16px;border:1px solid var(--line);background:rgba(20,18,40,.4);overflow:hidden;display:flex;align-items:center;justify-content:center}
   .imu-image-box img{width:100%;height:100%;object-fit:cover;}
   .img-placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.08em;color:var(--text-faint);text-align:center;padding:20px}
-  .imu-cross{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:300;color:#fff;align-self:center;padding-top:32px;
+  .imu-cross{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:300;line-height:1;color:#fff;
+    flex-shrink:0;align-self:center;
     width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
     border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);
     backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
     box-shadow:0 0 24px rgba(255,255,255,.12)}
-  @media(max-width:880px){.imu-cross{padding-top:0}}
+  @media(max-width:880px){.imu-cross{align-self:center}}
 
   /* WHAT WE'RE BUILDING */
   .wwb-section{padding-top:80px;padding-bottom:80px}
@@ -106,7 +107,7 @@
   .wwb-text .lead{font-size:1rem;line-height:1.85;color:var(--text-dim);margin-top:20px;white-space:normal}
   .wwb-text .h-sec{max-width:none;white-space:normal;word-break:keep-all;line-break:strict;}
   .wwb-visual{display:flex;align-items:center;justify-content:center}
-  .phone-mockup-box{width:100%;max-width:320px;aspect-ratio:9/16;border-radius:32px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(40,36,80,.4),rgba(10,10,20,.3));display:flex;align-items:center;justify-content:center;box-shadow:0 30px 60px rgba(0,0,0,.4),inset 0 0 30px rgba(0,0,0,.3)}
+  .phone-mockup-box{width:100%;max-width:384px;aspect-ratio:9/16;border-radius:32px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(40,36,80,.4),rgba(10,10,20,.3));display:flex;align-items:center;justify-content:center;box-shadow:0 30px 60px rgba(0,0,0,.4),inset 0 0 30px rgba(0,0,0,.3)}
   .phone-placeholder{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.08em;color:var(--text-faint);text-align:center;padding:20px;line-height:1.8}
   .analysis-img{width:100%;height:100%;object-fit:cover;border-radius:30px}
   @media(max-width:860px){
@@ -177,7 +178,7 @@
       </div>
     </div>
 
-    <div class="imu-cross"><span>×</span></div>
+    <div class="imu-cross"><span>&#215;</span></div>
 
     <div class="fields-block">
       <div class="imu-title"><span class="imu-num">4</span><span class="imu-word"> Fields</span></div>
