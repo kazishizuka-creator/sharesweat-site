@@ -37,6 +37,34 @@
   .info-table th{text-align:left;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:12px;letter-spacing:.1em;color:var(--text-faint);text-transform:uppercase;padding:18px 24px;width:200px;vertical-align:top;background:rgba(20,18,40,.3)}
   .info-table td{padding:18px 24px;color:var(--text-dim);font-size:.95rem}
   @media(max-width:680px){.info-table th{width:120px;padding:14px}.info-table td{padding:14px}}
+
+  /* founder new layout */
+  .founder-new{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin:0 auto;max-width:900px;position:relative}
+
+  /* skill circles */
+  .skill-circle{width:240px;height:240px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:1}
+  .tech-circle{background:radial-gradient(circle at 60% 40%,rgba(139,123,240,.18),rgba(139,123,240,.06));border:1px solid rgba(139,123,240,.35);margin-right:-32px}
+  .biz-circle{background:radial-gradient(circle at 40% 40%,rgba(99,220,255,.15),rgba(99,220,255,.05));border:1px solid rgba(99,220,255,.3);margin-left:-32px}
+  .skill-circle-inner{text-align:center;padding:20px}
+  .skill-label{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:12px}
+  .tech-circle .skill-label{color:var(--violet-bright)}
+  .biz-circle .skill-label{color:var(--cyan)}
+  .skill-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .skill-list li{font-size:12px;color:var(--text-dim);line-height:1.5}
+
+  /* center portrait */
+  .founder-center{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:2}
+  .portrait-circle{width:180px;height:180px;border-radius:50%;background:linear-gradient(160deg,rgba(40,36,80,.6),rgba(10,10,20,.5));border:2px solid rgba(139,123,240,.4);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(139,123,240,.2),0 20px 40px rgba(0,0,0,.4);margin-bottom:12px;overflow:hidden}
+  .portrait-ph{font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--text-faint);text-align:center;padding:12px}
+  .founder-name{font-family:'Noto Sans JP',sans-serif;font-size:1.3rem;font-weight:500;text-align:center}
+  .founder-name-en{font-family:'Space Grotesk',sans-serif;font-size:.85rem;color:var(--text-faint);letter-spacing:.06em}
+  .founder-role{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.14em;color:var(--violet-bright);text-transform:uppercase;margin-top:2px}
+
+  @media(max-width:720px){
+    .founder-new{flex-direction:column;gap:24px}
+    .tech-circle,.biz-circle{margin:0;width:200px;height:200px}
+    .portrait-circle{width:140px;height:140px}
+  }
 </style>
 </head>
 <body class="lang-ja">
@@ -62,8 +90,8 @@
 <section class="page-hero wrap">
   <span class="eyebrow"><span class="dot"></span>Company</span>
   <h1>
-    <span data-lang-ja>つくるのは、<span class="grad">一人の覚悟から。</span></span>
-    <span data-lang-en>Built from <span class="grad">one founder's resolve.</span></span>
+    <span data-lang-ja>技術とビジネスを、<span class="grad">一人で動かす。</span></span>
+    <span data-lang-en>Engineering meets <span class="grad">business — one founder.</span></span>
   </h1>
   <p class="sub">
     <span data-lang-ja>ビジネス設計を理解し、プロダクトを作り、ユーザーニーズを熟知し、機械学習までも自ら実装する。その全部を一人で担う人間が、覚悟を持って挑むべき領域だと考えています。</span>
@@ -73,17 +101,44 @@
 
 <section class="section" style="padding-top:20px">
   <div class="wrap">
-    <div class="founder reveal">
-      <div class="portrait"><div class="ph" data-lang-ja>代表写真<br>（後で差し替え）</div><div class="ph" data-lang-en>Founder photo<br>(to be added)</div></div>
-      <div>
-        <div class="role">Founder &amp; CEO</div>
-        <div class="nm">石塚 一真<small>Ishizuka Kazuma</small></div>
-        <ul class="creds">
-          <li><span class="n">01</span><span class="tx"><b data-lang-ja>東京大学大学院 工学系研究科 精密工学専攻 修了</b><b data-lang-en>M.Eng., Precision Engineering, The University of Tokyo</b><span data-lang-ja>ソフトウェア（アプリ開発・AI推論）を自ら実装できる。</span><span data-lang-en>Implements software — app development and AI inference — first-hand.</span></span></li>
-          <li><span class="n">02</span><span class="tx"><b data-lang-ja>デロイト トーマツ コンサルティングで約10年</b><b data-lang-en>~10 years at Deloitte Tohmatsu Consulting</b><span data-lang-ja>モノを作れるだけでなく、ビジネス設計（顧客UX・マーケ戦略）も担える。</span><span data-lang-en>Not only builds, but designs the business — customer UX and marketing strategy.</span></span></li>
-          <li><span class="n">03</span><span class="tx"><b data-lang-ja>体育会出身の体力・行動力</b><b data-lang-en>Athletic background &amp; drive</b><span data-lang-ja>東京大学運動会庭球部に所属。各業界にコネクションを持つ。</span><span data-lang-en>Former University of Tokyo tennis team; connections across industries.</span></span></li>
-          <li><span class="n">04</span><span class="tx"><b data-lang-ja>筋トレ歴10年以上・大会出場経験</b><b data-lang-en>10+ years of training; competition experience</b><span data-lang-ja>ニーズを深く理解したプロダクト構築ができる。</span><span data-lang-en>Builds products grounded in a deep understanding of real user needs.</span></span></li>
-        </ul>
+    <div class="founder-new reveal">
+      <!-- 左：技術サークル -->
+      <div class="skill-circle tech-circle">
+        <div class="skill-circle-inner">
+          <div class="skill-label">Engineering</div>
+          <ul class="skill-list">
+            <li>アプリ開発</li>
+            <li>AI推論実装</li>
+            <li>機械学習</li>
+            <li>東京大学大学院<br>精密工学専攻 修了</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 中央：代表写真 -->
+      <div class="founder-center">
+        <div class="portrait-circle">
+          <div class="portrait-ph">
+            <span data-lang-ja>代表写真</span>
+            <span data-lang-en>Founder photo</span>
+          </div>
+        </div>
+        <div class="founder-name">石塚 一真</div>
+        <div class="founder-name-en">Kazuma Ishizuka</div>
+        <div class="founder-role">Founder &amp; CEO</div>
+      </div>
+
+      <!-- 右：ビジネスサークル -->
+      <div class="skill-circle biz-circle">
+        <div class="skill-circle-inner">
+          <div class="skill-label">Business</div>
+          <ul class="skill-list">
+            <li>顧客UX設計</li>
+            <li>マーケ戦略</li>
+            <li>事業設計</li>
+            <li>デロイト トーマツ<br>コンサルティング 約10年</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
