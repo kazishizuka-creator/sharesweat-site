@@ -19,10 +19,15 @@
   .hero h1 .grad{background:linear-gradient(100deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero .sub{font-size:clamp(1rem,1.5vw,1.2rem);color:var(--text-dim);max-width:48ch;margin-bottom:42px}
   .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .founder-badge{display:inline-flex;align-items:center;gap:12px;margin-bottom:20px;width:max-content;transition:.25s}
+  .founder-badge:hover{opacity:.85}
+  .founder-badge-img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:1px solid rgba(139,123,240,.5);box-shadow:0 0 20px rgba(139,123,240,.3)}
+  .founder-badge-text{font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:.08em;color:var(--text-dim)}
   .hero > .eyebrow,
   .hero > .en-mini,
   .hero > h1,
   .hero > .sub,
+  .hero > .founder-badge,
   .hero > .cta-row{
     position:relative;
     z-index:2;
@@ -162,9 +167,13 @@
     <span data-lang-ja>手首・足首に着ける4点のウェアラブルと動作解析AIで、<br>スポーツのフォームを解析する。<br>日々の積み重ねが、確かなデータになる。</span>
     <span data-lang-en>Four wearable sensors on the wrists and ankles, paired with motion-analysis AI, turn everyday training into reliable data.</span>
   </p>
+  <a href="company.html" class="founder-badge rise d5">
+    <img src="assets/images/founder.jpg" alt="創業者" class="founder-badge-img">
+    <span class="founder-badge-text"><span data-lang-ja>創業者</span><span data-lang-en>Founder</span></span>
+  </a>
   <div class="cta-row rise d5">
-    <a href="vision.html" class="btn btn-primary"><span data-lang-ja>Our Vision</span><span data-lang-en>Our Vision</span> →</a>
-    <a href="product.html" class="btn btn-ghost"><span data-lang-ja>Product</span><span data-lang-en>Product</span></a>
+    <a href="company.html" class="btn btn-primary"><span data-lang-ja>創業者</span><span data-lang-en>Founder</span> →</a>
+    <a href="product.html" class="btn btn-ghost"><span data-lang-ja>プロダクト</span><span data-lang-en>Product</span></a>
   </div>
 </section>
 
