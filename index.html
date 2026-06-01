@@ -67,22 +67,30 @@
   .navcard .go{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--violet-bright)}
 
   /* 4IMU × 4Fields */
-  .imu-fields-section{position:relative;z-index:2;padding:40px 6vw;background:rgba(11,11,22,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .imu-fields-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
-  .imu-block,.fields-block{display:flex;flex-direction:column;align-items:center;gap:16px}
-  .imu-label,.fields-label{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--violet-bright);font-weight:600}
-  .imu-devices{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
-  .imu-device{display:flex;flex-direction:column;align-items:center;gap:6px}
-  .imu-icon{width:56px;height:56px;border-radius:14px;background:rgba(139,123,240,.08);border:1px solid rgba(139,123,240,.2);display:flex;align-items:center;justify-content:center;transition:.3s}
-  .imu-icon:hover{background:rgba(139,123,240,.16);border-color:rgba(139,123,240,.5)}
-  .imu-name{font-size:11px;color:var(--text-faint);font-family:'Space Grotesk',sans-serif}
-  .imu-cross{font-family:'Space Grotesk',sans-serif;font-size:2.4rem;font-weight:700;color:var(--violet-bright);opacity:.6}
-  .fields-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .field-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 16px;border-radius:12px;background:rgba(99,220,255,.05);border:1px solid rgba(99,220,255,.15);transition:.3s;min-width:80px}
-  .field-item:hover{background:rgba(99,220,255,.1);border-color:rgba(99,220,255,.35)}
-  .field-icon{font-size:1.4rem}
-  .field-name{font-size:11px;color:var(--text-dim);font-family:'Space Grotesk',sans-serif}
-  @media(max-width:720px){.imu-fields-inner{gap:28px}.imu-cross{font-size:1.8rem}}
+  .imu-fields-section{position:relative;z-index:2;padding:60px 6vw;border-bottom:1px solid var(--line)}
+  .imu-fields-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:flex-start;justify-content:center;gap:32px;flex-wrap:wrap}
+  .imu-block,.fields-block{display:flex;flex-direction:column;align-items:center;gap:20px;flex:1;min-width:280px;max-width:380px}
+  .imu-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.01em;text-align:center}
+  .imu-num{color:#ffffff}
+  .imu-word{color:var(--violet-bright)}
+  .fields-block .imu-word{color:var(--cyan)}
+  .imu-image-box{width:100%;aspect-ratio:4/3;border-radius:16px;border:1px solid var(--line);background:rgba(20,18,40,.4);overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .img-placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.08em;color:var(--text-faint);text-align:center;padding:20px}
+  .imu-cross{font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:700;color:var(--text-faint);opacity:.4;align-self:center;padding-top:32px}
+
+  /* WHAT WE'RE BUILDING */
+  .wwb-section{padding-top:80px;padding-bottom:80px}
+  .wwb-inner{max-width:var(--maxw);margin:0 auto;padding:0 6vw;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .wwb-text{max-width:100%}
+  .wwb-text .lead{font-size:1rem;line-height:1.85;color:var(--text-dim);margin-top:20px;white-space:normal}
+  .wwb-visual{display:flex;align-items:center;justify-content:center}
+  .phone-mockup-box{width:100%;max-width:320px;aspect-ratio:9/16;border-radius:32px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(40,36,80,.4),rgba(10,10,20,.3));display:flex;align-items:center;justify-content:center;box-shadow:0 30px 60px rgba(0,0,0,.4),inset 0 0 30px rgba(0,0,0,.3)}
+  .phone-placeholder{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.08em;color:var(--text-faint);text-align:center;padding:20px;line-height:1.8}
+  @media(max-width:860px){
+    .wwb-inner{grid-template-columns:1fr;gap:40px}
+    .phone-mockup-box{max-width:240px;margin:0 auto}
+    .imu-cross{padding-top:0}
+  }
 </style>
 </head>
 <body>
@@ -129,140 +137,54 @@
   </div>
 </section>
 
-<!-- ===== DATA STRIP ===== -->
-<div class="datastrip">
-  <div class="inner">
-    <div class="stat"><div class="l">Sampling</div><div class="v">200<span class="u">Hz</span></div></div>
-    <div class="stat"><div class="l">Sensors</div><div class="v">4<span class="u">IMU</span></div></div>
-    <div class="stat"><div class="l">Motion Classes</div><div class="v">150<span class="u">+</span></div></div>
-    <div class="stat"><div class="l">Sports</div><div class="v">4<span class="u">fields</span></div></div>
-  </div>
-</div>
-
 <!-- 4IMU × 4Fields ビジュアルセクション -->
 <div class="imu-fields-section">
   <div class="imu-fields-inner">
+
     <div class="imu-block">
-      <div class="imu-label">4 IMU</div>
-      <div class="imu-devices">
-        <div class="imu-device">
-          <div class="imu-icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-              <rect x="8" y="16" width="32" height="20" rx="6" fill="rgba(139,123,240,0.15)" stroke="rgba(139,123,240,0.6)" stroke-width="1.5"/>
-              <circle cx="24" cy="26" r="4" fill="rgba(139,123,240,0.4)"/>
-              <rect x="18" y="8" width="12" height="10" rx="3" fill="rgba(99,220,255,0.15)" stroke="rgba(99,220,255,0.5)" stroke-width="1.2"/>
-            </svg>
-          </div>
-          <div class="imu-name">左手首</div>
-        </div>
-        <div class="imu-device">
-          <div class="imu-icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-              <rect x="8" y="16" width="32" height="20" rx="6" fill="rgba(139,123,240,0.15)" stroke="rgba(139,123,240,0.6)" stroke-width="1.5"/>
-              <circle cx="24" cy="26" r="4" fill="rgba(139,123,240,0.4)"/>
-              <rect x="18" y="8" width="12" height="10" rx="3" fill="rgba(99,220,255,0.15)" stroke="rgba(99,220,255,0.5)" stroke-width="1.2"/>
-            </svg>
-          </div>
-          <div class="imu-name">右手首</div>
-        </div>
-        <div class="imu-device">
-          <div class="imu-icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-              <rect x="8" y="12" width="32" height="24" rx="6" fill="rgba(99,220,255,0.12)" stroke="rgba(99,220,255,0.5)" stroke-width="1.5"/>
-              <circle cx="24" cy="24" r="4" fill="rgba(99,220,255,0.35)"/>
-              <rect x="20" y="36" width="8" height="8" rx="2" fill="rgba(139,123,240,0.2)" stroke="rgba(139,123,240,0.4)" stroke-width="1"/>
-            </svg>
-          </div>
-          <div class="imu-name">左足首</div>
-        </div>
-        <div class="imu-device">
-          <div class="imu-icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-              <rect x="8" y="12" width="32" height="24" rx="6" fill="rgba(99,220,255,0.12)" stroke="rgba(99,220,255,0.5)" stroke-width="1.5"/>
-              <circle cx="24" cy="24" r="4" fill="rgba(99,220,255,0.35)"/>
-              <rect x="20" y="36" width="8" height="8" rx="2" fill="rgba(139,123,240,0.2)" stroke="rgba(139,123,240,0.4)" stroke-width="1"/>
-            </svg>
-          </div>
-          <div class="imu-name">右足首</div>
+      <div class="imu-title"><span class="imu-num">4</span><span class="imu-word"> IMU</span></div>
+      <div class="imu-image-box">
+        <div class="img-placeholder">
+          <span>IMU デバイス画像</span>
         </div>
       </div>
     </div>
 
-    <div class="imu-cross">
-      <span>×</span>
-    </div>
+    <div class="imu-cross"><span>×</span></div>
 
     <div class="fields-block">
-      <div class="fields-label">4 Fields</div>
-      <div class="fields-grid">
-        <div class="field-item">
-          <div class="field-icon">🏋️</div>
-          <div class="field-name">筋トレ</div>
-        </div>
-        <div class="field-item">
-          <div class="field-icon">🏃</div>
-          <div class="field-name">ランニング</div>
-        </div>
-        <div class="field-item">
-          <div class="field-icon">⛳</div>
-          <div class="field-name">ゴルフ</div>
-        </div>
-        <div class="field-item">
-          <div class="field-icon">🧘</div>
-          <div class="field-name">ヨガ</div>
+      <div class="imu-title"><span class="imu-num">4</span><span class="imu-word"> Fields</span></div>
+      <div class="imu-image-box">
+        <div class="img-placeholder">
+          <span>4種目 画像</span>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
-<!-- ===== WHAT WE'RE BUILDING (短い概要) ===== -->
-<section class="section">
-  <div class="wrap">
-    <span class="eyebrow reveal"><span class="dot"></span><span data-lang-ja>Our Product</span><span data-lang-en>What we build</span></span>
-    <h2 class="h-sec reveal">
-      <span data-lang-ja>つけて運動するだけで、<br><span class="grad">正しいフォームがわかる。</span></span>
-      <span data-lang-en>Just move — and your <span class="grad">form becomes data.</span></span>
-    </h2>
-    <p class="lead reveal">
-      <span data-lang-ja>筋トレ・ランニング・ゴルフ・ヨガ。趣味のスポーツに本気で向き合う人ほど、「今のフォームが正しかったのか」確かめる手段を持っていません。<br><br>スマホで動画をいちいち撮影するのは面倒。かといって、スマートウォッチ・リングだとフォームまではわからない。<br><br>私たちは、身体に着けた4点のセンサーと動作解析AIで、その問いに答えようとしています。</span>
-      <span data-lang-en>Strength, running, golf, yoga. The more seriously people pursue their sport, the harder it is to objectively check their own form. We answer that question with four body-worn sensors and motion-analysis AI.</span>
-    </p>
-  </div>
-</section>
-
-<!-- ===== NAV CARDS ===== -->
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <div class="navcards">
-      <a href="vision.html" class="navcard reveal">
-        <div class="k">Vision</div>
-        <h3 data-lang-ja>身体動作という、AIの次の領域</h3><h3 data-lang-en>The next frontier for AI</h3>
-        <p data-lang-ja>テキスト・画像・音声の次に、AIが理解すべきは人の身体動作だと考えています。</p>
-        <p data-lang-en>After text, image, and audio, we believe human motion is what AI should understand next.</p>
-        <span class="go" data-lang-ja>構想を見る →</span><span class="go" data-lang-en>Explore →</span>
-      </a>
-      <a href="product.html" class="navcard reveal">
-        <div class="k">Product</div>
-        <h3 data-lang-ja>4点IMUウェアラブル</h3><h3 data-lang-en>4-point IMU wearable</h3>
-        <p data-lang-ja>手首・足首に着ける、機能美のあるデバイス。2027年クラウドファンディング予定。</p>
-        <p data-lang-en>An elegant device for wrists and ankles. Crowdfunding planned for 2027.</p>
-        <span class="go" data-lang-ja>プロダクトを見る →</span><span class="go" data-lang-en>See product →</span>
-      </a>
-      <a href="app.html" class="navcard reveal">
-        <div class="k">App — Available Now</div>
-        <h3 data-lang-ja>筋トレアプリは、もう動いている</h3><h3 data-lang-en>Our app is already live</h3>
-        <p data-lang-ja>「ShareSweat」はApp Store / Google Playで公開中。記録・分析・シェアを一つに。</p>
-        <p data-lang-en>"ShareSweat" is live on the App Store and Google Play. Log, analyze, and share.</p>
-        <span class="go" data-lang-ja>アプリを見る →</span><span class="go" data-lang-en>Get the app →</span>
-      </a>
-      <a href="company.html" class="navcard reveal">
-        <div class="k">Company</div>
-        <h3 data-lang-ja>つくる人</h3><h3 data-lang-en>Who we are</h3>
-        <p data-lang-ja>ビジネス設計から機械学習の実装までを一人で担う創業者が、覚悟を持って挑む領域。</p>
-        <p data-lang-en>A founder who handles everything from business design to ML implementation.</p>
-        <span class="go" data-lang-ja>会社情報 →</span><span class="go" data-lang-en>About us →</span>
-      </a>
+<!-- ===== WHAT WE'RE BUILDING ===== -->
+<section class="section wwb-section">
+  <div class="wwb-inner">
+    <div class="wwb-text">
+      <span class="eyebrow reveal"><span class="dot"></span><span data-lang-ja>Our Product</span><span data-lang-en>Our Product</span></span>
+      <h2 class="h-sec reveal">
+        <span data-lang-ja>つけて運動するだけで、<br><span class="grad">正しいフォームがわかる。</span></span>
+        <span data-lang-en>Just move — and your <span class="grad">form becomes data.</span></span>
+      </h2>
+      <p class="lead reveal">
+        <span data-lang-ja>筋トレ・ランニング・ゴルフ・ヨガ。趣味のスポーツに本気で向き合う人ほど、「今のフォームが正しかったのか」確かめる手段を持っていません。<br><br>スマホで動画をいちいち撮影するのは面倒。かといって、スマートウォッチ・リングだとフォームまではわからない。<br><br>私たちは、身体に着けた4点のセンサーと動作解析AIで、その問いに答えようとしています。</span>
+        <span data-lang-en>Strength, running, golf, yoga. The more seriously people pursue their sport, the harder it is to objectively check their own form.<br><br>Recording video every time is too much effort. And smartwatches or rings can't capture form.<br><br>We answer that question with four body-worn sensors and motion-analysis AI.</span>
+      </p>
+    </div>
+    <div class="wwb-visual">
+      <div class="phone-mockup-box">
+        <div class="phone-placeholder">
+          <span data-lang-ja>解析結果イメージ<br>（スマホ画面）</span>
+          <span data-lang-en>App screen mockup</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
