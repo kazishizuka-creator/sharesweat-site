@@ -62,12 +62,28 @@
   .founder-role{font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:.14em;color:var(--violet-bright);text-transform:uppercase;margin-top:6px}
 
   @media(max-width:720px){
+    /* ファーストビュー：左右paddingを付けてベタ付き解消、ラベルも左余白を確保 */
+    .page-hero{padding-top:110px;padding-left:6vw;padding-right:6vw;display:flex;flex-direction:column}
     .page-hero .eyebrow{position:relative;z-index:3;margin-top:0;margin-bottom:18px;align-self:flex-start}
-    .page-hero{padding-top:110px}
-    .page-hero h1{font-size:clamp(1.9rem,7vw,2.6rem)}
-    .founder-new{flex-direction:column;gap:24px}
-    .tech-circle,.biz-circle{margin:0;width:250px;height:250px}
-    .portrait-circle{width:190px;height:190px}
+    .page-hero h1{font-size:clamp(1.6rem,6vw,2.1rem)}
+
+    /* 本文セクションにも左右余白（.wrapが効いていない場合の保険） */
+    .founder-new{padding-left:2vw;padding-right:2vw}
+
+    /* 3つの円を横並びに維持してコンパクトに */
+    .founder-new{flex-direction:row;gap:0;flex-wrap:nowrap;align-items:center;justify-content:center}
+    .skill-circle{width:34vw;height:34vw;flex-shrink:1}
+    .tech-circle{margin-right:-5vw}
+    .biz-circle{margin-left:-5vw}
+    .skill-circle-inner{padding:8px}
+    .skill-label{font-size:9px;letter-spacing:.1em;margin-bottom:6px}
+    .skill-list{gap:3px}
+    .skill-list li{font-size:8.5px;line-height:1.4}
+    .portrait-circle{width:28vw;height:28vw;margin-bottom:10px}
+    .founder-center{z-index:2}
+    .founder-name{font-size:1.1rem}
+    .founder-name-en{font-size:.8rem}
+    .founder-role{font-size:11px}
   }
 </style>
 </head>
