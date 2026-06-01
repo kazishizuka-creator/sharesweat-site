@@ -108,6 +108,16 @@
     .phone-mockup-box{max-width:240px;margin:0 auto}
     .imu-cross{padding-top:0}
   }
+
+  /* data platform */
+  .platform-section{border-top:1px solid var(--line)}
+  .platform-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .pcard{border:1px solid var(--line);border-radius:22px;padding:32px;background:linear-gradient(160deg,rgba(20,18,40,.5),rgba(10,10,20,.25));transition:.3s}
+  .pcard:hover{border-color:var(--violet);transform:translateY(-3px)}
+  .pcard .pk{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.16em;color:var(--violet-bright);text-transform:uppercase;margin-bottom:14px}
+  .pcard h3{font-weight:500;font-size:1.2rem;margin-bottom:10px}
+  .pcard p{color:var(--text-dim);font-size:.95rem}
+  @media(max-width:880px){.platform-cards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -141,7 +151,7 @@
     <span data-lang-en>Turning <span class="grad">body intelligence</span> into data.</span>
   </h1>
   <p class="sub rise d4">
-    <span data-lang-ja>手首・足首に着ける4点のウェアラブルと動作解析AIで、スポーツのフォームを解析する。日々の積み重ねが、確かなデータになる。</span>
+    <span data-lang-ja>手首・足首に着ける4点のウェアラブルと動作解析AIで、<br>スポーツのフォームを解析する。<br>日々の積み重ねが、確かなデータになる。</span>
     <span data-lang-en>Four wearable sensors on the wrists and ankles, paired with motion-analysis AI, turn everyday training into reliable data.</span>
   </p>
   <div class="cta-row rise d5">
@@ -183,7 +193,7 @@
         <span data-lang-en>Just move — and your <span class="grad">form becomes data.</span></span>
       </h2>
       <p class="lead reveal">
-        <span data-lang-ja>筋トレ・ランニング・ゴルフ・ヨガ。趣味のスポーツに本気で向き合う人ほど、「今のフォームが正しかったのか」確かめる手段を持っていません。<br><br>スマホで動画をいちいち撮影するのは面倒。かといって、スマートウォッチ・リングだとフォームまではわからない。<br><br>私たちは、身体に着けた4点のセンサーと動作解析AIで、その問いに答えようとしています。</span>
+        <span data-lang-ja>筋トレ・ランニング・ゴルフ・ヨガ。<br>趣味のスポーツに本気で向き合う人々は、<br>「自分のフォーム正しかったのか」気にしています。<br>しかし、客観的に確認する術がありません。<br><br>スマホで動画をいちいち撮影するのは面倒。<br>だけど、スマートウォッチ・リングだとフォームまではわからない。<br><br>私たちは、身体に着けた4点のセンサーと動作解析AIで、<br>その問いに答えようとしています。</span>
         <span data-lang-en>Strength, running, golf, yoga. The more seriously people pursue their sport, the harder it is to objectively check their own form.<br><br>Recording video every time is too much effort. And smartwatches or rings can't capture form.<br><br>We answer that question with four body-worn sensors and motion-analysis AI.</span>
       </p>
     </div>
@@ -193,6 +203,41 @@
           <span data-lang-ja>解析結果イメージ<br>（スマホ画面）</span>
           <span data-lang-en>App screen mockup</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DATA PLATFORM（身体動作基盤としての活用方向性） ===== -->
+<section class="section platform-section">
+  <div class="wrap">
+    <span class="eyebrow reveal"><span class="dot"></span><span data-lang-ja>その先の構想</span><span data-lang-en>Beyond the device</span></span>
+    <h2 class="h-sec reveal">
+      <span data-lang-ja>集まる動作データは、<br><span class="grad">身体動作の基盤</span>になる。</span>
+      <span data-lang-en>The motion data becomes <br><span class="grad">a foundation for human movement.</span></span>
+    </h2>
+    <p class="lead reveal" style="margin-bottom:48px">
+      <span data-lang-ja>デバイスを通じて蓄積される多様な動作データは、一人ひとりの上達に還元されるだけでなく、研究・社会に活かされる基盤へと育っていきます。</span>
+      <span data-lang-en>The diverse motion data gathered through the device not only feeds back into each person's progress, but grows into a foundation for research and society.</span>
+    </p>
+    <div class="platform-cards">
+      <div class="pcard reveal">
+        <div class="pk">For Individuals</div>
+        <h3 data-lang-ja>上達のために</h3><h3 data-lang-en>For mastery</h3>
+        <p data-lang-ja>自分の動きが記録され、フォーム改善の手がかりになる。</p>
+        <p data-lang-en>Your movement is recorded and becomes a cue for improving form.</p>
+      </div>
+      <div class="pcard reveal">
+        <div class="pk">For Research</div>
+        <h3 data-lang-ja>研究のために</h3><h3 data-lang-en>For research</h3>
+        <p data-lang-ja>大規模で多様な実環境の動作データは、これからの研究に欠かせない土台になる。</p>
+        <p data-lang-en>Large, diverse, real-world motion data becomes an essential basis for future research.</p>
+      </div>
+      <div class="pcard reveal">
+        <div class="pk">For Society</div>
+        <h3 data-lang-ja>社会のために</h3><h3 data-lang-en>For society</h3>
+        <p data-lang-ja>身体動作がAIに理解される時代へ。健康・リハビリにも広がっていく。</p>
+        <p data-lang-en>Toward an era where AI understands human motion — extending to health and rehabilitation.</p>
       </div>
     </div>
   </div>
