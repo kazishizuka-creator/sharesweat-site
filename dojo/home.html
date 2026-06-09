@@ -30,10 +30,18 @@
 <div id="boot" class="loading">AUTHENTICATING…</div>
 
 <main class="wrap gated" id="main" style="display:none">
-  <div class="page-head">
-    <h1><span data-lang-ja>ようこそ、<span id="hi-name"></span> さん</span><span data-lang-en>Welcome, <span id="hi-name-en"></span></span></h1>
-    <p><span data-lang-ja>あなたの権限に応じたコンテンツが表示されています。</span><span data-lang-en>Showing the content available to your roles.</span></p>
-  </div>
+
+  <!-- ============ (A) ファンドレイジング・ヒーロー ============ -->
+  <section class="fund-hero" id="fund-hero">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>ファンドレイジング</span><span data-lang-en>Fundraising</span></span>
+    <div class="fund-amount-label"><span data-lang-ja>現在の調達額</span><span data-lang-en>Amount raised</span></div>
+    <div class="fund-amount-wrap"><div class="fund-amount" id="fund-amount">¥0</div></div>
+    <div class="fund-launch">
+      <span class="fl-label"><span data-lang-ja>クラウドファンディング開始予定日</span><span data-lang-en>Crowdfunding launch</span></span>
+      <span class="fl-date" id="fund-date">—</span>
+    </div>
+  </section>
+  <div class="fund-divider"></div>
 
   <!-- ロール未付与のときの案内 -->
   <div id="no-role" class="empty" style="display:none">
@@ -41,29 +49,24 @@
     <span data-lang-en>No role has been assigned to your account yet. Please contact the team.</span>
   </div>
 
-  <!-- お知らせ -->
+  <!-- ============ (B) みなさまへのお知らせ ============ -->
   <div id="ann-section" style="display:none">
-    <div class="section-title"><span data-lang-ja>お知らせ</span><span data-lang-en>Announcements</span></div>
+    <div class="section-title"><span data-lang-ja>みなさまへのお知らせ</span><span data-lang-en>Announcements</span></div>
     <div id="ann-list"></div>
   </div>
 
-  <!-- カテゴリ -->
+  <!-- ============ (C) トピックカード ============ -->
   <div id="cat-section" style="display:none">
-    <div class="section-title"><span data-lang-ja>カテゴリ</span><span data-lang-en>Categories</span></div>
+    <div class="section-title"><span data-lang-ja>トピック</span><span data-lang-en>Topics</span></div>
     <div class="grid grid-cards" id="cat-list"></div>
   </div>
 
-  <!-- チャンネル -->
-  <div id="ch-section" style="display:none">
-    <div class="section-title"><span data-lang-ja>チャンネル</span><span data-lang-en>Channels</span></div>
-    <div class="grid grid-cards" id="ch-list"></div>
-  </div>
 </main>
 
 <script type="module">
 import {
   db, requireAuth, isAdmin,
-  collection, getDocs, query, where
+  collection, doc, getDoc, getDocs, query, where
 } from "./assets/firebase-init.js";
 import { initLang, initLogout, escapeHtml, roleChips, renderMarkdown, fmtTime, byCreatedDesc, byOrder } from "./assets/dojo.js";
 
@@ -71,11 +74,9 @@ const $ = (id) => document.getElementById(id);
 const isEN = () => document.body.classList.contains("lang-en");
 
 requireAuth(async (user, profile) => {
-  const name = (profile && profile.displayName) || (isEN()?"member":"メンバー");
+  const name  = (profile && profile.displayName) || (isEN() ? "member" : "メンバー");
   const roles = (profile && profile.roles) || [];
 
-  $("hi-name").textContent = name;
-  $("hi-name-en").textContent = name;
   $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
   if(isAdmin(roles)) $("nav-admin").style.display = "";
 
@@ -83,15 +84,68 @@ requireAuth(async (user, profile) => {
   $("boot").style.display = "none";
   $("main").style.display = "block";
 
-  // ロール未付与（user ドキュメントが無い or roles 空）→ 案内のみ
-  if(roles.length === 0){ $("no-role").style.display = "block"; return; }
+  // (A) 調達額・予定日は「ログイン済みメンバー全員」が見る（read=isSignedIn）。ロール有無に関係なく読み込む。
+  await loadFundraising();
 
-  await Promise.all([loadAnnouncements(roles), loadCategories(roles), loadChannels(roles)]);
+  // (B)(C) は roles に依存。ロール未付与なら案内だけ出してクエリは投げない。
+  if(roles.length === 0){ $("no-role").style.display = "block"; return; }
+  await Promise.all([loadAnnouncements(roles), loadCategories(roles)]);
 });
 
-// お知らせ: posts のうち isAnnouncement かつ閲覧可。
-// （array-contains-any の単一フィルタのみ→自動インデックスで動く。isAnnouncement と並びはクライアント側で処理）
+/* ============ (A) fundraising ============ */
+function yen(n){ return "¥" + Math.round(n).toLocaleString("ja-JP"); }
+
+// "YYYY-MM-DD" を日英それぞれの表記に（言語切替に追従させるため両方を span で出す）
+function launchHtml(s){
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s || ""));
+  if(!m) return escapeHtml(s || "—");
+  const y = m[1], mo = +m[2], d = +m[3];
+  const mEn = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][mo - 1];
+  return `<span data-lang-ja>${y}年${mo}月${d}日</span><span data-lang-en>${mEn} ${d}, ${y}</span>`;
+}
+
+function animateCountUp(el, target){
+  const dur = 1500, start = performance.now();
+  function frame(now){
+    const t = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+    el.textContent = yen(target * eased);
+    if(t < 1) requestAnimationFrame(frame);
+    else el.textContent = yen(target);
+  }
+  requestAnimationFrame(frame);
+}
+
+async function loadFundraising(){
+  const amtEl = $("fund-amount"), dateEl = $("fund-date");
+  try{
+    const snap = await getDoc(doc(db, "settings", "fundraising"));
+    const data = snap.exists() ? snap.data() : null;
+    const amount = (data && typeof data.currentAmount === "number") ? data.currentAmount : null;
+    const launch = (data && data.launchDate) ? data.launchDate : null;
+
+    dateEl.innerHTML = launch ? launchHtml(launch) : "—";
+
+    if(amount == null){ amtEl.textContent = "—"; return; }
+    // カウントアップは「セッション初回のみ」。以降のページ往復では即表示。
+    const done = sessionStorage.getItem("ss_dojo_fund_countup") === "1";
+    if(done){
+      amtEl.textContent = yen(amount);
+    }else{
+      animateCountUp(amtEl, amount);
+      try{ sessionStorage.setItem("ss_dojo_fund_countup", "1"); }catch(e){}
+    }
+  }catch(e){
+    console.error("fundraising:", e);
+    amtEl.textContent = "—";
+  }
+}
+
+/* ============ (B) announcements ============ */
 async function loadAnnouncements(roles){
+  // array-contains-any は空配列だとエラー。roles 空なら何も出さない。
+  // （roles をルールの hasAny と整合させるため。roles は最大でも数個＝上限10要素以内の想定）
+  if(!roles || roles.length === 0) return;
   try{
     const snap = await getDocs(query(collection(db, "posts"), where("visibleTo", "array-contains-any", roles)));
     const anns = [];
@@ -108,7 +162,9 @@ async function loadAnnouncements(roles){
   }catch(e){ console.error("announcements:", e); }
 }
 
+/* ============ (C) category cards ============ */
 async function loadCategories(roles){
+  if(!roles || roles.length === 0) return;   // array-contains-any は空配列だと不可
   try{
     const snap = await getDocs(query(collection(db, "categories"), where("visibleTo", "array-contains-any", roles)));
     const cats = [];
@@ -117,29 +173,11 @@ async function loadCategories(roles){
     cats.sort(byOrder);
     $("cat-list").innerHTML = cats.map(c => `
       <a class="card" href="category.html?id=${encodeURIComponent(c.id)}">
-        <span class="pk">Category</span>
-        <h3>${escapeHtml(c.title || c.titleEn || "")}</h3>
-        ${c.titleEn ? `<p>${escapeHtml(c.titleEn)}</p>` : ""}
+        <span class="pk">Topic</span>
+        <h3><span data-lang-ja>${escapeHtml(c.title || c.titleEn || "")}</span><span data-lang-en>${escapeHtml(c.titleEn || c.title || "")}</span></h3>
       </a>`).join("");
     $("cat-section").style.display = "block";
   }catch(e){ console.error("categories:", e); }
-}
-
-async function loadChannels(roles){
-  try{
-    const snap = await getDocs(query(collection(db, "channels"), where("visibleTo", "array-contains-any", roles)));
-    const chs = [];
-    snap.forEach(d => chs.push({ id: d.id, ...d.data() }));
-    if(chs.length === 0) return;
-    chs.sort(byOrder);
-    $("ch-list").innerHTML = chs.map(c => `
-      <a class="card" href="chat.html?channel=${encodeURIComponent(c.id)}">
-        <span class="pk">Channel</span>
-        <h3># ${escapeHtml(c.title || c.titleEn || "")}</h3>
-        ${c.titleEn ? `<p>${escapeHtml(c.titleEn)}</p>` : ""}
-      </a>`).join("");
-    $("ch-section").style.display = "block";
-  }catch(e){ console.error("channels:", e); }
 }
 
 initLang();

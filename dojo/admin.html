@@ -146,12 +146,34 @@
     <button class="btn btn-primary" id="ch-create"><span data-lang-ja>チャンネルを作成</span><span data-lang-en>Create channel</span></button>
     <p class="msg-line" id="ch-msg"></p>
   </section>
+
+  <!-- ===== Fundraising settings ===== -->
+  <section class="admin-block">
+    <h2><span data-lang-ja>⑤ ファンドレイジング設定</span><span data-lang-en>⑤ Fundraising</span></h2>
+    <p class="hint">
+      <span data-lang-ja>ホーム最上部に大きく表示される「現在の調達額」と「クラファン開始予定日」。保存すると即座にホームへ反映される。</span>
+      <span data-lang-en>The "amount raised" and "launch date" shown large at the top of the home page. Saving updates the home immediately.</span>
+    </p>
+    <div class="row-inline">
+      <div class="field" style="flex:1;min-width:200px;margin:0">
+        <label><span data-lang-ja>現在の調達額（円）</span><span data-lang-en>Amount raised (JPY)</span></label>
+        <input type="number" id="fund-amount-input" min="0" step="1" placeholder="30000000">
+      </div>
+      <div class="field" style="flex:1;min-width:200px;margin:0">
+        <label><span data-lang-ja>クラファン開始予定日</span><span data-lang-en>Launch date</span></label>
+        <input type="date" id="fund-date-input">
+      </div>
+      <button class="btn btn-primary" id="fund-save"><span data-lang-ja>保存</span><span data-lang-en>Save</span></button>
+    </div>
+    <p class="faint" id="fund-preview" style="margin-top:10px"></p>
+    <p class="msg-line" id="fund-msg"></p>
+  </section>
 </main>
 
 <script type="module">
 import {
   db, requireAuth, isAdmin, ALL_ROLES, ROLE_LABELS,
-  collection, doc, getDocs, setDoc, addDoc, updateDoc,
+  collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc,
   query, where, serverTimestamp
 } from "./assets/firebase-init.js";
 import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
@@ -197,9 +219,29 @@ requireAuth(async (user, profile) => {
   $("main").style.display = "block";
 
   renderRoleChecks();
-  await Promise.all([loadUsers(), loadCategories()]);
+  await Promise.all([loadUsers(), loadCategories(), loadFundraisingSettings()]);
   wire();
 });
+
+/* ---- fundraising 設定（settings/fundraising）---- */
+const FUND_DEFAULT_AMOUNT = 30000000;   // 3,000万円
+const FUND_DEFAULT_DATE = "2027-10-01"; // クラファン開始予定日（初期値）
+function fundPreview(){
+  const a = Number($("fund-amount-input").value);
+  $("fund-preview").textContent = Number.isFinite(a)
+    ? "プレビュー: ¥" + Math.round(a).toLocaleString("ja-JP")
+    : "";
+}
+async function loadFundraisingSettings(){
+  let d = {};
+  try{
+    const snap = await getDoc(doc(db, "settings", "fundraising"));
+    if(snap.exists()) d = snap.data();
+  }catch(e){ console.error("fundraising load:", e); }
+  $("fund-amount-input").value = (typeof d.currentAmount === "number") ? d.currentAmount : FUND_DEFAULT_AMOUNT;
+  $("fund-date-input").value   = d.launchDate || FUND_DEFAULT_DATE;
+  fundPreview();
+}
 
 /* ---- users 一覧 ---- */
 async function loadUsers(){
@@ -251,13 +293,25 @@ async function saveRoles(uid, btn){
 /* ---- categories（投稿フォームのドロップダウン用にも使う）---- */
 async function loadCategories(){
   CATEGORIES = [];
+  const sel = $("post-cat");
+  const roles = (MY && MY.roles) || [];
+  // array-contains-any は空配列だとエラーになるため、roles が空ならクエリを投げない。
+  // roles は通常 admin の1〜数個。array-contains-any の上限は10要素なので、
+  // ロールが極端に増える設計でない前提（現状 shihan / hanshi / admin の3種）。
+  if(roles.length === 0){
+    sel.innerHTML = `<option value="">${isEN()?"(no role)":"（ロールなし）"}</option>`;
+    return;
+  }
   try{
-    // admin は visibleTo に必ず含まれる前提なので array-contains 'admin' で安全に取得
-    const snap = await getDocs(query(collection(db, "categories"), where("visibleTo", "array-contains", "admin")));
+    // ルールの read 条件 hasAccess(=visibleTo に自分のroleが含まれる) は hasAny で判定するため、
+    // クエリ側も array-contains-any roles に揃える（演算子を一致させないと list クエリが拒否される）。
+    // admin はカテゴリ作成時に visibleTo へ自動付与されるので、admin ロールで全カテゴリを取得できる。
+    // ※ もし「visibleTo に admin を含まないカテゴリ」も admin に見せたい要件になったら、
+    //   クエリ側では実現できず firestore.rules 側で admin バイパスを足す必要がある（現状その要件は無し）。
+    const snap = await getDocs(query(collection(db, "categories"), where("visibleTo", "array-contains-any", roles)));
     snap.forEach(d => CATEGORIES.push({ id: d.id, ...d.data() }));
     CATEGORIES.sort((a,b)=>(a.order??0)-(b.order??0));
   }catch(e){ console.error(e); }
-  const sel = $("post-cat");
   if(CATEGORIES.length === 0){
     sel.innerHTML = `<option value="">${isEN()?"(create a category first)":"（先にカテゴリを作成）"}</option>`;
   }else{
@@ -334,6 +388,20 @@ function wire(){
       $("ch-title").value=""; $("ch-titleEn").value=""; $("ch-order").value="0";
       document.querySelectorAll('[data-rolegroup="ch"] input:checked').forEach(i=>i.checked=false);
     }catch(e){ console.error(e); setMsg("ch-msg", (isEN()?"Failed: ":"失敗: ")+(e.code||e.message), false); }
+  });
+
+  // fundraising settings 保存
+  $("fund-amount-input").addEventListener("input", fundPreview);
+  $("fund-save").addEventListener("click", async () => {
+    const amount = Number($("fund-amount-input").value);
+    const launchDate = $("fund-date-input").value;
+    if(!Number.isFinite(amount) || amount < 0){ setMsg("fund-msg", isEN()?"Enter a valid amount.":"金額を正しく入力してください。", false); return; }
+    if(!launchDate){ setMsg("fund-msg", isEN()?"Enter a launch date.":"開始予定日を入力してください。", false); return; }
+    try{
+      // 無ければ作成・あれば更新（merge）
+      await setDoc(doc(db, "settings", "fundraising"), { currentAmount: amount, launchDate }, { merge: true });
+      setMsg("fund-msg", isEN()?"Saved ✓":"保存しました ✓", true);
+    }catch(e){ console.error(e); setMsg("fund-msg", (isEN()?"Failed: ":"失敗: ")+(e.code||e.message), false); }
   });
 }
 

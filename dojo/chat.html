@@ -80,6 +80,9 @@ requireAuth(async (user, profile) => {
 // リアルタイム購読: 自分が見える messages を購読し、このチャンネル分だけ表示。
 // （array-contains-any の単一フィルタのみ→自動インデックス。channelId 絞り込み/並びはクライアント側）
 function subscribe(roles){
+  // array-contains-any は空配列だとエラー。ここに来る時点で channel 取得が通っている＝roles 非空のはずだが、念のためガード。
+  // （roles はルールの hasAny と整合。最大でも数個＝上限10要素以内の想定）
+  if(!roles || roles.length === 0){ location.replace("home.html"); return; }
   const q = query(collection(db, "messages"), where("visibleTo", "array-contains-any", roles));
   const list = $("msg-list");
   unsub = onSnapshot(q, (snap) => {

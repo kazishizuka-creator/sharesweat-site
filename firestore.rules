@@ -66,6 +66,14 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    // ---- settings（調達額・予定日などサイト全体の設定）----
+    // 読み取り: ログイン済みのメンバー全員（機密ではなく全員が見る情報）。
+    // 書き込み: admin のみ。未ログインには返さない。
+    match /settings/{id} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isAdmin();
+    }
+
     // ---- messages（チャット投稿）----
     // 読み取り: visibleTo に自分のロールが含まれる場合のみ。
     // 作成: そのチャンネル(=visibleTo)を見られるロールを持つ人だけ。

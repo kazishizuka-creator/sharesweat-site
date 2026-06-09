@@ -80,6 +80,7 @@ requireAuth(async (user, profile) => {
 
 async function loadPosts(roles){
   const box = $("posts");
+  // array-contains-any は空配列だとエラーになるためガード（roles はルールの hasAny と整合・上限10要素以内の想定）
   if(roles.length === 0){ box.innerHTML = `<p class="empty">${isEN()?"No access.":"閲覧権限がありません。"}</p>`; return; }
   try{
     // 自分が見られる posts を取得（単一の array-contains-any → 自動インデックス）。
