@@ -1,0 +1,88 @@
+rules_version = '2';
+
+// ============================================================
+// DONUT Dojo — Firestore Security Rules
+//
+// 思想（最重要）:
+//   フロントの表示制御とは独立して、DB側で必ず検証する。
+//   未ログイン / 権限のないロールには、DBがそもそもデータを返さない。
+//
+// デプロイ（サイトの git push とは別系統。Firebase 側へ）:
+//   firebase deploy --only firestore:rules
+//   もしくは Firebase コンソール > Firestore > ルール に貼り付け。
+//
+// ロール: admin（全権） / shihan（師範） / hanshi（範士）
+//   ユーザーのロールは users/{uid}.roles（配列）に保持。
+// ============================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- helpers ----
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // 自分の users ドキュメントが存在するか（ロール未付与の鶏卵対策）
+    function profileExists() {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    // 自分のロール配列を取得（profileExists() で守ってから呼ぶこと）
+    function myRoles() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles;
+    }
+
+    function isAdmin() {
+      return profileExists() && ('admin' in myRoles());
+    }
+
+    // visibleTo（配列）に、自分のロールのいずれかが含まれるか
+    function hasAccess(visibleTo) {
+      return profileExists() && myRoles().hasAny(visibleTo);
+    }
+
+    // ---- users ----
+    // 読み取り: 本人 または admin のみ。
+    // 書き込み(roles含む): admin のみ → 本人が自分を勝手に admin にできない。
+    match /users/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ---- categories / posts / channels ----
+    // 読み取り: visibleTo に自分のロールが含まれる場合のみ。
+    // 作成・更新・削除: admin のみ。
+    match /categories/{id} {
+      allow read: if hasAccess(resource.data.visibleTo);
+      allow create, update, delete: if isAdmin();
+    }
+    match /posts/{id} {
+      allow read: if hasAccess(resource.data.visibleTo);
+      allow create, update, delete: if isAdmin();
+    }
+    match /channels/{id} {
+      allow read: if hasAccess(resource.data.visibleTo);
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ---- messages（チャット投稿）----
+    // 読み取り: visibleTo に自分のロールが含まれる場合のみ。
+    // 作成: そのチャンネル(=visibleTo)を見られるロールを持つ人だけ。
+    //       authorUid は必ず本人のUIDと一致（なりすまし防止）。
+    // 編集・削除: 本人 または admin のみ。
+    match /messages/{id} {
+      allow read: if hasAccess(resource.data.visibleTo);
+      allow create: if isSignedIn()
+        && request.resource.data.authorUid == request.auth.uid
+        && hasAccess(request.resource.data.visibleTo);
+      allow update, delete: if isSignedIn()
+        && (resource.data.authorUid == request.auth.uid || isAdmin());
+    }
+
+    // 上記にマッチしないパスは全拒否（明示）
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

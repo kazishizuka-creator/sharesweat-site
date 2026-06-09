@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — 管理</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="admin.html" class="active"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <div class="page-head">
+    <h1><span data-lang-ja>管理コンソール</span><span data-lang-en>Admin Console</span></h1>
+    <p>
+      <span data-lang-ja>ユーザーのロール付与、カテゴリ・記事・お知らせ・チャンネルの管理。Authユーザーの発行（メール＋パスワード）は Firebase コンソールで行う。</span>
+      <span data-lang-en>Assign roles and manage categories, posts, announcements and channels. Auth users (email + password) are created in the Firebase console.</span>
+    </p>
+  </div>
+
+  <!-- ===== Users / roles ===== -->
+  <section class="admin-block">
+    <h2><span data-lang-ja>① ユーザーとロール</span><span data-lang-en>① Users &amp; roles</span></h2>
+    <p class="hint">
+      <span data-lang-ja>Firebase コンソールで Auth ユーザーを作成したら、その UID をここで登録してロールを付与する。</span>
+      <span data-lang-en>After creating an Auth user in the Firebase console, register its UID here and assign roles.</span>
+    </p>
+
+    <!-- create user doc -->
+    <div class="row-inline" style="margin-bottom:22px">
+      <div class="field" style="flex:1;min-width:200px;margin:0">
+        <label for="nu-uid">UID</label>
+        <input type="text" id="nu-uid" placeholder="Firebase Auth の UID">
+      </div>
+      <div class="field" style="flex:1;min-width:160px;margin:0">
+        <label for="nu-name"><span data-lang-ja>表示名（ニックネーム）</span><span data-lang-en>Display name</span></label>
+        <input type="text" id="nu-name" placeholder="例: ドーナツ太郎">
+      </div>
+      <div class="field" style="margin:0">
+        <label><span data-lang-ja>ロール</span><span data-lang-en>Roles</span></label>
+        <div class="checks" data-rolegroup="nu"></div>
+      </div>
+      <button class="btn btn-primary" id="nu-create"><span data-lang-ja>ユーザー登録</span><span data-lang-en>Add user</span></button>
+    </div>
+    <p class="msg-line" id="nu-msg"></p>
+
+    <div class="divider"></div>
+    <div id="users-table"><p class="loading">LOADING…</p></div>
+  </section>
+
+  <!-- ===== Category ===== -->
+  <section class="admin-block">
+    <h2><span data-lang-ja>② カテゴリ作成</span><span data-lang-en>② Create category</span></h2>
+    <p class="hint">
+      <span data-lang-ja>記事をまとめる区分。「全体」にしたい場合はロールを全部チェック。admin は自動で含まれる。</span>
+      <span data-lang-en>A grouping for posts. For an "all-members" category, check every role. admin is always included.</span>
+    </p>
+    <div class="row-inline">
+      <div class="field" style="flex:1;min-width:160px;margin:0">
+        <label>Title (JA)</label><input type="text" id="cat-title" placeholder="例: 戦略議論">
+      </div>
+      <div class="field" style="flex:1;min-width:160px;margin:0">
+        <label>Title (EN)</label><input type="text" id="cat-titleEn" placeholder="e.g. Strategy">
+      </div>
+      <div class="field" style="width:90px;margin:0">
+        <label><span data-lang-ja>並び順</span><span data-lang-en>Order</span></label><input type="number" id="cat-order" value="0">
+      </div>
+    </div>
+    <div class="field" style="margin-top:14px">
+      <label><span data-lang-ja>閲覧できるロール</span><span data-lang-en>Visible to</span></label>
+      <div class="checks" data-rolegroup="cat"></div>
+    </div>
+    <button class="btn btn-primary" id="cat-create"><span data-lang-ja>カテゴリを作成</span><span data-lang-en>Create category</span></button>
+    <p class="msg-line" id="cat-msg"></p>
+  </section>
+
+  <!-- ===== Post / announcement ===== -->
+  <section class="admin-block">
+    <h2><span data-lang-ja>③ 記事・お知らせの投稿</span><span data-lang-en>③ Post article / announcement</span></h2>
+    <p class="hint">
+      <span data-lang-ja>「お知らせにする」をオンにすると、全メンバーのダッシュボード上部に新着順で表示される（閲覧ロールは下で指定）。</span>
+      <span data-lang-en>Turn on "Announcement" to surface it at the top of members' dashboards (newest first). Visibility still follows the roles below.</span>
+    </p>
+    <div class="field">
+      <label><span data-lang-ja>カテゴリ</span><span data-lang-en>Category</span></label>
+      <select id="post-cat"></select>
+    </div>
+    <div class="field"><label>Title</label><input type="text" id="post-title" placeholder="記事タイトル"></div>
+    <div class="field">
+      <label><span data-lang-ja>本文（プレーン or 簡易Markdown: # 見出し / **太字** / - 箇条書き / [text](url)）</span><span data-lang-en>Body (plain or simple Markdown)</span></label>
+      <textarea id="post-body" placeholder="本文…"></textarea>
+    </div>
+    <div class="row-inline" style="align-items:center">
+      <div class="field" style="margin:0;flex:1">
+        <label><span data-lang-ja>閲覧できるロール</span><span data-lang-en>Visible to</span></label>
+        <div class="checks" data-rolegroup="post"></div>
+      </div>
+      <div class="checks" style="margin:0"><label style="border-color:var(--cyan)"><input type="checkbox" id="post-ann"><span data-lang-ja>お知らせにする</span><span data-lang-en>Announcement</span></label></div>
+    </div>
+    <button class="btn btn-primary" id="post-create" style="margin-top:14px"><span data-lang-ja>投稿する</span><span data-lang-en>Publish</span></button>
+    <p class="msg-line" id="post-msg"></p>
+  </section>
+
+  <!-- ===== Channel ===== -->
+  <section class="admin-block">
+    <h2><span data-lang-ja>④ チャットチャンネル作成</span><span data-lang-en>④ Create chat channel</span></h2>
+    <p class="hint">
+      <span data-lang-ja>メンバーが発言できる場。閲覧できるロールが、そのまま発言できるロールになる。</span>
+      <span data-lang-en>A space where members post. Whoever can view a channel can also post in it.</span>
+    </p>
+    <div class="row-inline">
+      <div class="field" style="flex:1;min-width:160px;margin:0">
+        <label>Title (JA)</label><input type="text" id="ch-title" placeholder="例: 雑談広場">
+      </div>
+      <div class="field" style="flex:1;min-width:160px;margin:0">
+        <label>Title (EN)</label><input type="text" id="ch-titleEn" placeholder="e.g. Lounge">
+      </div>
+      <div class="field" style="width:90px;margin:0">
+        <label><span data-lang-ja>並び順</span><span data-lang-en>Order</span></label><input type="number" id="ch-order" value="0">
+      </div>
+    </div>
+    <div class="field" style="margin-top:14px">
+      <label><span data-lang-ja>閲覧・発言できるロール</span><span data-lang-en>Visible to</span></label>
+      <div class="checks" data-rolegroup="ch"></div>
+    </div>
+    <button class="btn btn-primary" id="ch-create"><span data-lang-ja>チャンネルを作成</span><span data-lang-en>Create channel</span></button>
+    <p class="msg-line" id="ch-msg"></p>
+  </section>
+</main>
+
+<script type="module">
+import {
+  db, requireAuth, isAdmin, ALL_ROLES, ROLE_LABELS,
+  collection, doc, getDocs, setDoc, addDoc, updateDoc,
+  query, where, serverTimestamp
+} from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+
+const $ = (id) => document.getElementById(id);
+const isEN = () => document.body.classList.contains("lang-en");
+let MY = null;          // {uid, displayName, roles}
+let CATEGORIES = [];    // for the post-category dropdown
+
+// ロール選択チェックボックス群を描画
+function renderRoleChecks(){
+  document.querySelectorAll("[data-rolegroup]").forEach(box => {
+    box.innerHTML = ALL_ROLES.map(r => {
+      const lbl = `${ROLE_LABELS[r].ja} / ${ROLE_LABELS[r].en}`;
+      return `<label><input type="checkbox" value="${r}"> ${escapeHtml(lbl)}</label>`;
+    }).join("");
+  });
+}
+function getChecked(group){
+  return [...document.querySelectorAll(`[data-rolegroup="${group}"] input:checked`)].map(i => i.value);
+}
+// admin は visibleTo に常に含める
+function withAdmin(roles){
+  return roles.includes("admin") ? roles : [...roles, "admin"];
+}
+function setMsg(id, text, ok){
+  const el = $(id);
+  el.className = "msg-line " + (ok ? "ok" : "err");
+  el.textContent = text;
+}
+
+/* ---- auth guard: admin 限定 ---- */
+requireAuth(async (user, profile) => {
+  if(!profile || !isAdmin(profile.roles)){
+    location.replace("home.html");   // admin 以外は締め出し（本丸は Rules）
+    return;
+  }
+  MY = { uid: user.uid, displayName: profile.displayName || "Admin", roles: profile.roles || [] };
+  $("me").innerHTML = `<strong>${escapeHtml(MY.displayName)}</strong> <span class="me-roles">${roleChips(MY.roles)}</span>`;
+
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+
+  renderRoleChecks();
+  await Promise.all([loadUsers(), loadCategories()]);
+  wire();
+});
+
+/* ---- users 一覧 ---- */
+async function loadUsers(){
+  const wrap = $("users-table");
+  try{
+    const snap = await getDocs(collection(db, "users"));
+    const rows = [];
+    snap.forEach(d => rows.push({ uid: d.id, ...d.data() }));
+    if(rows.length === 0){ wrap.innerHTML = `<p class="empty">${isEN()?"No users yet.":"ユーザーがまだいません。"}</p>`; return; }
+    let html = `<table class="tbl"><thead><tr>
+      <th><span data-lang-ja>表示名</span><span data-lang-en>Name</span></th>
+      <th>UID</th>
+      <th><span data-lang-ja>ロール</span><span data-lang-en>Roles</span></th>
+      <th></th></tr></thead><tbody>`;
+    for(const u of rows){
+      const checks = ALL_ROLES.map(r =>
+        `<label><input type="checkbox" data-edit="${u.uid}" value="${r}" ${(u.roles||[]).includes(r)?"checked":""}> ${r}</label>`
+      ).join("");
+      html += `<tr>
+        <td>${escapeHtml(u.displayName || "—")}</td>
+        <td class="uid">${escapeHtml(u.uid)}</td>
+        <td><div class="checks">${checks}</div></td>
+        <td><button class="btn btn-ghost btn-sm" data-save="${u.uid}">${isEN()?"Save":"保存"}</button></td>
+      </tr>`;
+    }
+    html += "</tbody></table>";
+    wrap.innerHTML = html;
+    wrap.querySelectorAll("[data-save]").forEach(btn => btn.addEventListener("click", () => saveRoles(btn.dataset.save, btn)));
+  }catch(e){
+    console.error(e);
+    wrap.innerHTML = `<p class="msg-line err">${isEN()?"Failed to load users.":"ユーザー一覧の取得に失敗しました。"}（${escapeHtml(e.code||e.message||"")}）</p>`;
+  }
+}
+
+async function saveRoles(uid, btn){
+  const roles = [...document.querySelectorAll(`[data-edit="${uid}"]:checked`)].map(i => i.value);
+  btn.disabled = true;
+  try{
+    await updateDoc(doc(db, "users", uid), { roles });
+    btn.textContent = isEN() ? "Saved ✓" : "保存 ✓";
+    setTimeout(() => { btn.textContent = isEN()?"Save":"保存"; btn.disabled = false; }, 1400);
+  }catch(e){
+    console.error(e);
+    btn.disabled = false;
+    alert((isEN()?"Failed to save roles: ":"ロール保存に失敗: ") + (e.code||e.message));
+  }
+}
+
+/* ---- categories（投稿フォームのドロップダウン用にも使う）---- */
+async function loadCategories(){
+  CATEGORIES = [];
+  try{
+    // admin は visibleTo に必ず含まれる前提なので array-contains 'admin' で安全に取得
+    const snap = await getDocs(query(collection(db, "categories"), where("visibleTo", "array-contains", "admin")));
+    snap.forEach(d => CATEGORIES.push({ id: d.id, ...d.data() }));
+    CATEGORIES.sort((a,b)=>(a.order??0)-(b.order??0));
+  }catch(e){ console.error(e); }
+  const sel = $("post-cat");
+  if(CATEGORIES.length === 0){
+    sel.innerHTML = `<option value="">${isEN()?"(create a category first)":"（先にカテゴリを作成）"}</option>`;
+  }else{
+    sel.innerHTML = CATEGORIES.map(c =>
+      `<option value="${c.id}">${escapeHtml(c.title || c.titleEn || c.id)}</option>`
+    ).join("");
+  }
+}
+
+/* ---- 各種作成アクション ---- */
+function wire(){
+  // create user doc
+  $("nu-create").addEventListener("click", async () => {
+    const uid = $("nu-uid").value.trim();
+    const name = $("nu-name").value.trim();
+    const roles = getChecked("nu");
+    if(!uid){ setMsg("nu-msg", isEN()?"UID is required.":"UID を入力してください。", false); return; }
+    if(!name){ setMsg("nu-msg", isEN()?"Display name is required.":"表示名を入力してください。", false); return; }
+    try{
+      await setDoc(doc(db, "users", uid), { displayName: name, roles, createdAt: serverTimestamp() });
+      setMsg("nu-msg", isEN()?"User added ✓":"ユーザーを登録しました ✓", true);
+      $("nu-uid").value = ""; $("nu-name").value = "";
+      document.querySelectorAll('[data-rolegroup="nu"] input:checked').forEach(i=>i.checked=false);
+      await loadUsers();
+    }catch(e){ console.error(e); setMsg("nu-msg", (isEN()?"Failed: ":"失敗: ")+(e.code||e.message), false); }
+  });
+
+  // create category
+  $("cat-create").addEventListener("click", async () => {
+    const title = $("cat-title").value.trim();
+    const titleEn = $("cat-titleEn").value.trim();
+    const order = Number($("cat-order").value) || 0;
+    const visibleTo = withAdmin(getChecked("cat"));
+    if(!title && !titleEn){ setMsg("cat-msg", isEN()?"Enter a title.":"タイトルを入力してください。", false); return; }
+    try{
+      await addDoc(collection(db, "categories"), { title, titleEn, visibleTo, order });
+      setMsg("cat-msg", isEN()?"Category created ✓":"カテゴリを作成しました ✓", true);
+      $("cat-title").value=""; $("cat-titleEn").value=""; $("cat-order").value="0";
+      document.querySelectorAll('[data-rolegroup="cat"] input:checked').forEach(i=>i.checked=false);
+      await loadCategories();
+    }catch(e){ console.error(e); setMsg("cat-msg", (isEN()?"Failed: ":"失敗: ")+(e.code||e.message), false); }
+  });
+
+  // create post / announcement
+  $("post-create").addEventListener("click", async () => {
+    const categoryId = $("post-cat").value;
+    const title = $("post-title").value.trim();
+    const body = $("post-body").value;
+    const visibleTo = withAdmin(getChecked("post"));
+    const isAnnouncement = $("post-ann").checked;
+    if(!categoryId){ setMsg("post-msg", isEN()?"Select a category.":"カテゴリを選択してください。", false); return; }
+    if(!title){ setMsg("post-msg", isEN()?"Enter a title.":"タイトルを入力してください。", false); return; }
+    try{
+      await addDoc(collection(db, "posts"), {
+        categoryId, title, body, visibleTo, isAnnouncement,
+        authorName: MY.displayName, createdAt: serverTimestamp()
+      });
+      setMsg("post-msg", isEN()?"Published ✓":"投稿しました ✓", true);
+      $("post-title").value=""; $("post-body").value=""; $("post-ann").checked=false;
+      document.querySelectorAll('[data-rolegroup="post"] input:checked').forEach(i=>i.checked=false);
+    }catch(e){ console.error(e); setMsg("post-msg", (isEN()?"Failed: ":"失敗: ")+(e.code||e.message), false); }
+  });
+
+  // create channel
+  $("ch-create").addEventListener("click", async () => {
+    const title = $("ch-title").value.trim();
+    const titleEn = $("ch-titleEn").value.trim();
+    const order = Number($("ch-order").value) || 0;
+    const visibleTo = withAdmin(getChecked("ch"));
+    if(!title && !titleEn){ setMsg("ch-msg", isEN()?"Enter a title.":"タイトルを入力してください。", false); return; }
+    try{
+      await addDoc(collection(db, "channels"), { title, titleEn, visibleTo, order });
+      setMsg("ch-msg", isEN()?"Channel created ✓":"チャンネルを作成しました ✓", true);
+      $("ch-title").value=""; $("ch-titleEn").value=""; $("ch-order").value="0";
+      document.querySelectorAll('[data-rolegroup="ch"] input:checked').forEach(i=>i.checked=false);
+    }catch(e){ console.error(e); setMsg("ch-msg", (isEN()?"Failed: ":"失敗: ")+(e.code||e.message), false); }
+  });
+}
+
+initLang();
+initLogout();
+</script>
+</body>
+</html>

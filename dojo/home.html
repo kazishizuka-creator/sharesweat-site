@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — ホーム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html" class="active"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <div class="page-head">
+    <h1><span data-lang-ja>ようこそ、<span id="hi-name"></span> さん</span><span data-lang-en>Welcome, <span id="hi-name-en"></span></span></h1>
+    <p><span data-lang-ja>あなたの権限に応じたコンテンツが表示されています。</span><span data-lang-en>Showing the content available to your roles.</span></p>
+  </div>
+
+  <!-- ロール未付与のときの案内 -->
+  <div id="no-role" class="empty" style="display:none">
+    <span data-lang-ja>まだロールが付与されていません。運営（管理者）にご連絡ください。</span>
+    <span data-lang-en>No role has been assigned to your account yet. Please contact the team.</span>
+  </div>
+
+  <!-- お知らせ -->
+  <div id="ann-section" style="display:none">
+    <div class="section-title"><span data-lang-ja>お知らせ</span><span data-lang-en>Announcements</span></div>
+    <div id="ann-list"></div>
+  </div>
+
+  <!-- カテゴリ -->
+  <div id="cat-section" style="display:none">
+    <div class="section-title"><span data-lang-ja>カテゴリ</span><span data-lang-en>Categories</span></div>
+    <div class="grid grid-cards" id="cat-list"></div>
+  </div>
+
+  <!-- チャンネル -->
+  <div id="ch-section" style="display:none">
+    <div class="section-title"><span data-lang-ja>チャンネル</span><span data-lang-en>Channels</span></div>
+    <div class="grid grid-cards" id="ch-list"></div>
+  </div>
+</main>
+
+<script type="module">
+import {
+  db, requireAuth, isAdmin,
+  collection, getDocs, query, where
+} from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips, renderMarkdown, fmtTime, byCreatedDesc, byOrder } from "./assets/dojo.js";
+
+const $ = (id) => document.getElementById(id);
+const isEN = () => document.body.classList.contains("lang-en");
+
+requireAuth(async (user, profile) => {
+  const name = (profile && profile.displayName) || (isEN()?"member":"メンバー");
+  const roles = (profile && profile.roles) || [];
+
+  $("hi-name").textContent = name;
+  $("hi-name-en").textContent = name;
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+
+  // ロール未付与（user ドキュメントが無い or roles 空）→ 案内のみ
+  if(roles.length === 0){ $("no-role").style.display = "block"; return; }
+
+  await Promise.all([loadAnnouncements(roles), loadCategories(roles), loadChannels(roles)]);
+});
+
+// お知らせ: posts のうち isAnnouncement かつ閲覧可。
+// （array-contains-any の単一フィルタのみ→自動インデックスで動く。isAnnouncement と並びはクライアント側で処理）
+async function loadAnnouncements(roles){
+  try{
+    const snap = await getDocs(query(collection(db, "posts"), where("visibleTo", "array-contains-any", roles)));
+    const anns = [];
+    snap.forEach(d => { const x = d.data(); if(x.isAnnouncement) anns.push({ id: d.id, ...x }); });
+    if(anns.length === 0) return;
+    anns.sort(byCreatedDesc);
+    $("ann-list").innerHTML = anns.map(a => `
+      <div class="ann">
+        <div class="ann-meta">${escapeHtml(a.authorName || "")} · ${escapeHtml(fmtTime(a.createdAt))}</div>
+        <h3>${escapeHtml(a.title || "")}</h3>
+        <div class="body">${renderMarkdown(a.body || "")}</div>
+      </div>`).join("");
+    $("ann-section").style.display = "block";
+  }catch(e){ console.error("announcements:", e); }
+}
+
+async function loadCategories(roles){
+  try{
+    const snap = await getDocs(query(collection(db, "categories"), where("visibleTo", "array-contains-any", roles)));
+    const cats = [];
+    snap.forEach(d => cats.push({ id: d.id, ...d.data() }));
+    if(cats.length === 0) return;
+    cats.sort(byOrder);
+    $("cat-list").innerHTML = cats.map(c => `
+      <a class="card" href="category.html?id=${encodeURIComponent(c.id)}">
+        <span class="pk">Category</span>
+        <h3>${escapeHtml(c.title || c.titleEn || "")}</h3>
+        ${c.titleEn ? `<p>${escapeHtml(c.titleEn)}</p>` : ""}
+      </a>`).join("");
+    $("cat-section").style.display = "block";
+  }catch(e){ console.error("categories:", e); }
+}
+
+async function loadChannels(roles){
+  try{
+    const snap = await getDocs(query(collection(db, "channels"), where("visibleTo", "array-contains-any", roles)));
+    const chs = [];
+    snap.forEach(d => chs.push({ id: d.id, ...d.data() }));
+    if(chs.length === 0) return;
+    chs.sort(byOrder);
+    $("ch-list").innerHTML = chs.map(c => `
+      <a class="card" href="chat.html?channel=${encodeURIComponent(c.id)}">
+        <span class="pk">Channel</span>
+        <h3># ${escapeHtml(c.title || c.titleEn || "")}</h3>
+        ${c.titleEn ? `<p>${escapeHtml(c.titleEn)}</p>` : ""}
+      </a>`).join("");
+    $("ch-section").style.display = "block";
+  }catch(e){ console.error("channels:", e); }
+}
+
+initLang();
+initLogout();
+</script>
+</body>
+</html>

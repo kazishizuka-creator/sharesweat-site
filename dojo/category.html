@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — カテゴリ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <a href="home.html" class="linkish" style="display:inline-block;margin-bottom:18px"><span data-lang-ja>← ホームに戻る</span><span data-lang-en>← Back to home</span></a>
+  <div class="page-head">
+    <h1 id="cat-title">—</h1>
+    <p id="cat-subtitle" class="muted"></p>
+  </div>
+  <div id="posts"></div>
+</main>
+
+<script type="module">
+import {
+  db, requireAuth, isAdmin,
+  collection, doc, getDoc, getDocs, query, where
+} from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips, renderMarkdown, fmtTime, byCreatedDesc } from "./assets/dojo.js";
+
+const $ = (id) => document.getElementById(id);
+const isEN = () => document.body.classList.contains("lang-en");
+const catId = new URLSearchParams(location.search).get("id");
+
+requireAuth(async (user, profile) => {
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml((profile&&profile.displayName)||"")}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+
+  if(!catId){ location.replace("home.html"); return; }
+
+  // カテゴリ本体を取得。権限が無ければ Rules が拒否 → home へ（フロント側ガード）
+  let cat = null;
+  try{
+    const snap = await getDoc(doc(db, "categories", catId));
+    if(!snap.exists()){ $("cat-title").textContent = isEN()?"Not found":"見つかりません"; return; }
+    cat = snap.data();
+  }catch(e){
+    // permission-denied 含む → アクセス不可
+    location.replace("home.html");
+    return;
+  }
+
+  $("cat-title").textContent = isEN() ? (cat.titleEn || cat.title || "") : (cat.title || cat.titleEn || "");
+  $("cat-subtitle").textContent = isEN() ? (cat.title || "") : (cat.titleEn || "");
+
+  await loadPosts(roles);
+});
+
+async function loadPosts(roles){
+  const box = $("posts");
+  if(roles.length === 0){ box.innerHTML = `<p class="empty">${isEN()?"No access.":"閲覧権限がありません。"}</p>`; return; }
+  try{
+    // 自分が見られる posts を取得（単一の array-contains-any → 自動インデックス）。
+    // categoryId の絞り込みと並び替えはクライアント側で行い、複合インデックス不要にする。
+    const snap = await getDocs(query(collection(db, "posts"), where("visibleTo", "array-contains-any", roles)));
+    const posts = [];
+    snap.forEach(d => { const x = d.data(); if(x.categoryId === catId) posts.push({ id: d.id, ...x }); });
+    if(posts.length === 0){ box.innerHTML = `<p class="empty">${isEN()?"No posts yet.":"まだ記事がありません。"}</p>`; return; }
+    posts.sort(byCreatedDesc);
+    box.innerHTML = posts.map(p => `
+      <article class="article">
+        <h2>${escapeHtml(p.title || "")}</h2>
+        <div class="meta">${escapeHtml(p.authorName || "")} · ${escapeHtml(fmtTime(p.createdAt))}</div>
+        <div class="body">${renderMarkdown(p.body || "")}</div>
+      </article>`).join("");
+  }catch(e){
+    console.error(e);
+    box.innerHTML = `<p class="msg-line err">${isEN()?"Failed to load posts.":"記事の取得に失敗しました。"}（${escapeHtml(e.code||"")}）</p>`;
+  }
+}
+
+initLang();
+initLogout();
+</script>
+</body>
+</html>

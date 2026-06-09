@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — チャット</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<div class="chat-shell gated" id="shell" style="display:none">
+  <div class="chat-head">
+    <a href="home.html" class="back">←</a>
+    <h1 id="ch-title"># …</h1>
+  </div>
+  <div class="msg-list" id="msg-list"><p class="loading">LOADING…</p></div>
+  <div class="composer">
+    <textarea id="composer-text" rows="1" placeholder="メッセージを入力…（Enterで送信 / Shift+Enterで改行）"></textarea>
+    <button class="btn btn-primary" id="send-btn"><span data-lang-ja>送信</span><span data-lang-en>Send</span></button>
+  </div>
+</div>
+
+<script type="module">
+import {
+  db, requireAuth, isAdmin,
+  collection, doc, getDoc, addDoc, query, where, onSnapshot, serverTimestamp
+} from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips, fmtTime, byCreatedAsc } from "./assets/dojo.js";
+
+const $ = (id) => document.getElementById(id);
+const isEN = () => document.body.classList.contains("lang-en");
+const channelId = new URLSearchParams(location.search).get("channel");
+
+let ME = null;          // {uid, displayName}
+let CHANNEL = null;     // {title, titleEn, visibleTo}
+let unsub = null;
+
+requireAuth(async (user, profile) => {
+  const roles = (profile && profile.roles) || [];
+  ME = { uid: user.uid, displayName: (profile && profile.displayName) || (isEN()?"member":"メンバー") };
+  $("me").innerHTML = `<strong>${escapeHtml(ME.displayName)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("shell").style.display = "flex";
+
+  if(!channelId){ location.replace("home.html"); return; }
+
+  // チャンネル定義を取得（権限が無ければ Rules が拒否 → home へ）
+  try{
+    const snap = await getDoc(doc(db, "channels", channelId));
+    if(!snap.exists()){ location.replace("home.html"); return; }
+    CHANNEL = snap.data();
+  }catch(e){ location.replace("home.html"); return; }
+
+  const title = isEN() ? (CHANNEL.titleEn || CHANNEL.title || "") : (CHANNEL.title || CHANNEL.titleEn || "");
+  $("ch-title").textContent = "# " + title;
+
+  subscribe(roles);
+  wireComposer();
+});
+
+// リアルタイム購読: 自分が見える messages を購読し、このチャンネル分だけ表示。
+// （array-contains-any の単一フィルタのみ→自動インデックス。channelId 絞り込み/並びはクライアント側）
+function subscribe(roles){
+  const q = query(collection(db, "messages"), where("visibleTo", "array-contains-any", roles));
+  const list = $("msg-list");
+  unsub = onSnapshot(q, (snap) => {
+    const msgs = [];
+    snap.forEach(d => { const x = d.data(); if(x.channelId === channelId) msgs.push({ id: d.id, ...x }); });
+    msgs.sort(byCreatedAsc);
+    if(msgs.length === 0){ list.innerHTML = `<p class="empty">${isEN()?"No messages yet. Say hello!":"まだ発言がありません。最初の一言をどうぞ。"}</p>`; return; }
+    const nearBottom = list.scrollHeight - list.scrollTop - list.clientHeight < 120;
+    list.innerHTML = msgs.map(m => {
+      const mine = m.authorUid === ME.uid;
+      // 表示は authorName のみ。他人のメール/UIDは絶対に出さない。
+      return `<div class="msg ${mine ? "mine" : ""}">
+        <div class="msg-head"><b>${escapeHtml(m.authorName || "—")}</b> · ${escapeHtml(fmtTime(m.createdAt))}</div>
+        <div class="bubble">${escapeHtml(m.text || "")}</div>
+      </div>`;
+    }).join("");
+    if(nearBottom) list.scrollTop = list.scrollHeight;
+  }, (err) => {
+    console.error("chat snapshot:", err);
+    list.innerHTML = `<p class="msg-line err">${isEN()?"Failed to load messages.":"メッセージの取得に失敗しました。"}（${escapeHtml(err.code||"")}）</p>`;
+  });
+}
+
+function wireComposer(){
+  const ta = $("composer-text");
+  const btn = $("send-btn");
+  // 改行で高さを自動調整
+  ta.addEventListener("input", () => { ta.style.height = "auto"; ta.style.height = Math.min(ta.scrollHeight, 140) + "px"; });
+  ta.addEventListener("keydown", (e) => {
+    if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); send(); }
+  });
+  btn.addEventListener("click", send);
+
+  async function send(){
+    const text = ta.value.trim();
+    if(!text) return;
+    btn.disabled = true;
+    try{
+      await addDoc(collection(db, "messages"), {
+        channelId,
+        text,
+        authorUid: ME.uid,                 // 必ず本人のUID（なりすまし防止・Rulesでも検証）
+        authorName: ME.displayName,        // 表示名（ニックネーム）のみ公開
+        visibleTo: CHANNEL.visibleTo,      // チャンネルの閲覧ロールを継承
+        createdAt: serverTimestamp()
+      });
+      ta.value = ""; ta.style.height = "auto";
+    }catch(e){
+      console.error(e);
+      alert((isEN()?"Failed to send: ":"送信に失敗: ") + (e.code || e.message));
+    }finally{
+      btn.disabled = false;
+      ta.focus();
+    }
+  }
+}
+
+window.addEventListener("beforeunload", () => { if(unsub) unsub(); });
+
+initLang();
+initLogout();
+</script>
+</body>
+</html>

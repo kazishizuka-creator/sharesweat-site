@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — ログイン</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+</head>
+<body>
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="brand-lg">
+      <span class="dojo-mark">道</span>
+      <b>DONUT&nbsp;Dojo</b>
+    </div>
+
+    <!-- ログインフォーム -->
+    <div id="login-view">
+      <div class="field">
+        <label for="email"><span data-lang-ja>メールアドレス</span><span data-lang-en>Email</span></label>
+        <input type="email" id="email" autocomplete="username" placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label for="password"><span data-lang-ja>パスワード</span><span data-lang-en>Password</span></label>
+        <input type="password" id="password" autocomplete="current-password" placeholder="••••••••">
+      </div>
+      <div class="auth-foot">
+        <button type="button" class="linkish" id="forgot-link">
+          <span data-lang-ja>パスワードを忘れた方</span><span data-lang-en>Forgot your password?</span>
+        </button>
+      </div>
+      <button class="btn btn-primary" id="login-btn" style="width:100%">
+        <span data-lang-ja>ログイン</span><span data-lang-en>Log in</span>
+      </button>
+      <p class="msg-line" id="login-msg" role="alert"></p>
+    </div>
+
+    <!-- パスワードリセット -->
+    <div id="reset-view" style="display:none">
+      <p class="muted" style="font-size:.9rem;margin-bottom:16px">
+        <span data-lang-ja>登録メールアドレス宛に、パスワード再設定のリンクをお送りします。</span>
+        <span data-lang-en>We'll email you a link to reset your password.</span>
+      </p>
+      <div class="field">
+        <label for="reset-email"><span data-lang-ja>メールアドレス</span><span data-lang-en>Email</span></label>
+        <input type="email" id="reset-email" autocomplete="username" placeholder="you@example.com">
+      </div>
+      <button class="btn btn-primary" id="reset-btn" style="width:100%">
+        <span data-lang-ja>再設定メールを送る</span><span data-lang-en>Send reset email</span>
+      </button>
+      <div class="auth-foot" style="justify-content:flex-start;margin-top:14px">
+        <button type="button" class="linkish" id="back-link">
+          <span data-lang-ja>← ログインに戻る</span><span data-lang-en>← Back to log in</span>
+        </button>
+      </div>
+      <p class="msg-line" id="reset-msg" role="alert"></p>
+    </div>
+
+    <p class="auth-note">
+      <span data-lang-ja>DONUT Dojo は招待制です。アカウントは運営が発行します。</span>
+      <span data-lang-en>DONUT Dojo is invite-only. Accounts are issued by the team.</span>
+    </p>
+    <div style="display:flex;justify-content:center;margin-top:18px">
+      <button class="lang">EN / 日本語</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import {
+  auth, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail
+} from "./assets/firebase-init.js";
+import { initLang } from "./assets/dojo.js";
+
+initLang();
+
+// 既にログイン済みなら home へ
+onAuthStateChanged(auth, (user) => { if(user) location.replace("home.html"); });
+
+const $ = (id) => document.getElementById(id);
+const isEN = () => document.body.classList.contains("lang-en");
+
+// Firebase の生エラーコードは見せず、分かりやすい文言に変換
+function friendlyError(code){
+  const en = isEN();
+  switch(code){
+    case "auth/invalid-email":
+      return en ? "Please enter a valid email address." : "メールアドレスの形式が正しくありません。";
+    case "auth/missing-password":
+      return en ? "Please enter your password." : "パスワードを入力してください。";
+    case "auth/user-disabled":
+      return en ? "This account has been disabled. Please contact the team." : "このアカウントは無効化されています。運営にご連絡ください。";
+    case "auth/too-many-requests":
+      return en ? "Too many attempts. Please wait a moment and try again." : "試行回数が多すぎます。しばらく待って再度お試しください。";
+    case "auth/network-request-failed":
+      return en ? "Network error. Please check your connection." : "ネットワークエラーです。接続をご確認ください。";
+    // 認証情報の誤り（メール/パスワード違い・存在しないユーザーを一括で同じ文言に）
+    case "auth/invalid-credential":
+    case "auth/wrong-password":
+    case "auth/user-not-found":
+    default:
+      return en ? "Incorrect email or password." : "メールアドレスまたはパスワードが違います。";
+  }
+}
+
+/* ---- login ---- */
+async function doLogin(){
+  const btn = $("login-btn"), msg = $("login-msg");
+  msg.className = "msg-line"; msg.textContent = "";
+  const email = $("email").value.trim();
+  const pw = $("password").value;
+  if(!email || !pw){
+    msg.className = "msg-line err";
+    msg.textContent = isEN() ? "Please enter your email and password." : "メールアドレスとパスワードを入力してください。";
+    return;
+  }
+  btn.disabled = true;
+  try{
+    await signInWithEmailAndPassword(auth, email, pw);
+    location.replace("home.html");
+  }catch(e){
+    msg.className = "msg-line err";
+    msg.textContent = friendlyError(e && e.code);
+    btn.disabled = false;
+  }
+}
+$("login-btn").addEventListener("click", doLogin);
+$("password").addEventListener("keydown", (e) => { if(e.key === "Enter") doLogin(); });
+$("email").addEventListener("keydown", (e) => { if(e.key === "Enter") $("password").focus(); });
+
+/* ---- view 切替 ---- */
+$("forgot-link").addEventListener("click", () => {
+  $("login-view").style.display = "none";
+  $("reset-view").style.display = "block";
+  $("reset-email").value = $("email").value.trim();
+});
+$("back-link").addEventListener("click", () => {
+  $("reset-view").style.display = "none";
+  $("login-view").style.display = "block";
+});
+
+/* ---- password reset ---- */
+$("reset-btn").addEventListener("click", async () => {
+  const btn = $("reset-btn"), msg = $("reset-msg");
+  msg.className = "msg-line"; msg.textContent = "";
+  const email = $("reset-email").value.trim();
+  if(!email){
+    msg.className = "msg-line err";
+    msg.textContent = isEN() ? "Please enter your email address." : "メールアドレスを入力してください。";
+    return;
+  }
+  btn.disabled = true;
+  try{
+    await sendPasswordResetEmail(auth, email);
+    msg.className = "msg-line ok";
+    // 存在しないアドレスを推測させないため、常に同じ成功文言を出す
+    msg.textContent = isEN()
+      ? "If that email is registered, a reset link has been sent."
+      : "登録済みのメールアドレスであれば、再設定リンクを送信しました。";
+  }catch(e){
+    const code = e && e.code;
+    if(code === "auth/invalid-email"){
+      msg.className = "msg-line err";
+      msg.textContent = isEN() ? "Please enter a valid email address." : "メールアドレスの形式が正しくありません。";
+    }else{
+      // user-not-found 等も、情報を漏らさないため成功扱いの文言
+      msg.className = "msg-line ok";
+      msg.textContent = isEN()
+        ? "If that email is registered, a reset link has been sent."
+        : "登録済みのメールアドレスであれば、再設定リンクを送信しました。";
+    }
+  }finally{
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
