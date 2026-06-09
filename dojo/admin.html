@@ -163,6 +163,16 @@
         <label><span data-lang-ja>クラファン開始予定日</span><span data-lang-en>Launch date</span></label>
         <input type="date" id="fund-date-input">
       </div>
+      <div class="field" style="flex:1;min-width:180px;margin:0">
+        <label><span data-lang-ja>現在のフェーズ</span><span data-lang-en>Current phase</span></label>
+        <select id="fund-phase-input">
+          <option value="preseed">プレシード / Pre-Seed</option>
+          <option value="seed">シード / Seed</option>
+          <option value="crowdfunding">クラファン / Crowdfunding</option>
+          <option value="seriesA">シリーズA / Series A</option>
+          <option value="seriesB">シリーズB / Series B</option>
+        </select>
+      </div>
       <button class="btn btn-primary" id="fund-save"><span data-lang-ja>保存</span><span data-lang-en>Save</span></button>
     </div>
     <p class="faint" id="fund-preview" style="margin-top:10px"></p>
@@ -240,6 +250,7 @@ async function loadFundraisingSettings(){
   }catch(e){ console.error("fundraising load:", e); }
   $("fund-amount-input").value = (typeof d.currentAmount === "number") ? d.currentAmount : FUND_DEFAULT_AMOUNT;
   $("fund-date-input").value   = d.launchDate || FUND_DEFAULT_DATE;
+  $("fund-phase-input").value  = d.currentPhase || "preseed";
   fundPreview();
 }
 
@@ -395,11 +406,12 @@ function wire(){
   $("fund-save").addEventListener("click", async () => {
     const amount = Number($("fund-amount-input").value);
     const launchDate = $("fund-date-input").value;
+    const currentPhase = $("fund-phase-input").value;
     if(!Number.isFinite(amount) || amount < 0){ setMsg("fund-msg", isEN()?"Enter a valid amount.":"金額を正しく入力してください。", false); return; }
     if(!launchDate){ setMsg("fund-msg", isEN()?"Enter a launch date.":"開始予定日を入力してください。", false); return; }
     try{
-      // 無ければ作成・あれば更新（merge）
-      await setDoc(doc(db, "settings", "fundraising"), { currentAmount: amount, launchDate }, { merge: true });
+      // 無ければ作成・あれば更新（merge）。currentPhase もまとめて保存。
+      await setDoc(doc(db, "settings", "fundraising"), { currentAmount: amount, launchDate, currentPhase }, { merge: true });
       setMsg("fund-msg", isEN()?"Saved ✓":"保存しました ✓", true);
     }catch(e){ console.error(e); setMsg("fund-msg", (isEN()?"Failed: ":"失敗: ")+(e.code||e.message), false); }
   });

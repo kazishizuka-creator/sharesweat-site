@@ -41,6 +41,32 @@
       <span class="fl-date" id="fund-date">—</span>
     </div>
   </section>
+
+  <!-- ============ 事業フェーズ・マイルストーングラフ ============ -->
+  <section class="phase-section" id="phase-section">
+    <div class="section-title"><span data-lang-ja>事業フェーズ</span><span data-lang-en>Milestones</span></div>
+    <div class="phase-graph">
+      <div class="phase-inner">
+        <svg id="phase-curve" class="phase-curve" viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs>
+            <linearGradient id="phaseGrad" x1="0" y1="1" x2="1" y2="0" gradientUnits="objectBoundingBox">
+              <stop offset="0" stop-color="#534AB7"/>
+              <stop offset="0.55" stop-color="#A99CFF"/>
+              <stop offset="1" stop-color="#5BD8FF"/>
+            </linearGradient>
+            <linearGradient id="phaseArea" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+              <stop offset="0" stop-color="#8B7BF0" stop-opacity="0.18"/>
+              <stop offset="1" stop-color="#8B7BF0" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="phase-area" fill="url(#phaseArea)" stroke="none" d=""></path>
+          <path class="phase-line" fill="none" stroke="url(#phaseGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" d=""></path>
+        </svg>
+        <div class="phase-overlay" id="phase-overlay"></div>
+      </div>
+    </div>
+  </section>
+
   <div class="fund-divider"></div>
 
   <!-- ロール未付与のときの案内 -->
@@ -118,27 +144,93 @@ function animateCountUp(el, target){
 
 async function loadFundraising(){
   const amtEl = $("fund-amount"), dateEl = $("fund-date");
+  let amount = null, launch = null, phase = "preseed";
   try{
     const snap = await getDoc(doc(db, "settings", "fundraising"));
-    const data = snap.exists() ? snap.data() : null;
-    const amount = (data && typeof data.currentAmount === "number") ? data.currentAmount : null;
-    const launch = (data && data.launchDate) ? data.launchDate : null;
-
-    dateEl.innerHTML = launch ? launchHtml(launch) : "—";
-
-    if(amount == null){ amtEl.textContent = "—"; return; }
-    // カウントアップは「セッション初回のみ」。以降のページ往復では即表示。
-    const done = sessionStorage.getItem("ss_dojo_fund_countup") === "1";
-    if(done){
-      amtEl.textContent = yen(amount);
-    }else{
-      animateCountUp(amtEl, amount);
-      try{ sessionStorage.setItem("ss_dojo_fund_countup", "1"); }catch(e){}
+    if(snap.exists()){
+      const data = snap.data();
+      if(typeof data.currentAmount === "number") amount = data.currentAmount;
+      if(data.launchDate) launch = data.launchDate;
+      if(data.currentPhase) phase = data.currentPhase;   // preseed / seed / crowdfunding / seriesA / seriesB
     }
-  }catch(e){
-    console.error("fundraising:", e);
+  }catch(e){ console.error("fundraising:", e); }
+
+  // 調達額（カウントアップは「セッション初回のみ」。以降のページ往復では即表示）
+  if(amount == null){
     amtEl.textContent = "—";
+  }else if(sessionStorage.getItem("ss_dojo_fund_countup") === "1"){
+    amtEl.textContent = yen(amount);
+  }else{
+    animateCountUp(amtEl, amount);
+    try{ sessionStorage.setItem("ss_dojo_fund_countup", "1"); }catch(e){}
   }
+  // 開始予定日
+  dateEl.innerHTML = launch ? launchHtml(launch) : "—";
+  // 事業フェーズグラフ（settings が読めなくても既定 preseed で必ず描画）
+  buildPhaseGraph(phase);
+}
+
+/* ---- 事業フェーズ成長グラフ（SVG曲線＋ノード＋現在地パルス）---- */
+const PHASES = [
+  { key:"preseed",      ja:"プレシード",  en:"Pre-Seed",     periodJa:"〜26年10月",   periodEn:"– Oct 2026",
+    descJa:"プロトタイプ試作・PMF仮説設計",        descEn:"Prototype build · PMF hypothesis" },
+  { key:"seed",         ja:"シード",      en:"Seed",         periodJa:"〜27年9月",    periodEn:"– Sep 2027",
+    descJa:"PMF仮説検証（1000人〜にテスト）",       descEn:"PMF testing (1,000+ testers)" },
+  { key:"crowdfunding", ja:"クラファン",  en:"Crowdfunding", periodJa:"27年10〜12月", periodEn:"Oct–Dec 2027",
+    descJa:"クラファン・PMF実証（1000セット〜販売）", descEn:"Crowdfunding · PMF proof (1,000+ sets)" },
+  { key:"seriesA",      ja:"シリーズA",   en:"Series A",     periodJa:"〜29年",       periodEn:"– 2029",
+    descJa:"国内外販売開始 ※PMF達成が前提",         descEn:"Domestic & overseas launch *after PMF" },
+  { key:"seriesB",      ja:"シリーズB",   en:"Series B",     periodJa:"31年",         periodEn:"2031",
+    descJa:"スケール・組織化、他領域へも多角展開",   descEn:"Scale, org-building & diversification" },
+];
+
+function buildPhaseGraph(currentKey){
+  const VB_W = 1000, VB_H = 460, padX = 130, yTop = 70, yBot = 320, k = 2.2;
+  const denom = Math.exp(k) - 1;
+  const X = (t) => padX + t * (VB_W - 2 * padX);
+  const Y = (t) => yBot - ((Math.exp(k * t) - 1) / denom) * (yBot - yTop); // 右ほど急な指数カーブ
+  const pct = (v, max) => (v / max * 100) + "%";
+
+  // 曲線パス（多点サンプリングで滑らかに）
+  const N = 80;
+  let d = "";
+  for(let i = 0; i <= N; i++){ const t = i / N; d += (i ? " L" : "M") + X(t).toFixed(1) + " " + Y(t).toFixed(1); }
+  $("phase-curve").querySelector(".phase-line").setAttribute("d", d);
+  // 曲線下の塗り（成長グラフらしさ）
+  $("phase-curve").querySelector(".phase-area").setAttribute("d",
+    d + " L" + X(1).toFixed(1) + " " + VB_H + " L" + X(0).toFixed(1) + " " + VB_H + " Z");
+
+  // ノード＋ラベル＋現在地
+  const valid = PHASES.some(p => p.key === currentKey) ? currentKey : "preseed";
+  const overlay = $("phase-overlay");
+  overlay.innerHTML = "";
+  PHASES.forEach((p, i) => {
+    const t = i / (PHASES.length - 1);
+    const x = X(t), y = Y(t);
+    const isNow = (p.key === valid);
+
+    const node = document.createElement("div");
+    node.className = "phase-node" + (isNow ? " is-now" : "");
+    node.style.left = pct(x, VB_W); node.style.top = pct(y, VB_H);
+    overlay.appendChild(node);
+
+    if(isNow){
+      const here = document.createElement("div");
+      here.className = "phase-here";
+      here.style.left = pct(x, VB_W); here.style.top = pct(y - 32, VB_H);
+      here.innerHTML = '<span data-lang-ja>現在地</span><span data-lang-en>You are here</span>';
+      overlay.appendChild(here);
+    }
+
+    const label = document.createElement("div");
+    label.className = "phase-label" + (isNow ? " is-now" : "");
+    label.style.left = pct(x, VB_W); label.style.top = pct(y + 16, VB_H);
+    label.innerHTML =
+      `<div class="ph-name"><span data-lang-ja>${escapeHtml(p.ja)}</span><span data-lang-en>${escapeHtml(p.en)}</span></div>` +
+      `<div class="ph-period"><span data-lang-ja>${escapeHtml(p.periodJa)}</span><span data-lang-en>${escapeHtml(p.periodEn)}</span></div>` +
+      `<div class="ph-desc"><span data-lang-ja>${escapeHtml(p.descJa)}</span><span data-lang-en>${escapeHtml(p.descEn)}</span></div>`;
+    overlay.appendChild(label);
+  });
 }
 
 /* ============ (B) announcements ============ */
