@@ -139,19 +139,23 @@ a.card:hover{border-color:var(--violet);transform:translateY(-3px)}
 .phase-node{position:absolute;width:18px;height:18px;border-radius:50%;transform:translate(-50%,-50%);
   background:radial-gradient(circle at 35% 30%,var(--violet-bright),var(--violet-deep));
   border:1px solid var(--violet-bright);box-shadow:0 0 14px rgba(139,123,240,.5);z-index:3}
+/* 現在地ノードは一回り大きく＋派手なパルス */
 .phase-node.is-now{
+  width:32px;height:32px;
   background:radial-gradient(circle at 35% 30%,var(--cyan),var(--violet));
-  border-color:var(--cyan);animation:phasePulse 2.4s ease-in-out infinite}
+  border-color:var(--cyan);animation:phasePulse 2.2s ease-in-out infinite}
 @keyframes phasePulse{
-  0%,100%{box-shadow:0 0 16px rgba(139,123,240,.35);border-color:var(--violet-bright);transform:translate(-50%,-50%) scale(1)}
-  50%{box-shadow:0 0 30px rgba(91,216,255,.75),0 0 54px rgba(139,123,240,.4);border-color:var(--cyan);transform:translate(-50%,-50%) scale(1.2)}
+  0%,100%{box-shadow:0 0 20px rgba(139,123,240,.5);border-color:var(--violet-bright);transform:translate(-50%,-50%) scale(1)}
+  50%{box-shadow:0 0 52px rgba(91,216,255,.95),0 0 96px rgba(139,123,240,.6);border-color:var(--cyan);transform:translate(-50%,-50%) scale(1.5)}
 }
 /* labels */
 .phase-label{position:absolute;transform:translateX(-50%);width:134px;text-align:center;z-index:2;pointer-events:none}
+/* フェーズ名（他の4ノードは従来サイズ13pxのまま） */
 .phase-label .ph-name{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--text);line-height:1.3}
-.phase-label .ph-period{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.05em;color:var(--violet-bright);margin-top:2px}
-.phase-label .ph-desc{font-size:10.5px;line-height:1.45;color:var(--text-dim);margin-top:5px}
-.phase-label.is-now .ph-name{color:var(--cyan)}
+/* 時期ラベルは全ノード大きく（≒従来のフェーズ名サイズ13pxに揃える） */
+.phase-label .ph-period{font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:.04em;color:var(--violet-bright);margin-top:4px}
+/* 現在地（点滅中）のフェーズ名だけ大きく */
+.phase-label.is-now .ph-name{color:var(--cyan);font-size:21px;line-height:1.2}
 /* "現在地" badge */
 .phase-here{position:absolute;transform:translateX(-50%);z-index:4;white-space:nowrap;
   font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);

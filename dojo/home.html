@@ -172,16 +172,11 @@ async function loadFundraising(){
 
 /* ---- 事業フェーズ成長グラフ（SVG曲線＋ノード＋現在地パルス）---- */
 const PHASES = [
-  { key:"preseed",      ja:"プレシード",  en:"Pre-Seed",     periodJa:"〜26年10月",   periodEn:"– Oct 2026",
-    descJa:"プロトタイプ試作・PMF仮説設計",        descEn:"Prototype build · PMF hypothesis" },
-  { key:"seed",         ja:"シード",      en:"Seed",         periodJa:"〜27年9月",    periodEn:"– Sep 2027",
-    descJa:"PMF仮説検証（1000人〜にテスト）",       descEn:"PMF testing (1,000+ testers)" },
-  { key:"crowdfunding", ja:"クラファン",  en:"Crowdfunding", periodJa:"27年10〜12月", periodEn:"Oct–Dec 2027",
-    descJa:"クラファン・PMF実証（1000セット〜販売）", descEn:"Crowdfunding · PMF proof (1,000+ sets)" },
-  { key:"seriesA",      ja:"シリーズA",   en:"Series A",     periodJa:"〜29年",       periodEn:"– 2029",
-    descJa:"国内外販売開始 ※PMF達成が前提",         descEn:"Domestic & overseas launch *after PMF" },
-  { key:"seriesB",      ja:"シリーズB",   en:"Series B",     periodJa:"31年",         periodEn:"2031",
-    descJa:"スケール・組織化、他領域へも多角展開",   descEn:"Scale, org-building & diversification" },
+  { key:"preseed",      ja:"プレシード",  en:"Pre-Seed",     periodJa:"〜26年10月",   periodEn:"– Oct 2026" },
+  { key:"seed",         ja:"シード",      en:"Seed",         periodJa:"〜27年9月",    periodEn:"– Sep 2027" },
+  { key:"crowdfunding", ja:"クラファン",  en:"Crowdfunding", periodJa:"27年10〜12月", periodEn:"Oct–Dec 2027" },
+  { key:"seriesA",      ja:"シリーズA",   en:"Series A",     periodJa:"〜29年",       periodEn:"– 2029" },
+  { key:"seriesB",      ja:"シリーズB",   en:"Series B",     periodJa:"31年",         periodEn:"2031" },
 ];
 
 function buildPhaseGraph(currentKey){
@@ -217,18 +212,18 @@ function buildPhaseGraph(currentKey){
     if(isNow){
       const here = document.createElement("div");
       here.className = "phase-here";
-      here.style.left = pct(x, VB_W); here.style.top = pct(y - 32, VB_H);
+      here.style.left = pct(x, VB_W); here.style.top = pct(y - 40, VB_H); // 大きい現在地ノードを避けて上に
       here.innerHTML = '<span data-lang-ja>現在地</span><span data-lang-en>You are here</span>';
       overlay.appendChild(here);
     }
 
+    // 補足テキストは廃止。フェーズ名＋時期のみ。ラベルは大きいノードを避けて少し下げる。
     const label = document.createElement("div");
     label.className = "phase-label" + (isNow ? " is-now" : "");
-    label.style.left = pct(x, VB_W); label.style.top = pct(y + 16, VB_H);
+    label.style.left = pct(x, VB_W); label.style.top = pct(y + (isNow ? 26 : 18), VB_H);
     label.innerHTML =
       `<div class="ph-name"><span data-lang-ja>${escapeHtml(p.ja)}</span><span data-lang-en>${escapeHtml(p.en)}</span></div>` +
-      `<div class="ph-period"><span data-lang-ja>${escapeHtml(p.periodJa)}</span><span data-lang-en>${escapeHtml(p.periodEn)}</span></div>` +
-      `<div class="ph-desc"><span data-lang-ja>${escapeHtml(p.descJa)}</span><span data-lang-en>${escapeHtml(p.descEn)}</span></div>`;
+      `<div class="ph-period"><span data-lang-ja>${escapeHtml(p.periodJa)}</span><span data-lang-en>${escapeHtml(p.periodEn)}</span></div>`;
     overlay.appendChild(label);
   });
 }
