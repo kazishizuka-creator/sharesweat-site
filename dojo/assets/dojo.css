@@ -167,7 +167,7 @@ a.card:hover{border-color:var(--violet);transform:translateY(-3px)}
 /* 末広がりコーン（プレシードノードのあたり〜下方へズーム）。さりげない導線として */
 .pd-cone{position:absolute;top:0;left:0;right:0;height:94px;pointer-events:none;z-index:0}
 .pd-cone-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.pd-cone-tip{position:absolute;top:0;left:13%;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);
+.pd-cone-tip{position:absolute;top:0;left:13%;width:22px;height:3px;border-radius:2px;transform:translate(-50%,-50%);
   background:radial-gradient(circle at 35% 30%,var(--cyan),var(--violet));box-shadow:0 0 14px rgba(91,216,255,.7);
   animation:pdTip 2.2s ease-in-out infinite}
 @keyframes pdTip{
@@ -293,6 +293,16 @@ select{appearance:none;-webkit-appearance:none;cursor:pointer}
 .empty{color:var(--text-faint);font-size:.9rem;padding:24px;border:1px dashed var(--line);border-radius:14px;text-align:center}
 .loading{color:var(--text-faint);font-size:.88rem;padding:40px;text-align:center;font-family:'Space Grotesk',sans-serif;letter-spacing:.1em}
 .divider{height:1px;background:var(--line-soft);margin:30px 0}
+
+/* ---- about page（Dojoについて：∞シンボル）---- */
+.about-symbol{display:flex;justify-content:center;align-items:center;padding:26px 0 6px}
+.about-symbol svg{width:100%;max-width:560px;height:auto;display:block;
+  filter:drop-shadow(0 10px 44px rgba(139,123,240,.28))}
+.about-desc{max-width:680px;margin:22px auto 0;text-align:center}
+.about-desc .about-h{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:clamp(1.3rem,3vw,1.85rem);margin-bottom:12px}
+.about-desc .about-body{color:var(--text-faint);min-height:72px;line-height:1.9}
+.about-symbol .ring-halo{animation:ringPulse 2.6s ease-in-out infinite;transform-origin:center}
+@keyframes ringPulse{0%,100%{opacity:.45}50%{opacity:1}}
 
 /* ---- 認証解決までコンテンツを隠す（チラつき防止） ---- */
 body.cloak .gated{visibility:hidden}

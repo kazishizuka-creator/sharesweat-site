@@ -16,6 +16,11 @@
 
 <header class="dojo gated">
   <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
   <div class="dojo-actions">
     <span class="dojo-me" id="me"></span>
     <button class="lang">EN / 日本語</button>
@@ -56,6 +61,7 @@ requireAuth(async (user, profile) => {
   const roles = (profile && profile.roles) || [];
   ME = { uid: user.uid, displayName: (profile && profile.displayName) || (isEN()?"member":"メンバー") };
   $("me").innerHTML = `<strong>${escapeHtml(ME.displayName)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
 
   document.body.classList.remove("cloak");
   $("boot").style.display = "none";
