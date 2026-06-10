@@ -67,6 +67,54 @@
     </div>
   </section>
 
+  <!-- ============ 現在フェーズ（プレシード）の取り組み：末広がり＋2ボックス ============ -->
+  <section class="phase-detail" id="phase-detail">
+    <!-- プレシードノードから下へズームする末広がりコーン（さりげない導線） -->
+    <div class="pd-cone" aria-hidden="true">
+      <span class="pd-cone-tip"></span>
+      <svg class="pd-cone-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="pdFanFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#A99CFF" stop-opacity="0.18"></stop>
+            <stop offset="0.5" stop-color="#5BD8FF" stop-opacity="0.06"></stop>
+            <stop offset="1" stop-color="#5BD8FF" stop-opacity="0"></stop>
+          </linearGradient>
+          <linearGradient id="pdFanEdge" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#A99CFF" stop-opacity="0.55"></stop>
+            <stop offset="1" stop-color="#5BD8FF" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+        <polygon points="10,0 16,0 96,100 3,100" fill="url(#pdFanFill)"></polygon>
+        <line x1="10" y1="0" x2="3" y2="100" stroke="url(#pdFanEdge)" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+        <line x1="16" y1="0" x2="96" y2="100" stroke="url(#pdFanEdge)" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+      </svg>
+    </div>
+
+    <div class="pd-flow">
+      <!-- ボックス1：進行中（is-active）-->
+      <div class="pd-box is-active">
+        <div class="pd-scan"></div>
+        <div class="pd-box-head">
+          <span class="pd-status"><span class="pd-dot"></span><span data-lang-ja>進行中</span><span data-lang-en>In progress</span></span>
+        </div>
+        <h3><span data-lang-ja>プロトタイプ構築（20〜40台）</span><span data-lang-en>Prototyping (20–40 units)</span></h3>
+        <div class="pd-bar"><span></span></div>
+      </div>
+
+      <div class="pd-arrow" aria-hidden="true">▶</div>
+
+      <!-- ボックス2：次の段階（通常表示。将来は is-active を付けるだけで進行中表現に切替可）-->
+      <div class="pd-box">
+        <div class="pd-scan"></div>
+        <div class="pd-box-head">
+          <span class="pd-status"><span class="pd-dot"></span><span data-lang-ja>次の段階</span><span data-lang-en>Next</span></span>
+        </div>
+        <h3><span data-lang-ja>機械学習データ収集</span><span data-lang-en>Machine learning data collection</span></h3>
+        <div class="pd-bar"><span></span></div>
+      </div>
+    </div>
+  </section>
+
   <div class="fund-divider"></div>
 
   <!-- ロール未付与のときの案内 -->
