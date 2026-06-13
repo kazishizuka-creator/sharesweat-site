@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — ブランド戦略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .back-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .show-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:620px){.show-grid{grid-template-columns:1fr}}
+  .show-col{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:rgba(20,18,40,.32)}
+  .show-col.yes{border-color:rgba(91,216,255,.35)}
+  .show-col h4{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+  .show-col.yes h4{color:var(--cyan)}
+  .show-col.no h4{color:var(--text-faint)}
+  .show-col ul{list-style:none;margin:0}
+  .show-col li{color:var(--text-dim);font-size:.9rem;padding:5px 0 5px 20px;position:relative;line-height:1.6}
+  .show-col.yes li::before{content:'＋';position:absolute;left:0;color:var(--cyan)}
+  .show-col.no li::before{content:'−';position:absolute;left:0;color:var(--text-faint)}
+  .persona{border:1px solid var(--line);border-radius:18px;padding:22px 24px;background:linear-gradient(160deg,rgba(20,18,40,.5),rgba(10,10,20,.25))}
+  .persona h3{font-weight:500;font-size:1.08rem;margin-bottom:10px}
+  .persona p{color:var(--text-dim);font-size:.92rem;line-height:1.85}
+  .persona b{color:var(--text)}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <div class="back-row">
+    <a href="home.html" class="linkish"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+    <a href="target-strategy.html" class="linkish"><span data-lang-ja>← ターゲット戦略</span><span data-lang-en>← Targeting Strategy</span></a>
+  </div>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>ブランド・階層2</span><span data-lang-en>Brand · Tier 2</span></span>
+    <h1><span data-lang-ja>ブランド戦略</span><span data-lang-en>Brand Strategy</span></h1>
+    <p><span data-lang-ja>①②共通の憧れ「実直×洗練」を一本で張る。層ごとに変えるのは、見せ方・文脈・キャストだけ。</span><span data-lang-en>Stand on one aspiration for ① and ②: "earnest × refined." What changes by layer is only the framing, context, and casting.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>振りすぎると、両方を失う</span><span data-lang-en>Lean too far, and you lose both</span></div>
+  <div class="prose">
+    <p><span data-lang-ja><b>①向け（ゆるく可愛く）に振りすぎる</b>と②が離れ、しかも①にも刺さらない。人は「なりたい自分」を買うからだ。逆に<b>③向け（ガチ／計測／ストイック）に振りすぎる</b>と①②が引く（Runmetrixの轍）。</span><span data-lang-en>Lean <b>too far toward ① (loose and cute)</b> and ② leaves — and it still won't land with ①, because people buy "the self they want to become." Lean <b>too far toward ③ (hardcore / metrics / ascetic)</b> and ① and ② recoil (the Runmetrix rut).</span></p>
+    <p><span data-lang-ja>正解は、①②に共通する憧れ「<strong>実直×洗練</strong>（走りを生活の質として丁寧に高める人）」一本でブランドを張ること。DONUTという<strong>名前の柔らかさ（入口の低さ）</strong>と<strong>デザインの洗練（憧れの担保）</strong>が、それを両立させる装置になる。</span><span data-lang-en>The answer is to stand the brand on the aspiration shared by ① and ②: "<strong>earnest × refined</strong>" — someone who carefully raises running as a quality of life. The <strong>softness of the name DONUT (a low entrance)</strong> and the <strong>refinement of the design (the guarantee of aspiration)</strong> are the device that holds both together.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>ペルソナ</span><span data-lang-en>The persona</span></div>
+  <div class="persona">
+    <h3><span data-lang-ja>34歳・都内専門職</span><span data-lang-en>34, a Tokyo professional</span></h3>
+    <p><span data-lang-ja>朝6時半、駒沢か皇居を10km。<b>走りが綺麗</b>。On のシューズにミニマルなウェア。サブ4を余裕で走るが<b>記録を自慢しない</b>。10年間無故障。データは<b>見るが、追われない</b>。①はこの人の「<b>生活</b>」に憧れ、②は「<b>走り</b>」に憧れる — どちらにとっても半歩先。参照人物像: <b>三津家貴也</b>／知性側に <b>為末大</b>。</span><span data-lang-en>6:30 a.m., a 10 km loop at Komazawa or the Imperial Palace. <b>Runs beautifully.</b> On shoes, minimal apparel. Clears sub-4 with ease but <b>never boasts about times.</b> Ten years injury-free. <b>Reads</b> the data but isn't <b>chased</b> by it. ① aspires to this person's <b>life</b>; ② aspires to their <b>running</b> — half a step ahead for both. References: <b>Mitsuka Takaya</b>; on the intellect side, <b>Dai Tamesue</b>.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>映すもの / 映さないもの</span><span data-lang-en>What we show / don't show</span></div>
+  <div class="show-grid">
+    <div class="show-col yes">
+      <h4><span data-lang-ja>映す</span><span data-lang-en>Show</span></h4>
+      <ul>
+        <li><span data-lang-ja>朝の光</span><span data-lang-en>Morning light</span></li>
+        <li><span data-lang-ja>整った呼吸</span><span data-lang-en>Composed breathing</span></li>
+        <li><span data-lang-ja>美しいフォーム</span><span data-lang-en>Beautiful form</span></li>
+        <li><span data-lang-ja>走った後の丁寧な時間</span><span data-lang-en>The unhurried time after a run</span></li>
+      </ul>
+    </div>
+    <div class="show-col no">
+      <h4><span data-lang-ja>映さない</span><span data-lang-en>Don't show</span></h4>
+      <ul>
+        <li><span data-lang-ja>苦悶の表情</span><span data-lang-en>Faces of agony</span></li>
+        <li><span data-lang-ja>ゼッケン</span><span data-lang-en>Race bibs</span></li>
+        <li><span data-lang-ja>ストップウォッチを睨む顔</span><span data-lang-en>Glaring at a stopwatch</span></li>
+        <li><span data-lang-ja>汗だくの追い込み</span><span data-lang-en>Sweat-drenched grinding</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="note-mini"><span data-lang-ja>※ 人物像の起用・運用は <a class="linkish" href="ambassador.html"><span data-lang-ja>アンバサダー戦略</span><span data-lang-en>Ambassador Strategy</span></a>、①を動かす具体策は <a class="linkish" href="funrun.html"><span data-lang-ja>FunRun層を動かす仕組み</span><span data-lang-en>Moving the FunRun Layer</span></a> を参照。</span><span data-lang-en>See <a class="linkish" href="ambassador.html"><span data-lang-ja>アンバサダー戦略</span><span data-lang-en>Ambassador Strategy</span></a> for casting and operations, and <a class="linkish" href="funrun.html"><span data-lang-ja>FunRun層を動かす仕組み</span><span data-lang-en>Moving the FunRun Layer</span></a> for the mechanics that move ①.</span></p>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

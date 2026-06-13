@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — FORM CROSS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .cross-compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.cross-compare{grid-template-columns:1fr}}
+  .cc-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,rgba(20,18,40,.5),rgba(10,10,20,.25));
+    backdrop-filter:blur(8px);padding:24px;text-align:center}
+  .cc-card.tidy{border-color:rgba(91,216,255,.35)}
+  .cc-card svg{width:100%;max-width:200px;height:auto;margin:0 auto 6px;display:block}
+  .cc-title{font-weight:500;font-size:1.08rem;margin-bottom:4px}
+  .cc-sub{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:14px}
+  .cc-stats{display:flex;justify-content:center;gap:22px;margin-top:8px}
+  .cc-stat .v{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:600;color:var(--text)}
+  .cc-stat.tidy .v{color:var(--cyan)}
+  .cc-stat .l{font-size:.72rem;color:var(--text-faint);letter-spacing:.04em;margin-top:2px}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <a href="home.html" class="linkish" style="display:inline-block;margin-bottom:18px"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>プロダクト</span><span data-lang-en>Product</span></span>
+    <h1>FORM CROSS</h1>
+    <p><span data-lang-ja>整った周期運動は、一本の十字に収束する。乱れると楕円・円に開く。演出ではなく、本物の幾何学。</span><span data-lang-en>Steady periodic motion converges into a single cross. Disturbed, it opens into an ellipse — a circle. Not an effect, but real geometry.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>整った走り vs 乱れた走り</span><span data-lang-en>A steady run vs. a noisy run</span></div>
+  <div class="cross-compare">
+    <div class="cc-card tidy">
+      <svg viewBox="0 0 220 220" aria-hidden="true">
+        <defs>
+          <linearGradient id="tidyG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A99CFF"/><stop offset="1" stop-color="#5BD8FF"/></linearGradient>
+          <filter id="tidyGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <g filter="url(#tidyGlow)" fill="none" stroke="url(#tidyG)" stroke-width="3">
+          <g transform="rotate(45 110 110)"><ellipse cx="110" cy="110" rx="84" ry="4"/></g>
+          <g transform="rotate(-45 110 110)"><ellipse cx="110" cy="110" rx="84" ry="4"/></g>
+        </g>
+      </svg>
+      <div class="cc-title"><span data-lang-ja>整った走り</span><span data-lang-en>Steady run</span></div>
+      <div class="cc-sub">Sharp Cross</div>
+      <div class="cc-stats">
+        <div class="cc-stat tidy"><div class="v">1%</div><div class="l"><span data-lang-ja>左右差</span><span data-lang-en>L/R diff</span></div></div>
+        <div class="cc-stat tidy"><div class="v">±2°</div><div class="l"><span data-lang-ja>ブレ</span><span data-lang-en>Wobble</span></div></div>
+      </div>
+    </div>
+
+    <div class="cc-card">
+      <svg viewBox="0 0 220 220" aria-hidden="true">
+        <g fill="none" stroke="#8B7BF0" stroke-width="3" opacity=".9">
+          <g transform="rotate(45 110 110)"><ellipse cx="110" cy="110" rx="78" ry="34"/></g>
+          <g transform="rotate(-45 110 110)"><ellipse cx="110" cy="110" rx="78" ry="34"/></g>
+        </g>
+      </svg>
+      <div class="cc-title"><span data-lang-ja>乱れた走り</span><span data-lang-en>Noisy run</span></div>
+      <div class="cc-sub">Bulging Circle</div>
+      <div class="cc-stats">
+        <div class="cc-stat"><div class="v">8%</div><div class="l"><span data-lang-ja>左右差</span><span data-lang-en>L/R diff</span></div></div>
+        <div class="cc-stat"><div class="v">±14°</div><div class="l"><span data-lang-ja>ブレ</span><span data-lang-en>Wobble</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>なぜ十字になるのか</span><span data-lang-en>Why it becomes a cross</span></div>
+  <div class="prose">
+    <p><span data-lang-ja>これは <strong>リサージュ図形</strong>という物理の古典。二つの周期運動（たとえば左右の動き）を直交する軸にとって描くと、両者の<strong>位相と振幅が揃っているほど軌跡は一本の線（十字）に収束</strong>する。ズレるほど、線は楕円に、さらに円へと開いていく。</span><span data-lang-en>This is a <strong>Lissajous figure</strong> — a classic of physics. Plot two periodic motions (say, left and right) on orthogonal axes, and the more their <strong>phase and amplitude align, the more the trajectory collapses into a single line</strong> — a cross. The more they drift apart, the more the line opens into an ellipse, then a circle.</span></p>
+    <p><span data-lang-ja>つまり FORM CROSS は、実データからそのまま描ける<strong>本物の幾何学</strong>であり、こちらで作った装飾ではない。さらに「どちら側に・どの軸に膨らむか」には、その人固有の癖がそのまま現れる。</span><span data-lang-en>So FORM CROSS is <strong>real geometry drawn directly from the data</strong>, not decoration we invented. And which side, which axis it bulges toward, reveals each person's individual habits, intact.</span></p>
+  </div>
+
+  <div class="grid grid-cards">
+    <div class="card">
+      <span class="pk">Honest</span>
+      <h3><span data-lang-ja>嘘がない</span><span data-lang-en>No fabrication</span></h3>
+      <p><span data-lang-ja>スコアのような恣意的な数字でなく、運動から物理的に立ち上がる図形。だから説得力がある。</span><span data-lang-en>Not an arbitrary score, but a figure that arises physically from motion — and so it convinces.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Personal</span>
+      <h3><span data-lang-ja>癖が見える</span><span data-lang-en>Habits made visible</span></h3>
+      <p><span data-lang-ja>膨らみの向きと軸に、左右差や軸ブレといった個人の特徴がそのまま映る。</span><span data-lang-en>The direction and axis of the bulge mirror personal traits — left/right asymmetry, axial wobble — as they are.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Connected</span>
+      <h3><span data-lang-ja>物語と地続き</span><span data-lang-en>Continuous with the story</span></h3>
+      <p><span data-lang-ja><a class="linkish" href="donut-story.html"><span data-lang-ja>ドーナツの成長物語</span><span data-lang-en>The donut story</span></a> と同じ軸。円（ドーナツ）から十字へ研ぎ澄ます過程そのもの。</span><span data-lang-en>The same axis as <a class="linkish" href="donut-story.html"><span data-lang-ja>the donut story</span><span data-lang-en>the donut story</span></a> — the very process of sharpening from circle (donut) to cross.</span></p>
+    </div>
+  </div>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

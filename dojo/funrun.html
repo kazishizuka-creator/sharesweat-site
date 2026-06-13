@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — FunRun層を動かす仕組み</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .back-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .mech .pk .ltr{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;border-radius:6px;
+    background:linear-gradient(120deg,var(--violet-bright),var(--cyan));color:#05050a;font-weight:700;margin-right:8px}
+  .mech .ref{margin-top:12px;font-size:.78rem;color:var(--text-faint);font-family:'Space Grotesk',sans-serif;letter-spacing:.04em}
+  .star{border:1px solid rgba(91,216,255,.45);box-shadow:0 0 22px rgba(91,216,255,.14)}
+  .star .pk .ltr{box-shadow:0 0 12px rgba(91,216,255,.5)}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <div class="back-row">
+    <a href="home.html" class="linkish"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+    <a href="target-strategy.html" class="linkish"><span data-lang-ja>← ターゲット戦略</span><span data-lang-en>← Targeting Strategy</span></a>
+  </div>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>仕組み・階層2</span><span data-lang-en>Mechanics · Tier 2</span></span>
+    <h1><span data-lang-ja>FunRun層を動かす仕組み</span><span data-lang-en>Moving the FunRun Layer</span></h1>
+    <p><span data-lang-ja>①が求めるのは上達ではなく「走る体験そのものを良くすること」。気持ちいい・美しい・誇らしい・つながる、に反応する。</span><span data-lang-en>① doesn't want to improve — they want the running experience itself to feel better. They respond to: feels good, beautiful, proud, connected.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>6つの仕掛け</span><span data-lang-en>Six mechanisms</span></div>
+  <div class="grid grid-cards">
+    <div class="card mech star">
+      <span class="coming-soon">本命 / Core</span>
+      <span class="pk"><span class="ltr">a</span><span data-lang-ja>育成コンパニオン</span><span data-lang-en>Companion</span></span>
+      <h3><span data-lang-ja>質で育つ相棒</span><span data-lang-en>A companion that grows on quality</span></h3>
+      <p><span data-lang-ja>走りの質で育つ相棒。一人で完結するから、コミュニティのコールドスタートを回避できる。これが本命。</span><span data-lang-en>A buddy that grows with the quality of your running. Because it works solo, it sidesteps the cold-start problem of communities. This is the core bet.</span></p>
+      <div class="ref">ref: Duolingo / Tamagotchi / Pikmin Bloom</div>
+    </div>
+    <div class="card mech">
+      <span class="pk"><span class="ltr">b</span><span data-lang-ja>美しい記録シェア</span><span data-lang-en>Beautiful sharing</span></span>
+      <h3><span data-lang-ja>写真 × データ</span><span data-lang-en>Photo × data</span></h3>
+      <p><span data-lang-ja>Strava の橙のように記号化する出力を。ダサい出力は記号にならない — デザインが生命線。</span><span data-lang-en>Output that becomes iconic, like Strava's orange. Ugly output never becomes a symbol — design is the lifeline.</span></p>
+      <div class="ref">ref: Strava orange</div>
+    </div>
+    <div class="card mech">
+      <span class="pk"><span class="ltr">c</span><span data-lang-ja>達成リング</span><span data-lang-en>Achievement rings</span></span>
+      <h3><span data-lang-ja>継続が報われる</span><span data-lang-en>Consistency rewarded</span></h3>
+      <p><span data-lang-ja>Apple Watch 型。タイムでなく継続そのものを可視化する＝participation-first。</span><span data-lang-en>Apple Watch style. Visualize consistency itself, not times — participation-first.</span></p>
+      <div class="ref">ref: Apple Watch rings</div>
+    </div>
+    <div class="card mech">
+      <span class="pk"><span class="ltr">d</span><span data-lang-ja>褒め体験</span><span data-lang-en>Praise</span></span>
+      <h3><span data-lang-ja>指導でなく承認</span><span data-lang-en>Recognition, not coaching</span></h3>
+      <p><span data-lang-ja>①には承認を。音声伴走は①＝応援者／②＝コーチで振り分ける。</span><span data-lang-en>Give ① recognition. Split audio guidance: cheerleader for ①, coach for ②.</span></p>
+      <div class="ref">ref: NRC guided runs</div>
+    </div>
+    <div class="card mech">
+      <span class="pk"><span class="ltr">e</span><span data-lang-ja>仮想チャレンジ</span><span data-lang-en>Virtual challenges</span></span>
+      <h3><span data-lang-ja>地理に縛られない</span><span data-lang-en>Free of geography</span></h3>
+      <p><span data-lang-ja>月間100km・3日連続など。地理制約がなく海外でも効く＝コミュニティの代替。</span><span data-lang-en>100 km a month, 3 days in a row. No geographic constraint — works overseas too, a substitute for community.</span></p>
+      <div class="ref">ref: distance/streak challenges</div>
+    </div>
+    <div class="card mech">
+      <span class="pk"><span class="ltr">f</span><span data-lang-ja>上手い人をコンテンツ化</span><span data-lang-en>Skilled runners as content</span></span>
+      <h3><span data-lang-ja>導線でなくコンテンツ</span><span data-lang-en>Content, not a funnel</span></h3>
+      <p><span data-lang-ja>「あなたのフォーム、◯◯さんと似ています」。上手い人を導線でなくコンテンツとして見せる。</span><span data-lang-en>"Your form resembles ___'s." Present skilled runners as content rather than a funnel.</span></p>
+      <div class="ref">ref: similarity / match framing</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span data-lang-ja>共通原理: ①の本質は「上達」ではなく「<strong>走る体験そのものを良くする</strong>」こと。だから指標は participation-first（参加・継続）に置き、承認・美しさ・誇り・つながりで動かす。育成コンパニオン(a)を本命に据え、(b)〜(f)で体験を厚くする。</span>
+    <span data-lang-en>Common principle: ①'s essence is not "improvement" but "<strong>making the running experience itself better</strong>." So metrics are participation-first (taking part, continuing), driven by recognition, beauty, pride, and connection. The companion (a) is the core bet; (b)–(f) thicken the experience.</span>
+  </div>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

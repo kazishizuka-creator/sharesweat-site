@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — 1stピン戦略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .back-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .phase-steps{display:flex;flex-direction:column;gap:12px;counter-reset:ps}
+  .pstep{display:flex;gap:14px;border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:rgba(20,18,40,.35)}
+  .pstep .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;color:#05050a;
+    background:linear-gradient(120deg,var(--violet-bright),var(--cyan))}
+  .pstep p{color:var(--text-dim);font-size:.92rem;line-height:1.8}
+  .pstep b{color:var(--text)}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <div class="back-row">
+    <a href="home.html" class="linkish"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+    <a href="target-strategy.html" class="linkish"><span data-lang-ja>← ターゲット戦略</span><span data-lang-en>← Targeting Strategy</span></a>
+  </div>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>戦略・階層2</span><span data-lang-en>Strategy · Tier 2</span></span>
+    <h1><span data-lang-ja>1stピン戦略</span><span data-lang-en>First-Pin Strategy</span></h1>
+    <p><span data-lang-ja>②を1番ピンに置く。本物の価値で②を刺し、その姿を①に見せて波及させる。</span><span data-lang-en>Place ② as the lead pin. Strike ② with real value, show that to ①, and let it ripple outward.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>なぜ②が1stピンなのか</span><span data-lang-en>Why ② is the lead pin</span></div>
+  <div class="prose">
+    <p><span data-lang-ja>②＝「たまに大会に出て、タイムも少し気にする」層は、<strong>フォーム解析の本物の価値が最も刺さる</strong>。③ほどストイックではないが、上達への動機は確かにある。母数も①ほどではないが厚い。ここを一点突破することが、全体を倒す1番ピンになる。</span><span data-lang-en>Layer ② — "races now and then, mildly time-conscious" — is where the <strong>real value of form analysis lands hardest</strong>. Less ascetic than ③, yet genuinely motivated to improve, and a sizeable base. Breaking through here is the lead pin that topples the rest.</span></p>
+    <p><span data-lang-ja>距離感が鍵だ。①は③に憧れない — 遠すぎる。だが<strong>②（自分の半歩先）には憧れる</strong>。だから②が、①への中継点になる。</span><span data-lang-en>Distance is the key. ① doesn't aspire to ③ — too far. But it <strong>does aspire to ②, just half a step ahead</strong>. So ② becomes the relay point into ①.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>②→① フェーズ設計</span><span data-lang-en>The ②→① phasing</span></div>
+  <div class="phase-steps">
+    <div class="pstep"><span class="num">1</span><p><span data-lang-ja><b>②に集中して刺す。</b>フォーム解析の本物の価値で②を満たす。同時に、大会・ランコミュニティ・SNSで「②が使っている姿」を可視化する（＝<a class="linkish" href="ambassador.html"><span data-lang-ja>アンバサダー＝範士戦略</span><span data-lang-en>ambassador / Hanshi strategy</span></a>）。</span><span data-lang-en><b>Concentrate on striking ②.</b> Satisfy ② with the genuine value of form analysis. In parallel, make "② using it" visible at races, in run communities, and on social — the <a class="linkish" href="ambassador.html"><span data-lang-ja>ambassador / Hanshi strategy</span><span data-lang-en>ambassador / Hanshi strategy</span></a>.</span></p></div>
+    <div class="pstep"><span class="num">2</span><p><span data-lang-ja><b>①が②を目撃する場に露出する。</b>マラソン大会、②の美しい投稿、FunRun系インフルエンサー — ①が日常で②に出会う接点に置く。</span><span data-lang-en><b>Surface where ① witnesses ②.</b> Marathon events, ②'s beautiful posts, FunRun influencers — appear at the touchpoints where ① naturally encounters ②.</span></p></div>
+    <div class="pstep"><span class="num">3</span><p><span data-lang-ja><b>①向け体験を前面に出す。</b>②で土台ができたら、マーケティングは①向けの体験（楽しさ・継続・承認）を前に出す段階へ移る。</span><span data-lang-en><b>Bring ①'s experience to the front.</b> Once ② forms the base, marketing shifts to foregrounding ①'s experience — fun, consistency, recognition.</span></p></div>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>参照する競合事例</span><span data-lang-en>Competitor reference cases</span></div>
+  <div class="grid grid-cards">
+    <div class="card">
+      <span class="pk">Strava</span>
+      <h3><span data-lang-ja>上で確立 → 下へ</span><span data-lang-en>Establish high, spread low</span></h3>
+      <p><span data-lang-ja>上位ランナーで確立し記号化、そこから下方へ拡散した。憧れを上に置く構造。</span><span data-lang-en>Established among serious runners, became iconic, then diffused downward. Aspiration anchored at the top.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">lululemon</span>
+      <h3><span data-lang-ja>中継点を作る</span><span data-lang-en>Build the relay</span></h3>
+      <p><span data-lang-ja>ヨガインストラクター＝「憧れの中継点」を起点に一般へ広げた。②の役割と同じ。</span><span data-lang-en>Used yoga instructors as the "aspirational relay" to reach the mainstream — exactly ②'s role.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Oura · WHOOP</span>
+      <h3><span data-lang-ja>権威から一般へ</span><span data-lang-en>Authority to mainstream</span></h3>
+      <p><span data-lang-ja>アスリートの権威づけを足場に、一般ユーザーへ降りてきた。</span><span data-lang-en>Built on athlete credibility, then descended to everyday users.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Nike (NRC)</span>
+      <h3><span data-lang-ja>二層構造</span><span data-lang-en>A two-tier structure</span></h3>
+      <p><span data-lang-ja>ブランドは上・体験は下の二層。Nike Run Club で入口を低く保ちつつ憧れは上に。</span><span data-lang-en>Brand on top, experience at the bottom. Nike Run Club keeps the entry low while aspiration stays high.</span></p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span data-lang-ja>🔗 このページは <a class="linkish" href="ambassador.html"><span data-lang-ja>アンバサダー戦略</span><span data-lang-en>Ambassador Strategy</span></a> と連動。②可視化の担い手＝範士の選定基準はそちらを参照。</span>
+    <span data-lang-en>🔗 This page is linked with the <a class="linkish" href="ambassador.html"><span data-lang-ja>Ambassador Strategy</span><span data-lang-en>Ambassador Strategy</span></a>. See it for the selection criteria of the Hanshi who make ② visible.</span>
+  </div>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

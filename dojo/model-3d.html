@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — 3Dモデル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .model-stage{position:relative;display:flex;justify-content:center;padding:10px 0 6px}
+  .model-stage svg{width:100%;max-width:300px;height:auto;display:block;filter:drop-shadow(0 10px 50px rgba(91,216,255,.18))}
+  .wire{stroke:#8B7BF0;stroke-opacity:.5;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .joint{fill:#8B7BF0;fill-opacity:.55}
+  .imu-pt{fill:#5BD8FF}
+  .imu-halo{fill:none;stroke:#5BD8FF;stroke-width:3;transform-origin:center;transform-box:fill-box}
+  .p1{animation:imuPulse 2.2s ease-in-out infinite}
+  .p2{animation:imuPulse 2.2s ease-in-out .55s infinite}
+  .p3{animation:imuPulse 2.2s ease-in-out 1.1s infinite}
+  .p4{animation:imuPulse 2.2s ease-in-out 1.65s infinite}
+  @keyframes imuPulse{0%,100%{opacity:.25;transform:scale(1)}50%{opacity:.9;transform:scale(2.1)}}
+  .scan{stroke:#5BD8FF;stroke-opacity:.18;stroke-width:1;stroke-dasharray:3 6}
+  .model-badge{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk',sans-serif;
+    font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#FFD66B;border:1px solid rgba(255,214,107,.4);
+    background:rgba(255,214,107,.08);border-radius:100px;padding:3px 10px}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <a href="home.html" class="linkish" style="display:inline-block;margin-bottom:18px"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>プロダクト</span><span data-lang-en>Product</span></span>
+    <h1><span data-lang-ja>3Dモデル</span><span data-lang-en>3D Model</span></h1>
+    <p><span data-lang-ja>4つの点から、全身の動きを想像する。手首・足首のIMUだけで、フォーム全体を3D再構成する。</span><span data-lang-en>From four points, imagine the whole body's motion. Wrist and ankle IMUs alone reconstruct the entire form in 3D.</span></p>
+  </div>
+
+  <div class="model-stage">
+    <span class="model-badge">Placeholder · WIP</span>
+    <svg viewBox="0 0 240 400" aria-label="ワイヤーフレーム人体と4点IMUのプレースホルダ">
+      <!-- skeleton -->
+      <circle class="wire" cx="120" cy="46" r="22"/>
+      <line class="wire" x1="120" y1="68" x2="120" y2="210"/>
+      <line class="wire" x1="78" y1="96" x2="162" y2="96"/>
+      <polyline class="wire" points="78,96 60,150 54,200"/>
+      <polyline class="wire" points="162,96 180,150 186,200"/>
+      <line class="wire" x1="92" y1="210" x2="148" y2="210"/>
+      <polyline class="wire" points="92,210 86,290 80,360"/>
+      <polyline class="wire" points="148,210 154,290 160,360"/>
+      <!-- joints -->
+      <circle class="joint" cx="78" cy="96" r="4"/><circle class="joint" cx="162" cy="96" r="4"/>
+      <circle class="joint" cx="60" cy="150" r="3"/><circle class="joint" cx="180" cy="150" r="3"/>
+      <circle class="joint" cx="86" cy="290" r="3"/><circle class="joint" cx="154" cy="290" r="3"/>
+      <!-- scan lines toward center of mass -->
+      <line class="scan" x1="54" y1="200" x2="120" y2="150"/>
+      <line class="scan" x1="186" y1="200" x2="120" y2="150"/>
+      <line class="scan" x1="80" y1="360" x2="120" y2="150"/>
+      <line class="scan" x1="160" y1="360" x2="120" y2="150"/>
+      <!-- 4 IMU points (wrists + ankles) -->
+      <circle class="imu-halo p1" cx="54"  cy="200" r="6"/><circle class="imu-pt" cx="54"  cy="200" r="5"/>
+      <circle class="imu-halo p2" cx="186" cy="200" r="6"/><circle class="imu-pt" cx="186" cy="200" r="5"/>
+      <circle class="imu-halo p3" cx="80"  cy="360" r="6"/><circle class="imu-pt" cx="80"  cy="360" r="5"/>
+      <circle class="imu-halo p4" cx="160" cy="360" r="6"/><circle class="imu-pt" cx="160" cy="360" r="5"/>
+    </svg>
+  </div>
+  <p class="note-mini" style="text-align:center"><span data-lang-ja>※ これはプレースホルダ。将来 Three.js 等でインタラクティブな3Dビューアに差し替える（このページにはライブラリは入れていない）。</span><span data-lang-en>Placeholder. To be replaced with an interactive 3D viewer (e.g. Three.js) in the future — no library is bundled on this page.</span></p>
+
+  <div class="section-title"><span data-lang-ja>4点から全身を復元する</span><span data-lang-en>Reconstructing the whole body from four points</span></div>
+  <div class="grid grid-cards">
+    <div class="card">
+      <span class="pk">Input</span>
+      <h3><span data-lang-ja>4点のIMU</span><span data-lang-en>Four IMUs</span></h3>
+      <p><span data-lang-ja>手首2点・足首2点。最小限のセンサーで、装着の負担を抑えつつ四肢の動きを捉える。</span><span data-lang-en>Two wrists, two ankles. Minimal sensors capture limb motion while keeping the burden of wearing them low.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Inference</span>
+      <h3><span data-lang-ja>全体を想像する</span><span data-lang-en>Imagining the whole</span></h3>
+      <p><span data-lang-ja>4点の軌跡から、体幹・姿勢を含む全身フォームを推定・3D再構成する。「点」から「動き全体」へ。</span><span data-lang-en>From four trajectories, the model infers and reconstructs the full-body form — trunk and posture included. From points to whole motion.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Why it matters</span>
+      <h3><span data-lang-ja>技術的な凄み</span><span data-lang-en>The technical edge</span></h3>
+      <p><span data-lang-ja>少ない入力から多くを復元することそのものが価値。動画もカメラもいらず、走りながら全身が分かる。</span><span data-lang-en>Recovering much from little input is itself the value. No video, no camera — your whole form, understood as you run.</span></p>
+    </div>
+  </div>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

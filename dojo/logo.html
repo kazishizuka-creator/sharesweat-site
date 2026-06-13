@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — ロゴの由来</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .logo-stage{display:flex;justify-content:center;padding:14px 0 28px}
+  .logo-stage svg{width:100%;max-width:300px;height:auto;filter:drop-shadow(0 10px 44px rgba(139,123,240,.32))}
+  .logo-ring-halo{animation:logoPulse 2.8s ease-in-out infinite;transform-origin:center}
+  @keyframes logoPulse{0%,100%{opacity:.4}50%{opacity:.95}}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <a href="home.html" class="linkish" style="display:inline-block;margin-bottom:18px"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>ブランド</span><span data-lang-en>Brand</span></span>
+    <h1><span data-lang-ja>ロゴの由来</span><span data-lang-en>The Origin of the Logo</span></h1>
+    <p><span data-lang-ja>ひとつの円に、製品の形・幾何学・成長物語のすべてが収まっている。</span><span data-lang-en>A single circle holds it all — the product's form, its geometry, and its story of growth.</span></p>
+  </div>
+
+  <div class="logo-stage">
+    <svg viewBox="0 0 220 220" preserveAspectRatio="xMidYMid meet" role="img" aria-label="リング状のロゴシンボル">
+      <defs>
+        <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#A99CFF"></stop>
+          <stop offset="0.55" stop-color="#8B7BF0"></stop>
+          <stop offset="1" stop-color="#5BD8FF"></stop>
+        </linearGradient>
+      </defs>
+      <circle class="logo-ring-halo" cx="110" cy="110" r="64" fill="none" stroke="#5BD8FF" stroke-width="22" opacity=".5"></circle>
+      <circle cx="110" cy="110" r="64" fill="none" stroke="url(#logoGrad)" stroke-width="20"></circle>
+      <circle cx="110" cy="110" r="64" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="5"></circle>
+    </svg>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>ひとつの円に宿るもの</span><span data-lang-en>What the circle holds</span></div>
+  <div class="grid grid-cards">
+    <div class="card">
+      <span class="pk">Form</span>
+      <h3><span data-lang-ja>製品の形そのもの</span><span data-lang-en>The product's shape</span></h3>
+      <p><span data-lang-ja>○マーク＝リング＝ドーナツ。ロゴはそのままデバイスの形状を写している。記号と実物が一致している。</span><span data-lang-en>The mark is a ring — a donut — the very shape of the device. Symbol and object are one and the same.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Geometry</span>
+      <h3><span data-lang-ja>幾何学の核</span><span data-lang-en>A geometric core</span></h3>
+      <p><span data-lang-ja>円は、整った動きが描く軌跡の出発点。FORM CROSS（十字）へ研ぎ澄まされていく前の、最初のかたち。</span><span data-lang-en>The circle is where motion's trajectory begins — the first form, before it sharpens into the FORM CROSS.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Story</span>
+      <h3><span data-lang-ja>成長物語と一致</span><span data-lang-en>One with the story</span></h3>
+      <p><span data-lang-ja>「ドーナツ → 十字」という成長物語と、ブランド名 DONUT と、ロゴの円。三つが矛盾なく重なる。</span><span data-lang-en>The "donut → cross" growth story, the name DONUT, and the logo's circle all align without contradiction.</span></p>
+    </div>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>プロダクト体験と結合したシンボル</span><span data-lang-en>A symbol fused with the experience</span></div>
+  <div class="prose">
+    <p><span data-lang-ja>多くのロゴは「意味を後づけ」する。DONUT のロゴは逆で、<strong>プロダクト体験そのものから生まれている</strong>。手首・足首に着ける円形デバイス、走りが整うと現れる軌跡、名前、シンボル — これらが別々のアイデアではなく、ひとつの円から派生している。</span><span data-lang-en>Most logos have meaning bolted on afterward. DONUT's logo is the reverse — it <strong>emerges from the product experience itself</strong>. The ring-shaped device worn on wrist and ankle, the trajectory that appears as your form settles, the name, the symbol — none of these are separate ideas. They all derive from a single circle.</span></p>
+    <p><span data-lang-ja>だから説明がいらない。デバイスを見て、走って、データを見るうちに、ユーザーは自然とロゴの意味にたどり着く。「ロゴ＝製品＝物語」が一致していることが、ブランドの強度になる。</span><span data-lang-en>That's why it needs no explanation. As users see the device, run, and read their data, they arrive at the logo's meaning on their own. The unity of "logo = product = story" is what gives the brand its strength.</span></p>
+  </div>
+
+  <p class="note-mini"><span data-lang-ja>※ 叩き台。確定ロゴデータ・カラーバリエーション・最小サイズ規定は別途。</span><span data-lang-en>Draft. Final logo assets, color variants, and minimum-size rules to be defined separately.</span></p>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

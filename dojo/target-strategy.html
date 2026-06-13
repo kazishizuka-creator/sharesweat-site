@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — ターゲット戦略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .layers{display:flex;flex-direction:column;gap:0;max-width:680px;margin:2px auto 0}
+  .layer{position:relative;border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin:7px 0;
+    background:linear-gradient(160deg,rgba(20,18,40,.5),rgba(10,10,20,.25));backdrop-filter:blur(8px)}
+  .layer .ly-n{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--violet-bright);margin-right:10px}
+  .layer h3{display:inline;font-weight:500;font-size:1.02rem}
+  .layer p{color:var(--text-dim);font-size:.86rem;margin-top:6px}
+  .layer.pin{border-color:rgba(91,216,255,.55);box-shadow:0 0 28px rgba(91,216,255,.18)}
+  .layer.pin .ly-n{color:var(--cyan)}
+  .pin-badge{position:absolute;top:-10px;right:16px;font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--cyan);border:1px solid rgba(91,216,255,.5);background:rgba(5,5,10,.9);border-radius:100px;padding:3px 10px}
+  .flow-arrow{display:flex;flex-direction:column;align-items:center;color:var(--cyan);margin:2px 0;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.1em}
+  .flow-arrow .ar{font-size:18px;line-height:1}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <a href="home.html" class="linkish" style="display:inline-block;margin-bottom:18px"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>戦略ハブ</span><span data-lang-en>Strategy Hub</span></span>
+    <h1><span data-lang-ja>ターゲット戦略</span><span data-lang-en>Targeting Strategy</span></h1>
+    <p><span data-lang-ja>ランニング人口を3層で捉え、「②で刺して①へ広げる」。ボウリングの1番ピンを倒すように。</span><span data-lang-en>Read the running population in three layers, then "strike layer ② to spread into ①" — like toppling the lead pin in bowling.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>ランニング3層マップ</span><span data-lang-en>The three-layer running map</span></div>
+  <div class="layers">
+    <div class="layer">
+      <span class="ly-n">③</span><h3><span data-lang-ja>大会常連・タイム意識</span><span data-lang-en>Race regulars, time-driven</span></h3>
+      <p><span data-lang-ja>熱量高 × タイム重視。母数は小さい。最初に狙うと①②が引いてしまう（ガチに見える）。</span><span data-lang-en>High intensity × time-focused. A small base. Target them first and layers ① and ② recoil — it looks too hardcore.</span></p>
+    </div>
+    <div class="flow-arrow"><span class="ar">▲</span><span data-lang-ja>憧れは遠すぎる</span><span data-lang-en>too far to aspire to</span></div>
+    <div class="layer pin">
+      <span class="pin-badge"><span data-lang-ja>本命センターピン</span><span data-lang-en>Center pin</span></span>
+      <span class="ly-n">②</span><h3><span data-lang-ja>たまに大会・タイムを気にする</span><span data-lang-en>Occasional racers, time-curious</span></h3>
+      <p><span data-lang-ja>熱量中 × タイム寄り。フォーム解析の「本物の価値」が最も刺さる層。ここを1stピンに置く。</span><span data-lang-en>Medium intensity × time-leaning. The layer where the real value of form analysis lands hardest. This is the lead pin.</span></p>
+    </div>
+    <div class="flow-arrow"><span class="ar">▼</span><span data-lang-ja>②で刺して①へ広げる</span><span data-lang-en>strike ②, spread into ①</span></div>
+    <div class="layer">
+      <span class="ly-n">①</span><h3><span data-lang-ja>FunRun層（健康・楽しみ・継続）</span><span data-lang-en>FunRun (health, fun, consistency)</span></h3>
+      <p><span data-lang-ja>母数が最大。①は③に憧れない（遠すぎる）が、半歩先の②には憧れる。②が①への中継点になる。</span><span data-lang-en>The largest base. ① doesn't aspire to ③ (too far) but does aspire to ②, just half a step ahead. ② becomes the relay into ①.</span></p>
+    </div>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>9マスとの整合</span><span data-lang-en>Mapping to the nine-grid</span></div>
+  <div class="prose">
+    <p><span data-lang-ja>熱量（高・中・低）×タイム志向（強・中・弱）の9マスで見ると、③＝熱量高×タイム取れない、②＝熱量中×タイム寄り＝<strong>本命センターピン</strong>、①＝右列（健康／楽しみ／継続）に対応する。最初から①を広く狙うのではなく、②を一点突破してから①へ波及させる。</span><span data-lang-en>On a nine-grid of intensity (high/mid/low) × time-orientation (strong/mid/weak): ③ = high intensity but can't get the time, ② = mid intensity, time-leaning = the <strong>center pin</strong>, ① = the right column (health / fun / consistency). Rather than aiming broadly at ① from the start, break through ② first, then let it ripple into ①.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>詳細戦略（4ページ）</span><span data-lang-en>Detailed strategies (4 pages)</span></div>
+  <div class="grid grid-cards">
+    <a class="card" href="first-pin.html">
+      <span class="pk">Strategy</span>
+      <h3><span data-lang-ja>1stピン戦略</span><span data-lang-en>First-Pin Strategy</span></h3>
+      <p><span data-lang-ja>②を1stピンに置く理由と、②→①へ広げるフェーズ設計。競合・参照事例。</span><span data-lang-en>Why ② is the lead pin, and the ②→① phasing. Competitors and reference cases.</span></p>
+    </a>
+    <a class="card" href="ambassador.html">
+      <span class="pk">Strategy</span>
+      <h3><span data-lang-ja>アンバサダー戦略</span><span data-lang-en>Ambassador Strategy</span></h3>
+      <p><span data-lang-ja>②の姿を可視化する担い手＝範士。「実直×洗練」の人物像。1stピンと連動。</span><span data-lang-en>Ambassadors (Hanshi) who make ② visible. The "earnest × refined" persona. Linked with First-Pin.</span></p>
+    </a>
+    <a class="card" href="brand-strategy.html">
+      <span class="pk">Brand</span>
+      <h3><span data-lang-ja>ブランド戦略</span><span data-lang-en>Brand Strategy</span></h3>
+      <p><span data-lang-ja>①②共通の憧れ「実直×洗練」一本で張る。ペルソナと、映す／映さないの線引き。</span><span data-lang-en>One aspiration for ① and ②: "earnest × refined." The persona, and what to show vs. not show.</span></p>
+    </a>
+    <a class="card" href="funrun.html">
+      <span class="pk">Mechanics</span>
+      <h3><span data-lang-ja>FunRun層を動かす仕組み</span><span data-lang-en>Moving the FunRun Layer</span></h3>
+      <p><span data-lang-ja>育成相棒・記録シェア・達成リング・褒め・チャレンジ・上手い人のコンテンツ化。</span><span data-lang-en>Companion, beautiful sharing, achievement rings, praise, challenges, and turning skilled runners into content.</span></p>
+    </a>
+  </div>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

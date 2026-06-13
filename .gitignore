@@ -6,3 +6,7 @@
 !.env.example
 .DS_Store
 **/.DS_Store
+
+# 計画・作業用メモ（静的配信されると戦略が漏れるため除外）
+content-plan.md
+dojo-build-command.md

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — 将来的な展開方向性</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .modal-chain{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 6px}
+  .modal-chip{font-family:'Space Grotesk',sans-serif;font-size:.92rem;letter-spacing:.04em;color:var(--text-dim);
+    border:1px solid var(--line);border-radius:100px;padding:8px 16px}
+  .modal-chip.now{color:#05050a;font-weight:600;background:linear-gradient(100deg,var(--violet-bright),var(--cyan));border-color:transparent}
+  .modal-arrow{color:var(--text-faint)}
+  .comp-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+  .comp{font-family:'Space Grotesk',sans-serif;font-size:.9rem;color:var(--text-dim);border:1px solid var(--line);border-radius:12px;padding:8px 14px}
+  .comp.now{color:var(--cyan);border-color:rgba(91,216,255,.45)}
+  .comp-arrow{color:var(--text-faint)}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <a href="home.html" class="linkish" style="display:inline-block;margin-bottom:18px"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>将来構想</span><span data-lang-en>Future</span></span>
+    <h1><span data-lang-ja>将来的な展開方向性</span><span data-lang-en>Future Directions</span></h1>
+    <p><span data-lang-ja>ランニングは入口。その先に、身体動作がAIに理解される時代の基盤を据える。</span><span data-lang-en>Running is the entry point. Beyond it lies a foundation for an era in which AI understands human motion.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>身体動作AIの基盤へ</span><span data-lang-en>Toward a human-motion AI foundation</span></div>
+  <div class="prose">
+    <p><span data-lang-ja>AIが扱えるモダリティは広がってきた。テキスト、画像、音声 — そして次に来るのが <strong>身体動作（Human Motion）</strong>。私たちは、その動作データの基盤を日本から築く。</span><span data-lang-en>The modalities AI can handle keep expanding — text, image, audio — and next comes <strong>human motion</strong>. We are building the foundation of that motion data, from Japan.</span></p>
+    <div class="modal-chain">
+      <span class="modal-chip">Text</span><span class="modal-arrow">→</span>
+      <span class="modal-chip">Image</span><span class="modal-arrow">→</span>
+      <span class="modal-chip">Audio</span><span class="modal-arrow">→</span>
+      <span class="modal-chip now">Human&nbsp;Motion</span>
+    </div>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>競技の拡大</span><span data-lang-en>Expanding across sports</span></div>
+  <div class="prose">
+    <div class="comp-flow">
+      <span class="comp now"><span data-lang-ja>ランニング</span><span data-lang-en>Running</span></span><span class="comp-arrow">→</span>
+      <span class="comp"><span data-lang-ja>サイクリング</span><span data-lang-en>Cycling</span></span><span class="comp-arrow">→</span>
+      <span class="comp"><span data-lang-ja>筋トレ</span><span data-lang-en>Strength</span></span><span class="comp-arrow">→</span>
+      <span class="comp"><span data-lang-ja>ヨガ</span><span data-lang-en>Yoga</span></span>
+    </div>
+    <p class="note-mini"><span data-lang-ja>※ 公開サイトでは「ゴルフ」表記の箇所あり。将来は<strong>サイクリング</strong>へ寄せる方針（公開サイトの記述も後日要更新）。このDojo内では更新済みの想定で記載。</span><span data-lang-en>Note: the public site still lists "golf" in places. The plan is to shift toward <strong>cycling</strong> (public copy to be updated later). Within this Dojo, the updated lineup is assumed.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>研究・社会、そして海外へ</span><span data-lang-en>Research, society, and overseas</span></div>
+  <div class="grid grid-cards">
+    <div class="card">
+      <span class="pk">Research & Society</span>
+      <h3><span data-lang-ja>研究・社会への活用</span><span data-lang-en>Research & society</span></h3>
+      <p><span data-lang-ja>蓄積される動作データは、一人ひとりの上達に還元されるだけでなく、健康・リハビリなど研究・社会の基盤になる。</span><span data-lang-en>The accumulated motion data feeds back into each person's progress — and grows into a basis for research and society, from health to rehabilitation.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Global</span>
+      <h3><span data-lang-ja>海外展開</span><span data-lang-en>Going global</span></h3>
+      <p><span data-lang-ja>「SENSEI＝日本製」の認知を武器に、地理に縛られない仮想チャレンジやコンテンツで海外へ広げる。</span><span data-lang-en>Leveraging the "SENSEI = made in Japan" identity, expand abroad through geography-free virtual challenges and content.</span></p>
+    </div>
+  </div>
+
+  <p class="note-mini"><span data-lang-ja>※ 関連: 収益化の具体は <a class="linkish" href="btob.html"><span data-lang-ja>BtoB戦略</span><span data-lang-en>B2B Strategy</span></a>、資金面は <a class="linkish" href="funding-policy.html"><span data-lang-ja>調達方針</span><span data-lang-en>Funding Policy</span></a> を参照。</span><span data-lang-en>Related: see <a class="linkish" href="btob.html"><span data-lang-ja>BtoB戦略</span><span data-lang-en>B2B Strategy</span></a> for monetization and <a class="linkish" href="funding-policy.html"><span data-lang-ja>調達方針</span><span data-lang-en>Funding Policy</span></a> for capital.</span></p>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

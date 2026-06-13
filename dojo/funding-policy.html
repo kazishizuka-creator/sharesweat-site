@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — 調達方針</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .ph-list{display:flex;flex-direction:column;gap:14px}
+  .ph-item{display:flex;gap:16px;border:1px solid var(--line);border-radius:16px;padding:18px 20px;
+    background:linear-gradient(160deg,rgba(20,18,40,.45),rgba(10,10,20,.25))}
+  .ph-key{flex:0 0 auto;width:90px;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.1em;color:var(--violet-bright)}
+  .ph-key .per{display:block;color:var(--text-faint);margin-top:4px;font-size:10px}
+  .ph-main{flex:1;min-width:0}
+  .ph-main h3{font-weight:500;font-size:1.04rem;margin-bottom:8px}
+  .ph-row{display:flex;gap:8px;font-size:.86rem;color:var(--text-dim);margin:4px 0}
+  .ph-row b{flex:0 0 auto;color:var(--text-faint);font-weight:400;width:64px;font-size:.8rem}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <a href="home.html" class="linkish" style="display:inline-block;margin-bottom:18px"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>調達</span><span data-lang-en>Funding</span></span>
+    <h1><span data-lang-ja>調達方針</span><span data-lang-en>Funding Policy</span></h1>
+    <p><span data-lang-ja>フェーズごとに目的を切り、必要な分を必要なタイミングで。ホームのマイルストーンと整合させる。</span><span data-lang-en>Phase by phase, with a clear purpose each time — the right amount at the right moment, aligned with the home milestones.</span></p>
+  </div>
+
+  <div class="callout">
+    <span data-lang-ja>⚠️ このページは<strong>骨子のみ</strong>。各フェーズの想定調達額・使途・バリュエーションは <span class="tag-todo">要記入</span> です（叩き台はプレースホルダ）。フェーズ区分はホーム（<code>home.html</code> の PHASES）と一致させています。</span>
+    <span data-lang-en>⚠️ This page is a <strong>skeleton only</strong>. Each phase's target amount, use of funds, and valuation are <span class="tag-todo">to be filled in</span> (placeholders for now). The phase breakdown matches the home page (PHASES in <code>home.html</code>).</span>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>フェーズ別調達</span><span data-lang-en>Funding by phase</span></div>
+  <div class="ph-list">
+    <div class="ph-item">
+      <div class="ph-key">PRE-SEED<span class="per"><span data-lang-ja>〜26年10月</span><span data-lang-en>– Oct 2026</span></span></div>
+      <div class="ph-main">
+        <h3><span data-lang-ja>プレシード</span><span data-lang-en>Pre-Seed</span></h3>
+        <div class="ph-row"><b><span data-lang-ja>目的</span><span data-lang-en>Goal</span></b><span><span data-lang-ja>プロトタイプ構築（20〜40台）と初期検証。</span><span data-lang-en>Build prototypes (20–40 units) and run early validation.</span></span></div>
+        <div class="ph-row"><b><span data-lang-ja>調達額</span><span data-lang-en>Amount</span></b><span class="tag-todo"><span data-lang-ja>要記入</span><span data-lang-en>TBD</span></span></div>
+        <div class="ph-row"><b><span data-lang-ja>使途</span><span data-lang-en>Use</span></b><span class="tag-todo"><span data-lang-ja>要記入</span><span data-lang-en>TBD</span></span></div>
+      </div>
+    </div>
+    <div class="ph-item">
+      <div class="ph-key">SEED<span class="per"><span data-lang-ja>〜27年9月</span><span data-lang-en>– Sep 2027</span></span></div>
+      <div class="ph-main">
+        <h3><span data-lang-ja>シード</span><span data-lang-en>Seed</span></h3>
+        <div class="ph-row"><b><span data-lang-ja>目的</span><span data-lang-en>Goal</span></b><span><span data-lang-ja>機械学習データ収集と解析精度の確立。</span><span data-lang-en>Collect ML data and establish analysis accuracy.</span></span></div>
+        <div class="ph-row"><b><span data-lang-ja>調達額</span><span data-lang-en>Amount</span></b><span class="tag-todo"><span data-lang-ja>要記入</span><span data-lang-en>TBD</span></span></div>
+        <div class="ph-row"><b><span data-lang-ja>使途</span><span data-lang-en>Use</span></b><span class="tag-todo"><span data-lang-ja>要記入</span><span data-lang-en>TBD</span></span></div>
+      </div>
+    </div>
+    <div class="ph-item">
+      <div class="ph-key">CF<span class="per"><span data-lang-ja>27年10〜12月</span><span data-lang-en>Oct–Dec 2027</span></span></div>
+      <div class="ph-main">
+        <h3><span data-lang-ja>クラウドファンディング</span><span data-lang-en>Crowdfunding</span></h3>
+        <div class="ph-row"><b><span data-lang-ja>目的</span><span data-lang-en>Goal</span></b><span><span data-lang-ja>初期ファンの獲得と需要の実証、量産前の助走。</span><span data-lang-en>Win early fans, prove demand, and warm up before mass production.</span></span></div>
+        <div class="ph-row"><b><span data-lang-ja>調達額</span><span data-lang-en>Amount</span></b><span class="tag-todo"><span data-lang-ja>要記入</span><span data-lang-en>TBD</span></span></div>
+        <div class="ph-row"><b><span data-lang-ja>使途</span><span data-lang-en>Use</span></b><span class="tag-todo"><span data-lang-ja>要記入</span><span data-lang-en>TBD</span></span></div>
+      </div>
+    </div>
+    <div class="ph-item">
+      <div class="ph-key">SERIES A<span class="per"><span data-lang-ja>〜29年</span><span data-lang-en>– 2029</span></span></div>
+      <div class="ph-main">
+        <h3><span data-lang-ja>シリーズA</span><span data-lang-en>Series A</span></h3>
+        <div class="ph-row"><b><span data-lang-ja>目的</span><span data-lang-en>Goal</span></b><span><span data-lang-ja>量産・販売拡大とチーム強化。</span><span data-lang-en>Scale production and sales, strengthen the team.</span></span></div>
+        <div class="ph-row"><b><span data-lang-ja>調達額</span><span data-lang-en>Amount</span></b><span class="tag-todo"><span data-lang-ja>要記入</span><span data-lang-en>TBD</span></span></div>
+        <div class="ph-row"><b><span data-lang-ja>使途</span><span data-lang-en>Use</span></b><span class="tag-todo"><span data-lang-ja>要記入</span><span data-lang-en>TBD</span></span></div>
+      </div>
+    </div>
+    <div class="ph-item">
+      <div class="ph-key">SERIES B<span class="per"><span data-lang-ja>31年</span><span data-lang-en>2031</span></span></div>
+      <div class="ph-main">
+        <h3><span data-lang-ja>シリーズB</span><span data-lang-en>Series B</span></h3>
+        <div class="ph-row"><b><span data-lang-ja>目的</span><span data-lang-en>Goal</span></b><span><span data-lang-ja>データ基盤の拡張と海外・BtoB展開。</span><span data-lang-en>Expand the data platform and pursue overseas / B2B growth.</span></span></div>
+        <div class="ph-row"><b><span data-lang-ja>調達額</span><span data-lang-en>Amount</span></b><span class="tag-todo"><span data-lang-ja>要記入</span><span data-lang-en>TBD</span></span></div>
+        <div class="ph-row"><b><span data-lang-ja>使途</span><span data-lang-en>Use</span></b><span class="tag-todo"><span data-lang-ja>要記入</span><span data-lang-en>TBD</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="note-mini"><span data-lang-ja>※ 関連: 将来の事業展開は <a class="linkish" href="future.html"><span data-lang-ja>将来的な展開方向性</span><span data-lang-en>Future Directions</span></a>、B2Bの収益化先は <a class="linkish" href="btob.html"><span data-lang-ja>BtoB戦略</span><span data-lang-en>B2B Strategy</span></a> を参照。</span><span data-lang-en>Related: see <a class="linkish" href="future.html"><span data-lang-ja>将来的な展開方向性</span><span data-lang-en>Future Directions</span></a> for the long-term business, and <a class="linkish" href="btob.html"><span data-lang-ja>BtoB戦略</span><span data-lang-en>B2B Strategy</span></a> for monetization targets.</span></p>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

@@ -311,3 +311,44 @@ body.cloak .gated{visibility:hidden}
 [data-lang-en]{display:none}
 body.lang-en [data-lang-ja]{display:none}
 body.lang-en [data-lang-en]{display:revert}
+
+/* ============================================================
+   ▼ 追記分（戦略ページ叩き台用）— 既存セレクタの値は変更せず末尾に追加のみ
+   ============================================================ */
+
+/* ---- coming soon バッジ（カード右上）---- */
+.card{position:relative}            /* バッジを絶対配置するための起点（既存 .card に影響なし） */
+.coming-soon{position:absolute;top:12px;right:14px;font-family:'Space Grotesk',sans-serif;font-size:9px;
+  letter-spacing:.14em;text-transform:uppercase;color:#FFD66B;border:1px solid rgba(255,214,107,.4);
+  background:rgba(255,214,107,.08);border-radius:100px;padding:3px 9px;pointer-events:none}
+
+/* ---- 創業者のつぶやき欄（home: founder-note）---- */
+.founder-note{display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line);border-radius:18px;
+  background:linear-gradient(160deg,rgba(20,18,40,.5),rgba(10,10,20,.25));backdrop-filter:blur(8px);
+  padding:22px 24px;margin:8px 0 30px;position:relative;z-index:2}
+.founder-note .fn-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;
+  border:1px solid rgba(139,123,240,.5);box-shadow:0 0 20px rgba(139,123,240,.3)}
+.founder-note .fn-body{flex:1;min-width:0}
+.founder-note .fn-label{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-bright);margin-bottom:3px}
+.founder-note .fn-label .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.founder-note .fn-date{font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--text-faint);margin-bottom:11px;letter-spacing:.04em}
+.founder-note .fn-text{color:var(--text-dim);font-size:.94rem;line-height:1.85}
+@media(max-width:560px){
+  .founder-note{gap:14px;padding:18px 18px}
+  .founder-note .fn-avatar{width:46px;height:46px}
+}
+
+/* ---- 戦略ページ共通プロース（叩き台本文）---- */
+.prose{max-width:780px}
+.prose p{color:var(--text-dim);margin-bottom:14px;line-height:1.9}
+.prose strong{color:var(--text);font-weight:600}
+.prose ul{margin:2px 0 18px 1.2em;color:var(--text-dim)}
+.prose li{margin:7px 0;line-height:1.8}
+.lead-p{color:var(--text-dim);font-size:1.04rem;line-height:1.9;max-width:780px;margin-bottom:6px}
+.tag-todo{display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:#FFD66B;border:1px solid rgba(255,214,107,.4);background:rgba(255,214,107,.08);
+  border-radius:100px;padding:2px 10px;margin-left:8px;vertical-align:middle}
+.callout{border:1px dashed var(--line);border-radius:14px;background:rgba(255,214,107,.04);
+  padding:16px 20px;color:var(--text-faint);font-size:.9rem;line-height:1.8;margin:8px 0 18px}
+.note-mini{color:var(--text-faint);font-size:.82rem;line-height:1.7;margin-top:8px}

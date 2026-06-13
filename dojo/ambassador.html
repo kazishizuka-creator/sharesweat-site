@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — アンバサダー戦略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .back-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .crit{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:10px 0;background:rgba(20,18,40,.32)}
+  .crit .x{font-family:'Space Grotesk',sans-serif;color:var(--cyan);font-size:1.1rem;flex:0 0 auto}
+  .crit span.t{color:var(--text-dim);font-size:.94rem}
+  .crit b{color:var(--text)}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <div class="back-row">
+    <a href="home.html" class="linkish"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+    <a href="target-strategy.html" class="linkish"><span data-lang-ja>← ターゲット戦略</span><span data-lang-en>← Targeting Strategy</span></a>
+  </div>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>戦略・階層2</span><span data-lang-en>Strategy · Tier 2</span></span>
+    <h1><span data-lang-ja>アンバサダー戦略</span><span data-lang-en>Ambassador Strategy</span></h1>
+    <p><span data-lang-ja>範士＝空中戦の発信者であり、教師データの提供者。「実直×洗練」を体現する人を選ぶ。</span><span data-lang-en>The Hanshi are the broadcasters of the air war and the providers of teacher data. We choose those who embody "earnest × refined."</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>範士の役割</span><span data-lang-en>The role of the Hanshi</span></div>
+  <div class="prose">
+    <p><span data-lang-ja>アンバサダー＝<strong>範士</strong>は二つの役割を担う。ひとつは<strong>空中戦の発信者</strong> — ②が使う姿を可視化し、①の憧れの中継点になる。もうひとつは<strong>教師データの提供者</strong> — 美しいフォームのデータが、解析AIの質を支える。発信と検証の両輪を、同じ人物像が回す。</span><span data-lang-en>The ambassador — the <strong>Hanshi</strong> — plays two roles. One is the <strong>broadcaster of the air war</strong>: making "② in action" visible and serving as the aspirational relay for ①. The other is the <strong>provider of teacher data</strong>: beautiful-form data underpins the quality of the analysis AI. The same persona drives both wheels — broadcasting and validation.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>選定基準：実直 × 洗練</span><span data-lang-en>Selection criteria: earnest × refined</span></div>
+  <div class="crit"><span class="x">✓</span><span class="t"><b><span data-lang-ja>走りが綺麗</span><span data-lang-en>Runs beautifully</span></b><span data-lang-ja> — フォームそのものが見本になる。</span><span data-lang-en> — the form itself is exemplary.</span></span></div>
+  <div class="crit"><span class="x">✓</span><span class="t"><b><span data-lang-ja>生活が整っている</span><span data-lang-en>A composed life</span></b><span data-lang-ja> — 走りが生活の質と地続きに見える。</span><span data-lang-en> — running reads as continuous with quality of life.</span></span></div>
+  <div class="crit"><span class="x">✓</span><span class="t"><b><span data-lang-ja>自慢しない</span><span data-lang-en>Doesn't boast</span></b><span data-lang-ja> — 記録を誇示せず、淡々と積み重ねる品格。</span><span data-lang-en> — no flexing of records; the dignity of quiet accumulation.</span></span></div>
+
+  <div class="section-title"><span data-lang-ja>FunRun系インフルエンサーの選び方</span><span data-lang-en>Choosing FunRun influencers</span></div>
+  <div class="prose">
+    <p><span data-lang-ja>FunRun系の発信者でも、選ぶのは「<strong>楽しいが走りは本物</strong>」な人 — いわゆる<strong>三津家貴也型</strong>。楽しさで入口を広げつつ、走りの説得力で憧れを担保する。ただ賑やかなだけの起用は、ブランドの「洗練」を毀損する。</span><span data-lang-en>Even among FunRun creators, we pick those who are "<strong>fun, but the running is the real thing</strong>" — the <strong>Mitsuka Takaya type</strong>. Fun widens the entrance, while credible running secures the aspiration. Casting purely for noise erodes the brand's "refinement."</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>参照モデル：Peloton</span><span data-lang-en>Reference model: Peloton</span></div>
+  <div class="callout">
+    <span data-lang-ja>Peloton のインストラクターのスター化と同じ構造を狙う。リアルな集合の場を作らずとも、上位層との接点を「演出」することで、憧れと所属感を生み出せる。範士は、その接点装置になる。</span>
+    <span data-lang-en>We aim for the same structure as Peloton's star instructors. Without building a physical gathering, "staging" contact with the upper tier can manufacture aspiration and belonging. The Hanshi are that contact device.</span>
+  </div>
+
+  <div class="callout">
+    <span data-lang-ja>🔗 ②可視化のフェーズ設計は <a class="linkish" href="first-pin.html"><span data-lang-ja>1stピン戦略</span><span data-lang-en>First-Pin Strategy</span></a> と連動。人物像のブランド面は <a class="linkish" href="brand-strategy.html"><span data-lang-ja>ブランド戦略</span><span data-lang-en>Brand Strategy</span></a> を参照。</span>
+    <span data-lang-en>🔗 The phasing of "making ② visible" links with the <a class="linkish" href="first-pin.html"><span data-lang-ja>First-Pin Strategy</span><span data-lang-en>First-Pin Strategy</span></a>. For the brand side of the persona, see the <a class="linkish" href="brand-strategy.html"><span data-lang-ja>Brand Strategy</span><span data-lang-en>Brand Strategy</span></a>.</span>
+  </div>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

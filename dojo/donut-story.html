@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>DONUT Dojo — ドーナツの成長物語</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/dojo.css">
+<style>
+  .spectrum{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 0 18px}
+  .spectrum-row{display:flex;align-items:flex-start;gap:10px;min-width:560px}
+  .spec-cell{flex:1;min-width:96px;text-align:center}
+  .spec-cell svg{width:100%;max-width:120px;height:auto;margin:0 auto;display:block}
+  .spec-stage{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.12em;color:var(--text-faint);margin-top:6px}
+  .spec-name{font-size:.84rem;color:var(--text-dim);margin-top:3px;line-height:1.4}
+  .spec-arrow{display:flex;align-items:center;color:var(--violet-bright);font-size:14px;padding-top:42px;flex:0 0 auto}
+</style>
+</head>
+<body class="cloak">
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<header class="dojo gated">
+  <a href="home.html" class="dojo-brand"><span class="dojo-mark">道</span> DONUT&nbsp;Dojo</a>
+  <nav class="dojo-nav">
+    <a href="home.html"><span data-lang-ja>ホーム</span><span data-lang-en>Home</span></a>
+    <a href="about.html"><span data-lang-ja>Dojoについて</span><span data-lang-en>About</span></a>
+    <a href="admin.html" id="nav-admin" style="display:none"><span data-lang-ja>管理</span><span data-lang-en>Admin</span></a>
+  </nav>
+  <div class="dojo-actions">
+    <span class="dojo-me" id="me"></span>
+    <button class="lang">EN / 日本語</button>
+    <button class="btn btn-ghost btn-sm" data-logout><span data-lang-ja>ログアウト</span><span data-lang-en>Log out</span></button>
+  </div>
+</header>
+
+<div id="boot" class="loading">AUTHENTICATING…</div>
+
+<main class="wrap gated" id="main" style="display:none">
+  <a href="home.html" class="linkish" style="display:inline-block;margin-bottom:18px"><span data-lang-ja>← Dojoホーム</span><span data-lang-en>← Dojo home</span></a>
+
+  <div class="page-head">
+    <span class="eyebrow"><span class="dot"></span><span data-lang-ja>ブランド</span><span data-lang-en>Brand</span></span>
+    <h1><span data-lang-ja>ドーナツの成長物語</span><span data-lang-en>The Donut Grows Up</span></h1>
+    <p><span data-lang-ja>スコアの数字ではなく、かたちの変化で上達を見せる。突きつけない、研ぎ澄ます思想。</span><span data-lang-en>Progress shown not as a number, but as a change of shape — refining, never confronting.</span></p>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>ドーナツ → 十字：5段階スペクトラム</span><span data-lang-en>Donut → Cross: a five-stage spectrum</span></div>
+  <div class="spectrum">
+    <div class="spectrum-row">
+      <div class="spec-cell">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="36" fill="none" stroke="#8B7BF0" stroke-width="16" opacity=".85"/>
+        </svg>
+        <div class="spec-stage">STAGE 1</div>
+        <div class="spec-name"><span data-lang-ja>ドーナツ</span><span data-lang-en>Donut</span></div>
+      </div>
+      <div class="spec-arrow">→</div>
+      <div class="spec-cell">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <g transform="rotate(35 60 60)"><ellipse cx="60" cy="60" rx="40" ry="28" fill="none" stroke="#8478ED" stroke-width="12" opacity=".9"/></g>
+        </svg>
+        <div class="spec-stage">STAGE 2</div>
+        <div class="spec-name"><span data-lang-ja>ゆがみ</span><span data-lang-en>Skewing</span></div>
+      </div>
+      <div class="spec-arrow">→</div>
+      <div class="spec-cell">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <g transform="rotate(45 60 60)"><ellipse cx="60" cy="60" rx="46" ry="16" fill="none" stroke="#7E86F4" stroke-width="9"/></g>
+        </svg>
+        <div class="spec-stage">STAGE 3</div>
+        <div class="spec-name"><span data-lang-ja>絞られる</span><span data-lang-en>Narrowing</span></div>
+      </div>
+      <div class="spec-arrow">→</div>
+      <div class="spec-cell">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <g transform="rotate(45 60 60)"><ellipse cx="60" cy="60" rx="50" ry="6" fill="none" stroke="#6FAEF8" stroke-width="7"/></g>
+        </svg>
+        <div class="spec-stage">STAGE 4</div>
+        <div class="spec-name"><span data-lang-ja>ほぼ一線</span><span data-lang-en>Almost a line</span></div>
+      </div>
+      <div class="spec-arrow">→</div>
+      <div class="spec-cell">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="crossG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#A99CFF"/><stop offset="1" stop-color="#5BD8FF"/>
+            </linearGradient>
+            <filter id="crossGlow" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <g filter="url(#crossGlow)" stroke="url(#crossG)" stroke-width="8" stroke-linecap="round">
+            <line x1="18" y1="18" x2="102" y2="102"/>
+            <line x1="102" y1="18" x2="18" y2="102"/>
+          </g>
+        </svg>
+        <div class="spec-stage" style="color:var(--cyan)">STAGE 5</div>
+        <div class="spec-name" style="color:var(--cyan)"><span data-lang-ja>研ぎ澄まされた十字</span><span data-lang-en>Sharp cross</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="note-mini"><span data-lang-ja>※ スマホでは横スクロールで5段階を確認できます。</span><span data-lang-en>On mobile, scroll horizontally to see all five stages.</span></p>
+
+  <div class="section-title"><span data-lang-ja>かたちが語ること</span><span data-lang-en>What the shape says</span></div>
+  <div class="grid grid-cards">
+    <div class="card">
+      <span class="pk">Beginner</span>
+      <h3><span data-lang-ja>「まだ私、ドーナツです」</span><span data-lang-en>"I'm still a donut."</span></h3>
+      <p><span data-lang-ja>乱れた走りは、楕円が重なって環＝ドーナツになる。初心者の形に愛嬌と意味を与える。恥ではなく、チャーミングな自己紹介に。</span><span data-lang-en>An unsteady run overlaps into rings — a donut. The beginner's shape is given charm and meaning: not shame, but a charming way to introduce yourself.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Advanced</span>
+      <h3><span data-lang-ja>「ドーナツ、卒業」</span><span data-lang-en>"Graduated from donut."</span></h3>
+      <p><span data-lang-ja>整うほど軌跡は十字へ研ぎ澄まされる。上達した人には、数字でなく「形が変わった」という誇りが残る。</span><span data-lang-en>The steadier the run, the more the trajectory sharpens into a cross. For the advanced, pride comes not from a number, but from a shape that has changed.</span></p>
+    </div>
+    <div class="card">
+      <span class="pk">Philosophy</span>
+      <h3><span data-lang-ja>突きつけない</span><span data-lang-en>Never confronting</span></h3>
+      <p><span data-lang-ja>「あなたは○点」と突きつけない。形態変化でそっと示す。育成相棒（コンパニオン）の輪郭も、この成長に連動して変わっていく。</span><span data-lang-en>No "you scored X" thrown in your face. Growth is shown gently, through morphology. The training companion's silhouette evolves along with this same growth.</span></p>
+    </div>
+  </div>
+
+  <div class="section-title"><span data-lang-ja>検証メモ（要実機確認）</span><span data-lang-en>Validation notes (needs real-device check)</span></div>
+  <div class="callout">
+    <span data-lang-ja>実データで本当にドーナツ型になるかを実機で確認する。「乱れの量 → 環の太さ」「偏り → 歪み」へマッピングする方針。これは嘘の演出ではなく、<strong>座標系（どの軸でデータを見るか）の選び方</strong>で本物の幾何学として現れさせる。</span>
+    <span data-lang-en>Verify on real devices that the data genuinely forms a donut. The plan maps "amount of noise → ring thickness" and "bias → distortion." This is not fake theatrics — by <strong>choosing the right coordinate system</strong> (which axes to read the data on), the geometry appears for real.</span>
+  </div>
+
+</main>
+
+<script type="module">
+import { requireAuth, isAdmin } from "./assets/firebase-init.js";
+import { initLang, initLogout, escapeHtml, roleChips } from "./assets/dojo.js";
+const $ = (id) => document.getElementById(id);
+requireAuth((user, profile) => {
+  const name  = (profile && profile.displayName) || "";
+  const roles = (profile && profile.roles) || [];
+  $("me").innerHTML = `<strong>${escapeHtml(name)}</strong> <span class="me-roles">${roleChips(roles)}</span>`;
+  if(isAdmin(roles)) $("nav-admin").style.display = "";
+  document.body.classList.remove("cloak");
+  $("boot").style.display = "none";
+  $("main").style.display = "block";
+});
+initLang();
+initLogout();
+</script>
+</body>
+</html>

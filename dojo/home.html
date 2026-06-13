@@ -116,6 +116,82 @@
     </div>
   </section>
 
+  <!-- ============ 創業者のつぶやき（founder-note）============ -->
+  <!-- 現状は静的プレースホルダ。後で settings/founderNote を Firestore 化し、
+       admin から本文・日付を編集できるようにする想定（loadFundraising と同様に getDoc で読む）。 -->
+  <section class="founder-note">
+    <img class="fn-avatar" src="../assets/images/founder.jpg" alt="">
+    <div class="fn-body">
+      <div class="fn-label"><span class="dot"></span>Founder's Note <span style="color:var(--text-faint);letter-spacing:0;text-transform:none;font-size:11px">&nbsp;·&nbsp;<span data-lang-ja>創業者のつぶやき</span><span data-lang-en>From the founder</span></span></div>
+      <div class="fn-date">2026.06.13</div>
+      <div class="fn-text">
+        <span data-lang-ja>（ここに創業者からの一言が入ります。プロトタイプの進捗、考えていること、メンバーへの感謝など。— 本文は後で記入／Firestore化予定）</span>
+        <span data-lang-en>(A short note from the founder will go here — progress on the prototype, what's on my mind, thanks to the members. Copy to be written later / will be moved to Firestore.)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 階層1パネル（戦略・コンテンツ）：ロール非依存・全員に表示 ============ -->
+  <section id="panel-section">
+    <div class="section-title"><span data-lang-ja>戦略・コンテンツ</span><span data-lang-en>Strategy &amp; Content</span></div>
+    <div class="grid grid-cards">
+      <a class="card" href="logo.html">
+        <span class="coming-soon">Coming Soon</span>
+        <span class="pk">Brand</span>
+        <h3><span data-lang-ja>ロゴの由来</span><span data-lang-en>The Origin of the Logo</span></h3>
+        <p><span data-lang-ja>ひとつの円に、形・幾何学・物語のすべてが収まっている。</span><span data-lang-en>A single circle holds form, geometry, and story.</span></p>
+      </a>
+      <a class="card" href="naming.html">
+        <span class="coming-soon">Coming Soon</span>
+        <span class="pk">Brand</span>
+        <h3><span data-lang-ja>デバイス名の由来</span><span data-lang-en>The Origin of the Name</span></h3>
+        <p><span data-lang-ja>DONUT ＝ SENSE.i ＝ 先生。柔らかさと意味を一語に。</span><span data-lang-en>DONUT = SENSE.i = sensei. Softness and meaning in one word.</span></p>
+      </a>
+      <a class="card" href="donut-story.html">
+        <span class="coming-soon">Coming Soon</span>
+        <span class="pk">Brand</span>
+        <h3><span data-lang-ja>ドーナツの成長物語</span><span data-lang-en>The Donut Grows Up</span></h3>
+        <p><span data-lang-ja>数字でなく、かたちの変化で上達を見せる。</span><span data-lang-en>Progress shown as a change of shape, not a number.</span></p>
+      </a>
+      <a class="card" href="form-cross.html">
+        <span class="coming-soon">Coming Soon</span>
+        <span class="pk">Product</span>
+        <h3>FORM CROSS</h3>
+        <p><span data-lang-ja>整った周期運動は、一本の十字に収束する。</span><span data-lang-en>Steady periodic motion converges into a single cross.</span></p>
+      </a>
+      <a class="card" href="model-3d.html">
+        <span class="coming-soon">Coming Soon</span>
+        <span class="pk">Product</span>
+        <h3><span data-lang-ja>3Dモデル</span><span data-lang-en>3D Model</span></h3>
+        <p><span data-lang-ja>4つの点から、全身フォームを3D再構成する。</span><span data-lang-en>Reconstruct full-body form in 3D from four points.</span></p>
+      </a>
+      <a class="card" href="target-strategy.html">
+        <span class="coming-soon">Coming Soon</span>
+        <span class="pk">Strategy</span>
+        <h3><span data-lang-ja>ターゲット戦略</span><span data-lang-en>Targeting Strategy</span></h3>
+        <p><span data-lang-ja>3層で捉え「②で刺して①へ広げる」。4詳細への入口。</span><span data-lang-en>Three layers — strike ② to spread into ①. Gateway to 4 deep-dives.</span></p>
+      </a>
+      <a class="card" href="funding-policy.html">
+        <span class="coming-soon">Coming Soon</span>
+        <span class="pk">Funding</span>
+        <h3><span data-lang-ja>調達方針</span><span data-lang-en>Funding Policy</span></h3>
+        <p><span data-lang-ja>フェーズ別の調達。ホームのマイルストーンと整合。</span><span data-lang-en>Funding by phase, aligned with the home milestones.</span></p>
+      </a>
+      <a class="card" href="btob.html">
+        <span class="coming-soon">Coming Soon</span>
+        <span class="pk">Strategy</span>
+        <h3><span data-lang-ja>BtoB戦略</span><span data-lang-en>B2B Strategy</span></h3>
+        <p><span data-lang-ja>動作データを研究・スポーツ・ヘルスケア・保険へ。</span><span data-lang-en>Motion data for research, sports, healthcare, insurance.</span></p>
+      </a>
+      <a class="card" href="future.html">
+        <span class="coming-soon">Coming Soon</span>
+        <span class="pk">Future</span>
+        <h3><span data-lang-ja>将来的な展開方向性</span><span data-lang-en>Future Directions</span></h3>
+        <p><span data-lang-ja>身体動作AIの基盤へ。競技拡大・研究・社会・海外。</span><span data-lang-en>Toward a human-motion AI foundation: sports, research, society, global.</span></p>
+      </a>
+    </div>
+  </section>
+
   <div class="fund-divider"></div>
 
   <!-- ロール未付与のときの案内 -->
